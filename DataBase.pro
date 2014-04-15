@@ -14,11 +14,9 @@ TEMPLATE = app
 PRECOMPILED_HEADER += stdafx.h
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    customsplitter.cpp
+        mainwindow.cpp
 
 HEADERS  += mainwindow.h \
-    stdafx.h \
-    customsplitter.h
+    stdafx.h
 
 FORMS    += mainwindow.ui
