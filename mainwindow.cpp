@@ -7,10 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-//    ui->tabVImplants->installEventFilter(this);
-//    ui->tabVAbutments->installEventFilter(this);
-//    ui->tVImplants->installEventFilter(this);
-//    ui->tVAbutments->installEventFilter(this);
     ui->splitterLeft->handle(1)->installEventFilter(this);
     ui->splitterRight->handle(1)->installEventFilter(this);
     connect(ui->splitterLeft, SIGNAL(splitterMoved(int,int)), SLOT(moveSplitter(int,int)));
