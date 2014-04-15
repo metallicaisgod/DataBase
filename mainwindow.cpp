@@ -55,7 +55,6 @@ void MainWindow::moveSplitter(int pos, int index)
 {
     if(m_bLeftSplitterCatched)
     {
-        //ui->splitterRight->moveSplitter(pos, index);
         ui->splitterRight->handle(index)->move(ui->splitterRight->handle(index)->x(), pos);
         QRect rect = ui->tabVImplants->geometry();
         rect.setHeight(pos);
