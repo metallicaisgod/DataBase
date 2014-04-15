@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    ui->setupUi(this);//
     ui->splitterLeft->handle(1)->installEventFilter(this);
     ui->splitterRight->handle(1)->installEventFilter(this);
     connect(ui->splitterLeft, SIGNAL(splitterMoved(int,int)), SLOT(moveSplitter(int,int)));
