@@ -14,9 +14,15 @@ TEMPLATE = app
 PRECOMPILED_HEADER += stdafx.h
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    splitterhandle.cpp \
+    gridsplitter.cpp \
+    crosssplitterhandle.cpp
 
 HEADERS  += mainwindow.h \
-    stdafx.h
+    stdafx.h \
+    splitterhandle.h \
+    gridsplitter.h \
+    crosssplitterhandle.h
 
 FORMS    += mainwindow.ui
