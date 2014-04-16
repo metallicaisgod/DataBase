@@ -17,12 +17,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     splitterhandle.cpp \
     gridsplitter.cpp \
-    crosssplitterhandle.cpp
+    crosssplitterhandle.cpp \
+    treemodel.cpp \
+    treeitem.cpp
 
 HEADERS  += mainwindow.h \
     stdafx.h \
     splitterhandle.h \
     gridsplitter.h \
-    crosssplitterhandle.h
+    crosssplitterhandle.h \
+    treemodel.h \
+    treeitem.h
 
 FORMS    += mainwindow.ui
