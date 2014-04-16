@@ -28,100 +28,51 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
+        <property name="margin">
          <number>0</number>
         </property>
         <item>
-         <widget class="QWidget" name="widget_2" native="true">
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <property name="spacing">
-            <number>0</number>
+         <widget class="CGridSplitter" name="frame_2">
+          <widget class="QTableView" name="tabVAbutments">
+           <property name="geometry">
+            <rect>
+             <x>490</x>
+             <y>240</y>
+             <width>256</width>
+             <height>189</height>
+            </rect>
            </property>
-           <property name="leftMargin">
-            <number>0</number>
+          </widget>
+          <widget class="QTableView" name="tabVImplants">
+           <property name="geometry">
+            <rect>
+             <x>500</x>
+             <y>10</y>
+             <width>256</width>
+             <height>190</height>
+            </rect>
            </property>
-           <property name="topMargin">
-            <number>0</number>
+          </widget>
+          <widget class="QTreeView" name="tVImplants">
+           <property name="geometry">
+            <rect>
+             <x>240</x>
+             <y>30</y>
+             <width>256</width>
+             <height>190</height>
+            </rect>
            </property>
-           <property name="rightMargin">
-            <number>0</number>
+          </widget>
+          <widget class="QTreeView" name="tVAbutments">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>250</y>
+             <width>256</width>
+             <height>189</height>
+            </rect>
            </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QSplitter" name="splitter_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <widget class="QWidget" name="wClasses" native="true">
-              <layout class="QVBoxLayout" name="verticalLayout_2">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QSplitter" name="splitterLeft">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <widget class="QTreeView" name="tVImplants"/>
-                 <widget class="QTreeView" name="tVAbutments"/>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="wObjects" native="true">
-              <layout class="QVBoxLayout" name="verticalLayout_3">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QSplitter" name="splitterRight">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <widget class="QTableView" name="tabVImplants"/>
-                 <widget class="QTableView" name="tabVAbutments"/>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </widget>
-           </item>
-          </layout>
+          </widget>
          </widget>
         </item>
         <item>
@@ -181,7 +132,7 @@
               <string>View/Hide  3D Model</string>
              </property>
              <property name="text">
-              <string>3D Model  &gt;&gt;</string>
+              <string>3D Model  &lt;&lt;</string>
              </property>
             </widget>
            </item>
@@ -208,23 +159,14 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CGridSplitter</class>
+   <extends>QFrame</extends>
+   <header location="global">gridsplitter.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>pB3DModel</sender>
-   <signal>clicked()</signal>
-   <receiver>wOpenGL</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>646</x>
-     <y>482</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>745</x>
-     <y>427</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

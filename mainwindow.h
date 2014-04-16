@@ -19,12 +19,15 @@ protected:
     virtual bool eventFilter(QObject *, QEvent *);
 
 protected slots:
-    void moveSplitter(int pos, int index);
+//    void moveSplitter(int pos, int index);
+
+private slots:
+    void on_pB3DModel_clicked();
 
 private:
     Ui::MainWindow *ui;
-    bool m_bLeftSplitterCatched;
-    bool m_bRightSplitterCatched;
+//    bool m_bLeftSplitterCatched;
+//    bool m_bRightSplitterCatched;
 };
 
 #endif // MAINWINDOW_H
