@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "..\iadatabase\headers\IADataBase.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,7 +18,7 @@ public:
 
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
-
+    void fillModels(QString);
 protected slots:
 //    void moveSplitter(int pos, int index);
 
@@ -26,6 +27,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    db::IADataBase iadb;
+    QStandardItemModel * m_pImplantsTreeModel;
+    QStandardItemModel * m_pAbutmentsTreeModel;
 //    bool m_bLeftSplitterCatched;
 //    bool m_bRightSplitterCatched;
 };
