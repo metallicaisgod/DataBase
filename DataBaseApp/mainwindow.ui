@@ -71,6 +71,9 @@
              <height>190</height>
             </rect>
            </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
            <attribute name="headerVisible">
             <bool>false</bool>
            </attribute>

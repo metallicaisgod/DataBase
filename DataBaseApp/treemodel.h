@@ -45,7 +45,15 @@
 #include <QModelIndex>
 #include <QVariant>
 
+#include "..\iadatabase\headers\IADataBase.h"
+
 class TreeItem;
+
+typedef enum
+{
+    Implants,
+    Abutments
+}ModelType;
 
 //! [0]
 class TreeModel : public QAbstractItemModel
@@ -53,7 +61,7 @@ class TreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    TreeModel(const QString &data, QObject *parent = 0);
+    TreeModel(QList<db::DbProvider*> providers, ModelType type,QObject *parent = 0);
     ~TreeModel();
 
     QVariant data(const QModelIndex &index, int role) const;
@@ -67,8 +75,9 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
 private:
-    void setupModelData(const QStringList &lines, TreeItem *parent);
-
+    void setupModelData(QList<db::DbProvider*> providers, TreeItem *parent);
+    QList<db::DbProvider*> m_providers;
+    ModelType m_type;
     TreeItem *rootItem;
 };
 //! [0]

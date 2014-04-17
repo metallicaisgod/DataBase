@@ -44,11 +44,13 @@
 #include <QList>
 #include <QVariant>
 
+#include "..\iadatabase\headers\IADataBase.h"
+
 //! [0]
 class TreeItem
 {
 public:
-    TreeItem(const QList<QVariant> &data, TreeItem *parent = 0);
+    TreeItem(TreeItem *parent = 0, db::DbSeries * data = NULL, bool root = false);
     ~TreeItem();
 
     void appendChild(TreeItem *child);
@@ -56,14 +58,19 @@ public:
     TreeItem *child(int row);
     int childCount() const;
     int columnCount() const;
-    QVariant data(int column) const;
+    db::DbSeries * data() const;
     int row() const;
     TreeItem *parent();
+    bool isRoot()
+    {
+        return m_root;
+    }
 
 private:
     QList<TreeItem*> childItems;
-    QList<QVariant> itemData;
+    db::DbSeries * itemData;
     TreeItem *parentItem;
+    bool m_root;
 };
 //! [0]
 

@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
+#include "treemodel.h"
 #include "..\iadatabase\headers\IADataBase.h"
 
 namespace Ui {
@@ -28,8 +30,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;
-    QStandardItemModel * m_pImplantsTreeModel;
-    QStandardItemModel * m_pAbutmentsTreeModel;
+    //QStandardItemModel * m_pImplantsTreeModel;
+    //QStandardItemModel * m_pAbutmentsTreeModel;
+    TreeModel * m_pModel;
+    QList<db::DbProvider*> providerList;
 //    bool m_bLeftSplitterCatched;
 //    bool m_bRightSplitterCatched;
 };

@@ -51,13 +51,13 @@
 #include "treemodel.h"
 
 //! [0]
-TreeModel::TreeModel(const QString &data, QObject *parent)
+TreeModel::TreeModel(QList<db::DbProvider*> providers, ModelType type, QObject *parent)
     : QAbstractItemModel(parent)
 {
-    QList<QVariant> rootData;
-    rootData << "Title" << "Summary";
-    rootItem = new TreeItem(rootData);
-    setupModelData(data.split(QString("\n")), rootItem);
+    m_providers = providers;
+    m_type = type;
+    rootItem = new TreeItem(NULL, NULL, true);
+    setupModelData(providers, rootItem);
 }
 //! [0]
 
@@ -71,10 +71,11 @@ TreeModel::~TreeModel()
 //! [2]
 int TreeModel::columnCount(const QModelIndex &parent) const
 {
-    if (parent.isValid())
-        return static_cast<TreeItem*>(parent.internalPointer())->columnCount();
-    else
-        return rootItem->columnCount();
+//    if (parent.isValid())
+//        return static_cast<TreeItem*>(parent.internalPointer())->columnCount();
+//    else
+//        return rootItem->columnCount();
+    return 1;
 }
 //! [2]
 
@@ -86,10 +87,34 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
 
     if (role != Qt::DisplayRole)
         return QVariant();
-
     TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+    TreeItem * parent =  item->parent();
+    if(!parent)
+        return QVariant();
+    if(parent && item->isRoot())
+    {
+        QString rootName;
+        switch(m_type)
+        {
+        case Implants:
+            rootName = "Implants";
+            break;
+        case Abutments:
+            rootName = "Abutments";
+            break;
+        }
+        return rootName;
+    }
+    else if(parent->isRoot()) //providers
+    {
+        return QString(m_providers[index.row()]->name);
+    }
+    else  //series
+    {
+    return QString(item->data()->name);
+    }
 
-    return item->data(index.column());
+    //return item->data(index.column());
 }
 //! [3]
 
@@ -107,8 +132,8 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 QVariant TreeModel::headerData(int section, Qt::Orientation orientation,
                                int role) const
 {
-    if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
-        return rootItem->data(section);
+//    if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
+//        return rootItem->data(section);
 
     return QVariant();
 }
@@ -168,50 +193,64 @@ int TreeModel::rowCount(const QModelIndex &parent) const
 }
 //! [8]
 
-void TreeModel::setupModelData(const QStringList &lines, TreeItem *parent)
+void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *parent)
 {
-    QList<TreeItem*> parents;
-    QList<int> indentations;
-    parents << parent;
-    indentations << 0;
+    //QList<TreeItem*> parents;
+    //QList<int> indentations;
+    //parents << parent;
+    //indentations << 0;
 
+    TreeItem * root = new TreeItem(parent, NULL, true);
+    parent->appendChild(root);
     int number = 0;
 
-    while (number < lines.count()) {
-        int position = 0;
-        while (position < lines[number].length()) {
-            if (lines[number].mid(position, 1) != " ")
-                break;
-            position++;
+    while (number < providers.count())
+    {
+//        int position = 0;
+//        while (position < providers[number].length()) {
+//            if (lines[number].mid(position, 1) != " ")
+//                break;
+//            position++;
+//        }
+        QList<db::DbSeries*> list = QList<db::DbSeries*>::fromStdList(providers.at(number)->GetSeriesList());
+
+        TreeItem * provider = new TreeItem(root);
+        for(int i = 0; i < list.count(); i++)
+        {
+            provider->appendChild(new TreeItem(provider, list[i]));
         }
+        root->appendChild(provider);
+//        if (!lineData.isEmpty())
+//        {
+//            // Read the column data from the rest of the line.
+//            QStringList columnStrings = lineData.split("\t", QString::SkipEmptyParts);
+//            QList<QVariant> columnData;
+//            for (int column = 0; column < columnStrings.count(); ++column)
+//                columnData << columnStrings[column];
 
-        QString lineData = lines[number].mid(position).trimmed();
+//            if (position > indentations.last())
+//            {
+//                // The last child of the current parent is now the new parent
+//                // unless the current parent has no children.
 
-        if (!lineData.isEmpty()) {
-            // Read the column data from the rest of the line.
-            QStringList columnStrings = lineData.split("\t", QString::SkipEmptyParts);
-            QList<QVariant> columnData;
-            for (int column = 0; column < columnStrings.count(); ++column)
-                columnData << columnStrings[column];
+//                if (parents.last()->childCount() > 0)
+//                {
+//                    parents << parents.last()->child(parents.last()->childCount()-1);
+//                    indentations << position;
+//                }
+//            }
+//            else
+//            {
+//                while (position < indentations.last() && parents.count() > 0)
+//                {
+//                    parents.pop_back();
+//                    indentations.pop_back();
+//                }
+//            }
 
-            if (position > indentations.last()) {
-                // The last child of the current parent is now the new parent
-                // unless the current parent has no children.
-
-                if (parents.last()->childCount() > 0) {
-                    parents << parents.last()->child(parents.last()->childCount()-1);
-                    indentations << position;
-                }
-            } else {
-                while (position < indentations.last() && parents.count() > 0) {
-                    parents.pop_back();
-                    indentations.pop_back();
-                }
-            }
-
-            // Append a new item to the current parent's list of children.
-            parents.last()->appendChild(new TreeItem(columnData, parents.last()));
-        }
+//            // Append a new item to the current parent's list of children.
+//            parents.last()->appendChild(new TreeItem(columnData, parents.last()));
+//        }
 
         number++;
     }

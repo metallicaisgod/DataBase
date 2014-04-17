@@ -49,10 +49,11 @@
 #include "treeitem.h"
 
 //! [0]
-TreeItem::TreeItem(const QList<QVariant> &data, TreeItem *parent)
+TreeItem::TreeItem(TreeItem *parent, db::DbSeries * data, bool root)
 {
     parentItem = parent;
     itemData = data;
+    m_root = root;
 }
 //! [0]
 
@@ -87,15 +88,16 @@ int TreeItem::childCount() const
 //! [5]
 int TreeItem::columnCount() const
 {
-    return itemData.count();
+    return 1;
 }
 //! [5]
 
 //! [6]
-QVariant TreeItem::data(int column) const
+db::DbSeries * TreeItem::data() const
 {
-    return itemData.value(column);
+    return itemData;
 }
+
 //! [6]
 
 //! [7]
