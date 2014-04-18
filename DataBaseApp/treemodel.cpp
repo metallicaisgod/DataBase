@@ -85,36 +85,44 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    if (role != Qt::DisplayRole)
-        return QVariant();
-    TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-    TreeItem * parent =  item->parent();
-    if(!parent)
-        return QVariant();
-    if(parent && item->isRoot())
+    if (role == Qt::DisplayRole)
     {
-        QString rootName;
-        switch(m_type)
+        //return QVariant();
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        TreeItem * parent =  item->parent();
+        if(!parent)
+            return QVariant();
+        if(parent && item->isRoot())
         {
-        case Implants:
-            rootName = "Implants";
-            break;
-        case Abutments:
-            rootName = "Abutments";
-            break;
+            QString rootName;
+            switch(m_type)
+            {
+            case Implants:
+                rootName = "Implants";
+                break;
+            case Abutments:
+                rootName = "Abutments";
+                break;
+            }
+            return rootName;
         }
-        return rootName;
+        else if(parent->isRoot()) //providers
+        {
+            return QString(m_providers[index.row()]->name);
+        }
+        else  //series
+        {
+        return QString(item->data()->name);
+        }
     }
-    else if(parent->isRoot()) //providers
+    else if(role == SeriesRole)
     {
-        return QString(m_providers[index.row()]->name);
-    }
-    else  //series
-    {
-    return QString(item->data()->name);
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        //QMetaType::VoidStar
+        return QVariant::fromValue((void*)item->data());
     }
 
-    //return item->data(index.column());
+    return QVariant();
 }
 //! [3]
 

@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     gridsplitter.cpp \
     crosssplitterhandle.cpp \
     treemodel.cpp \
-    treeitem.cpp
+    treeitem.cpp \
+    tablemodel.cpp
 
 HEADERS  += mainwindow.h \
     stdafx.h \
@@ -30,6 +31,8 @@ HEADERS  += mainwindow.h \
     gridsplitter.h \
     crosssplitterhandle.h \
     treemodel.h \
-    treeitem.h
+    treeitem.h \
+    tablemodel.h \
+    types.h
 
 FORMS    += mainwindow.ui

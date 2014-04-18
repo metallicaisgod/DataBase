@@ -44,16 +44,12 @@
 #include <QAbstractItemModel>
 #include <QModelIndex>
 #include <QVariant>
-
+#include "types.h"
 #include "..\iadatabase\headers\IADataBase.h"
 
-class TreeItem;
+#define SeriesRole Qt::UserRole + 1
 
-typedef enum
-{
-    Implants,
-    Abutments
-}ModelType;
+class TreeItem;
 
 //! [0]
 class TreeModel : public QAbstractItemModel

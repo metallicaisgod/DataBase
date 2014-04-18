@@ -119,8 +119,20 @@ void MainWindow::fillModels(QString fileName)
             providerList << provider;
         }
     }
-    m_pModel = new TreeModel(providerList, Implants);
+    m_pTreeModel = new TreeModel(providerList, Implants, this);
     //m_pImplantsTreeModel->appendRow(parentItem);
     delete impl_enum;
-    ui->tVImplants->setModel(m_pModel);
+    ui->tVImplants->setModel(m_pTreeModel);
+    m_pTableModel = new TableModel(Implants, this);
+    ui->tabVImplants->setModel(m_pTableModel);
+}
+
+void MainWindow::on_tVImplants_clicked(const QModelIndex &index)
+{
+
+    db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pTreeModel->data(index, SeriesRole).value<void *>());
+    if(series)
+    {
+        m_pTableModel->setSeries(series);
+    }
 }

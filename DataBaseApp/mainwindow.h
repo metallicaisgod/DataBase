@@ -4,7 +4,10 @@
 #include <QMainWindow>
 
 #include "treemodel.h"
+#include "tablemodel.h"
 #include "..\iadatabase\headers\IADataBase.h"
+
+Q_DECLARE_METATYPE(db::DbSeries*)
 
 namespace Ui {
 class MainWindow;
@@ -27,12 +30,15 @@ protected slots:
 private slots:
     void on_pB3DModel_clicked();
 
+    void on_tVImplants_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;
     //QStandardItemModel * m_pImplantsTreeModel;
     //QStandardItemModel * m_pAbutmentsTreeModel;
-    TreeModel * m_pModel;
+    TreeModel * m_pTreeModel;
+    TableModel * m_pTableModel;
     QList<db::DbProvider*> providerList;
 //    bool m_bLeftSplitterCatched;
 //    bool m_bRightSplitterCatched;
