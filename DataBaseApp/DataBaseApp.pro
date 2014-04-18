@@ -10,7 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = DataBase
 TEMPLATE = app
-DESTDIR = "../debug"
+DESTDIR = "../"
+DEFINES += _CRT_SECURE_NO_WARNINGS
 LIBS += -L"$${DESTDIR}" \
     -lIADataBase
 PRECOMPILED_HEADER += stdafx.h

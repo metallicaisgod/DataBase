@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->frame_2->setWidgets(list, 2, 2);
     //m_pImplantsTreeModel = new QStandardItemModel();
     //m_pAbutmentsTreeModel = new QStandardItemModel();
-    fillModels("m:\\Downloads\\iaaaa\\IA_Database\\implants_db.xml");
+    fillModels("..\\DataBase\\implants_db.xml");
 //
 //    ui->splitterLeft->handle(1)->installEventFilter(this);
 //    ui->splitterRight->handle(1)->installEventFilter(this);

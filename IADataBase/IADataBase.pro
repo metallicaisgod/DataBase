@@ -9,8 +9,8 @@ QT       -= gui
 TARGET = IADataBase
 TEMPLATE = lib
 CONFIG += staticlib
-DESTDIR = "../debug"
-DEFINES += TIXML_USE_TICPP
+DESTDIR = "../"
+DEFINES += TIXML_USE_TICPP _CRT_SECURE_NO_WARNINGS
 INCLUDEPATH += ./headers
 
 
