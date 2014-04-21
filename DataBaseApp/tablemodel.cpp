@@ -163,7 +163,7 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
             implants[index.row()]->state = db::ObjState::Active;
         else
             implants[index.row()]->state = db::ObjState::Nonactive;
-        emit clicked();
+        emit stateChanged();
         return true;
     }
     return QAbstractTableModel::setData(index, value, role);

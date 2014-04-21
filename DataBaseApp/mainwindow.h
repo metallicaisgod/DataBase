@@ -34,7 +34,7 @@ private slots:
 
     void on_tVImplants_collapsed(const QModelIndex &index);
 
-    void tableImplantsClicked();
+    void tableImplantsStateChanged();
 
     void treeImplantStateChanged(QModelIndex);
 

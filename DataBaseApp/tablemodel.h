@@ -31,7 +31,7 @@ public:
     }
 
 signals:
-    void clicked();
+    void stateChanged();
 
 //	void setDir(QDir dir);
 //	void setDir(QString dir_path)

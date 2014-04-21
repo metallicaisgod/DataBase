@@ -137,7 +137,7 @@ void MainWindow::fillModels(/*QString fileName*/)
     ui->tabVImplants->horizontalHeader()->setVisible(false);
     ui->tabVImplants->resizeColumnsToContents();
 
-    connect(m_pTableModel, SIGNAL(clicked()), this, SLOT(tableImplantsClicked()));
+    connect(m_pTableModel, SIGNAL(stateChanged()), this, SLOT(tableImplantsStateChanged()));
     connect(m_pTreeModel, SIGNAL(stateChanged(QModelIndex)), SLOT(treeImplantStateChanged(QModelIndex)));
 }
 
@@ -190,7 +190,7 @@ void MainWindow::on_tVImplants_collapsed(const QModelIndex &index)
     }
 }
 
-void MainWindow::tableImplantsClicked()
+void MainWindow::tableImplantsStateChanged()
 {
     QModelIndex idx = ui->tVImplants->currentIndex();
     m_pTreeModel->Update();
