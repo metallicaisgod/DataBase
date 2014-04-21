@@ -79,6 +79,62 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+QList<double> fromVariantToDouble(QList<QVariant> list)
+{
+    QList<double> double_list;
+    foreach(const QVariant & item, list)
+        double_list << item.toDouble();
+    return double_list;
+}
+
+QList<QVariant> fromDoubleToVariant(QList<double> list)
+{
+    QList<QVariant> variant_list;
+    foreach(const double & item, list)
+        variant_list << item;
+    return variant_list;
+}
+
+void MainWindow::showEvent(QShowEvent * ev)
+{
+    if(ui->wOpenGL->isVisible())
+    {
+        QRect rect = geometry();
+        m_openGLwidth = ui->wOpenGL->width();
+        rect.setWidth(rect.width() - ui->wOpenGL->width() - ui->splitter->handleWidth());
+        ui->wOpenGL->setVisible(false);
+        setGeometry(rect);
+    }
+    QSettings settings("AI","DataBase");
+    //QVariant var();
+    QList<QVariant> list = settings.value("LeftHorizontalRatio", QVariant::fromValue(fromDoubleToVariant(ui->frame_2->horizontalRatio()))).toList();
+    ui->frame_2->setHorizontalRatio(fromVariantToDouble(list));
+    list = settings.value("LeftVerticalRatio", QVariant::fromValue(fromDoubleToVariant(ui->frame_2->verticalRatio()))).toList();
+    ui->frame_2->setVerticalRatio(fromVariantToDouble(list));
+    //settings.setValue("LeftGeometry", ui->widget->geometry());
+    setGeometry(settings.value("Geometry", geometry()).toRect());
+    ev->accept();
+}
+
+void MainWindow::closeEvent(QCloseEvent * ev)
+{
+    if(ui->wOpenGL->isVisible())
+    {
+        QRect rect = geometry();
+        m_openGLwidth = ui->wOpenGL->width();
+        rect.setWidth(rect.width() - ui->wOpenGL->width() - ui->splitter->handleWidth());
+        ui->wOpenGL->setVisible(false);
+        setGeometry(rect);
+    }
+    QSettings settings("AI","DataBase");
+    //QVariant var();
+    settings.setValue("LeftHorizontalRatio", QVariant::fromValue(fromDoubleToVariant(ui->frame_2->horizontalRatio())));
+    settings.setValue("LeftVerticalRatio", QVariant::fromValue(fromDoubleToVariant(ui->frame_2->verticalRatio())));
+    //settings.setValue("LeftGeometry", ui->widget->geometry());
+    settings.setValue("Geometry", geometry());
+    ev->accept();
+}
+
 bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
 {
     return QMainWindow::eventFilter(obj, ev);

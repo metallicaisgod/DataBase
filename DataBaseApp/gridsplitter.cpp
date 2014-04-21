@@ -138,6 +138,16 @@ int CGridSplitter::setWidgets(QWidgetList widgetsList, int rows, int cols)
 		m_rows += rows;
 		m_cols += cols;
 	}
+    m_horizontalRatio.clear();
+    for(int i = 0; i < m_cols; i++)
+    {
+        m_horizontalRatio << 1./m_cols;
+    }
+    m_verticalRatio.clear();
+    for(int i = 0; i < m_rows; i++)
+    {
+        m_verticalRatio << 1./m_rows;
+    }
 	snapToGrid();
 	return 0;
 }
@@ -150,39 +160,77 @@ void CGridSplitter::snapToGrid()
 	int maxX = last.x();
 	int maxY = last.y();
 	//int count = m_PointsList.count();
-	int widgetWidth = (rect.width() - m_iHandleWidth * maxX) / (maxX + 1);
-	int widgetHeight = (rect.height() - m_iHandleWidth * maxY) / (maxY + 1);
-	QMapIterator<int, SplitterWidget> i(m_WidgetsMap);
-	while(i.hasNext())
+    int widgetWidth = (rect.width() - m_iHandleWidth * maxX);
+    int widgetHeight = (rect.height() - m_iHandleWidth * maxY);
+    //QMapIterator<int, SplitterWidget> i(m_WidgetsMap);
+    int prevWidth = 0;
+    int prevHeight = 0;
+    int row = 0;
+    int col = 0;
+    int prevX = 0;
+    int prevY = 0;
+    int width = 0;
+    int height = 0;
+    //while(i.hasNext())
+    for(row = 0; row < m_rows; row ++)
 	{
-		i.next();
-		QWidget * widget = i.value().widget;
-		widget->setGeometry((m_iHandleWidth + widgetWidth) * i.value().pos.x(), (m_iHandleWidth + widgetHeight) * i.value().pos.y(), widgetWidth, widgetHeight);
+        for(col = 0; col < m_cols; col ++)
+        {
+            QWidget * widget = m_WidgetsMap.value(m_cols * row + col).widget;
+            if(col == (m_cols - 1))
+                width =  rect.width() -  prevX;
+            else
+                width = widgetWidth * m_horizontalRatio.at(col);
+            if(row == (m_rows - 1))
+                height = rect.height() - prevY;
+            else
+                height = widgetHeight * m_verticalRatio.at(row);
+            widget->setGeometry(prevX, prevY, width, height);
+            prevX += m_iHandleWidth + width;
+        }
+        //        prevWidth = 0;
+       // prevHeight = height;
+        prevX = 0;
+        prevY += m_iHandleWidth + height;
 	}
+    prevWidth = 0;
+    prevHeight = 0;
 	for(int iter = 0; iter < maxX; iter++)
 	{
 		QList<CSplitterHandle*> list = m_HandlesMap.values(iter);
 		CSplitterHandle* pHand = list.at(1);
+        int width = widgetWidth * m_horizontalRatio.at(iter);
 		if(pHand->orientation() == Qt::Vertical)
 		{
-			pHand->setGeometry(iter * (m_iHandleWidth + widgetWidth) + widgetWidth,0, m_iHandleWidth, rect.height());			
+            pHand->setGeometry(iter * (m_iHandleWidth + prevWidth) + width,0, m_iHandleWidth, rect.height());
 		}
+        prevWidth = width;
 	}
 	for(int iter = 0; iter < maxY; iter++)
 	{
 		QList<CSplitterHandle*> list = m_HandlesMap.values(iter);
 		CSplitterHandle* pHand = list.at(0);
+        int height = widgetHeight * m_verticalRatio.at(iter);
 		if(pHand->orientation() == Qt::Horizontal)
 		{
-			pHand->setGeometry(0, iter*(m_iHandleWidth + widgetHeight) + widgetHeight, rect.width(), m_iHandleWidth);			
+            pHand->setGeometry(0, iter*(m_iHandleWidth + prevHeight) + height, rect.width(), m_iHandleWidth);
 		}
+        prevHeight = height;
 	}
+    prevWidth = 0;
+    prevHeight = 0;
 	QMapIterator<int, SplitterWidget> iter(m_CrossHandleMap);
 	while(iter.hasNext())
 	{
 		iter.next();
 		QWidget * widget = iter.value().widget;
-		widget->setGeometry((m_iHandleWidth + widgetWidth) * iter.value().pos.x() + widgetWidth, (m_iHandleWidth + widgetHeight) * iter.value().pos.y() + widgetHeight, m_iHandleWidth, m_iHandleWidth);
+        int width = widgetWidth * m_horizontalRatio.at(iter.value().pos.x());
+        int height = widgetHeight * m_verticalRatio.at(iter.value().pos.y());
+        widget->setGeometry((m_iHandleWidth + width) * iter.value().pos.x() + width,
+                            (m_iHandleWidth + height) * iter.value().pos.y() + height,
+                            m_iHandleWidth, m_iHandleWidth);
+//        prevWidth = width;
+//        prevHeight = height;
 	}
 }
 void CGridSplitter::setHandleWidth(int width)
@@ -268,6 +316,25 @@ void CGridSplitter::moveSplitter(int num, Qt::Orientation orient, int def)
 		//	QWidget * widget = i.value().widget;
 		//widget->setGeometry((m_iHandleWidth + widgetWidth) * i.value().pos.x(), (m_iHandleWidth + widgetHeight) * i.value().pos.y(), widgetWidth, widgetHeight);
 	}
+    QRect rect = geometry();
+    QPoint last = m_PointsList.last();
+    int maxX = last.x();
+    int maxY = last.y();
+    //int count = m_PointsList.count();
+    int widgetWidth = (rect.width() - m_iHandleWidth * maxX);
+    int widgetHeight = (rect.height() - m_iHandleWidth * maxY);
+    m_verticalRatio.clear();
+    for(int row = 0; row < m_rows; row++)
+    {
+        QWidget * widget = m_WidgetsMap.value(m_cols * row).widget;
+        m_verticalRatio << ((double)widget->height()) / ((double)widgetHeight);
+    }
+    m_horizontalRatio.clear();
+    for(int col = 0; col < m_cols; col++)
+    {
+        QWidget * widget = m_WidgetsMap.value(col).widget;
+        m_horizontalRatio << ((double)widget->width()) / ((double)widgetWidth);
+    }
 }
 
 void CGridSplitter::moveCrossSplitter(int num, int dx, int dy)

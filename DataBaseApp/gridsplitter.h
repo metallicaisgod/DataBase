@@ -23,6 +23,22 @@ public:
 	int setWidgets(QWidgetList widgetsList, int rows, int cols);
 	void setHandleWidth(int width);
 	int handleWidth(){return m_iHandleWidth;}
+    QList<double> verticalRatio()
+    {
+        return m_verticalRatio;
+    }
+    QList<double> horizontalRatio()
+    {
+        return m_horizontalRatio;
+    }
+    void setVerticalRatio(QList<double> ratio)
+    {
+        m_verticalRatio = ratio;
+    }
+    void setHorizontalRatio(QList<double> ratio)
+    {
+        m_horizontalRatio = ratio;
+    }
 
 public slots:
 	void snapToGrid();
@@ -43,6 +59,8 @@ private:
 	QMap<int, SplitterWidget> m_CrossHandleMap;
 	int m_rows;
 	int m_cols;
+    QList<double> m_horizontalRatio;
+    QList<double> m_verticalRatio;
 };
 
 #endif // GRIDSPLITTER_H

@@ -24,6 +24,9 @@ public:
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
     void fillModels();
+    void closeEvent(QCloseEvent * ev);
+    void showEvent(QShowEvent * ev);
+
 protected slots:
 //    void moveSplitter(int pos, int index);
 
