@@ -42,6 +42,9 @@
              <height>189</height>
             </rect>
            </property>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
           </widget>
           <widget class="QTableView" name="tabVImplants">
            <property name="geometry">
@@ -55,6 +58,9 @@
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
            </property>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderDefaultSectionSize">
             <number>20</number>
            </attribute>
@@ -71,8 +77,14 @@
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectItems</enum>
            </property>
+           <property name="indentation">
+            <number>20</number>
+           </property>
            <property name="rootIsDecorated">
             <bool>true</bool>
+           </property>
+           <property name="uniformRowHeights">
+            <bool>false</bool>
            </property>
            <property name="itemsExpandable">
             <bool>true</bool>
