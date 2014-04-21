@@ -43,8 +43,9 @@
 
 #include <QList>
 #include <QVariant>
-
+#include "types.h"
 #include "..\iadatabase\headers\IADataBase.h"
+
 
 //! [0]
 class TreeItem
@@ -65,12 +66,23 @@ public:
     {
         return m_root;
     }
+    Qt::CheckState state(ModelType type);
+    void setState(ModelType, bool);
+//    {
+//        return m_state;
+//    }
+
+//    void setState(Qt::CheckState state)
+//    {
+//        state = m_state;
+//    }
 
 private:
     QList<TreeItem*> childItems;
     db::DbSeries * itemData;
     TreeItem *parentItem;
     bool m_root;
+    Qt::CheckState m_state;
 };
 //! [0]
 

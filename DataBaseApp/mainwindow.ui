@@ -28,16 +28,7 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
+        <property name="margin">
          <number>0</number>
         </property>
         <item>
@@ -61,6 +52,12 @@
              <height>190</height>
             </rect>
            </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>20</number>
+           </attribute>
           </widget>
           <widget class="QTreeView" name="tVImplants">
            <property name="geometry">
@@ -71,7 +68,16 @@
              <height>190</height>
             </rect>
            </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectItems</enum>
+           </property>
            <property name="rootIsDecorated">
+            <bool>true</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>true</bool>
+           </property>
+           <property name="animated">
             <bool>false</bool>
            </property>
            <attribute name="headerVisible">

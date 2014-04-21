@@ -69,6 +69,14 @@ public:
     QModelIndex parent(const QModelIndex &index) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QModelIndex rootIndex();
+    bool setData(const QModelIndex &index, const QVariant &value, int role);
+
+public slots:
+    void Update();
+
+signals:
+    void stateChanged(QModelIndex);
 
 private:
     void setupModelData(QList<db::DbProvider*> providers, TreeItem *parent);

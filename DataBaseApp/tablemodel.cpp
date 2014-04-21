@@ -126,7 +126,7 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
     {
         if(c == 0)
         {
-            if(m_b)
+            if(implants[r]->state == db::ObjState::Active)
                 return Qt::Checked;
             else
                 return Qt::Unchecked;
@@ -151,10 +151,20 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
 
 bool TableModel::setData(const QModelIndex & index, const QVariant & value, int role /*= Qt::EditRole*/ )
 {
+    if (!index.isValid() || !set)
+        return false;
+
+    QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(m_pSeries->GetImplants());
+    if (index.row() >= implants.count() || index.column() >= MAX_COLUMN)
+        return false;
     if(role == Qt::CheckStateRole)
     {
-        m_b = value.toBool();
-        //return false;
+        if(value.toBool())
+            implants[index.row()]->state = db::ObjState::Active;
+        else
+            implants[index.row()]->state = db::ObjState::Nonactive;
+        emit clicked();
+        return true;
     }
     return QAbstractTableModel::setData(index, value, role);
 }

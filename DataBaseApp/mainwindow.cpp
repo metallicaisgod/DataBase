@@ -63,7 +63,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->frame_2->setWidgets(list, 2, 2);
     //m_pImplantsTreeModel = new QStandardItemModel();
     //m_pAbutmentsTreeModel = new QStandardItemModel();
-    fillModels("..\\DataBase\\implants_db.xml");
+    fileName = "..\\DataBase\\implants_db.xml";
+    fillModels();
+    //on_pB3DModel_clicked();
 //
 //    ui->splitterLeft->handle(1)->installEventFilter(this);
 //    ui->splitterRight->handle(1)->installEventFilter(this);
@@ -73,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    iadb.SaveXml_All(fileName.toLocal8Bit().data());
     delete ui;
 }
 
@@ -83,19 +86,24 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
 
 void MainWindow::on_pB3DModel_clicked()
 {
+    QRect rect = geometry();
     if(ui->wOpenGL->isVisible())
     {
+        m_openGLwidth = ui->wOpenGL->width();
+        rect.setWidth(rect.width() - ui->wOpenGL->width() - ui->splitter->handleWidth());
         ui->wOpenGL->setVisible(false);
         ui->pB3DModel->setText("3D Model >>");
     }
     else
     {
+        rect.setWidth(rect.width() + m_openGLwidth + ui->splitter->handleWidth());
         ui->wOpenGL->setVisible(true);
         ui->pB3DModel->setText("3D Model <<");
     }
+    setGeometry(rect);
 }
 
-void MainWindow::fillModels(QString fileName)
+void MainWindow::fillModels(/*QString fileName*/)
 {
     iadb.LoadXml_All(fileName.toLocal8Bit().data());
 
@@ -123,16 +131,78 @@ void MainWindow::fillModels(QString fileName)
     //m_pImplantsTreeModel->appendRow(parentItem);
     delete impl_enum;
     ui->tVImplants->setModel(m_pTreeModel);
+    ui->tVImplants->expand(m_pTreeModel->rootIndex());
     m_pTableModel = new TableModel(Implants, this);
     ui->tabVImplants->setModel(m_pTableModel);
+    ui->tabVImplants->horizontalHeader()->setVisible(false);
+    ui->tabVImplants->resizeColumnsToContents();
+
+    connect(m_pTableModel, SIGNAL(clicked()), this, SLOT(tableImplantsClicked()));
+    connect(m_pTreeModel, SIGNAL(stateChanged(QModelIndex)), SLOT(treeImplantStateChanged(QModelIndex)));
 }
 
 void MainWindow::on_tVImplants_clicked(const QModelIndex &index)
 {
-
+    if(!index.isValid())
+        return;
     db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pTreeModel->data(index, SeriesRole).value<void *>());
-    if(series)
+    //if(series)
+    //{
+    m_pTableModel->setSeries(series);
+    ui->tabVImplants->horizontalHeader()->setVisible((bool)series);
+    if(series && series->GetImplants().empty())
+        ui->tabVImplants->horizontalHeader()->setVisible(false);
+    ui->tabVImplants->resizeColumnsToContents();
+    //}
+}
+
+void MainWindow::on_tVImplants_collapsed(const QModelIndex &index)
+{
+    if(ui->tabVImplants->model() && index.isValid())
     {
-        m_pTableModel->setSeries(series);
+        if(m_pTreeModel->rowCount(index) > 0)
+        {
+            for(int i = 0; i < m_pTreeModel->rowCount(index); i++)
+            {
+                QModelIndex childIndex = m_pTreeModel->index(i, 0, index);
+                db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pTreeModel->data(childIndex, SeriesRole).value<void *>());
+                if(series == m_pTableModel->series())
+                {
+                    m_pTableModel->setSeries(NULL);
+                    ui->tabVImplants->horizontalHeader()->setVisible(false);
+                    //ui->tabVImplants->setCurrentIndex(index);
+                    QItemSelectionModel * selectionModel = ui->tVImplants->selectionModel();
+                    selectionModel->clearSelection();
+                    selectionModel->select(index, QItemSelectionModel::Select | QItemSelectionModel::Current);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pTreeModel->data(index, SeriesRole).value<void *>());
+            if(series == m_pTableModel->series())
+            {
+                m_pTableModel->setSeries(NULL);
+                ui->tabVImplants->horizontalHeader()->setVisible(false);
+            }
+        }
     }
+}
+
+void MainWindow::tableImplantsClicked()
+{
+    QModelIndex idx = ui->tVImplants->currentIndex();
+    m_pTreeModel->Update();
+    ui->tVImplants->setCurrentIndex(idx);
+}
+
+void MainWindow::treeImplantStateChanged(QModelIndex index)
+{
+    if(!index.isValid())
+        return;
+    m_pTreeModel->Update();
+    on_tVImplants_clicked(index);
+    ui->tVImplants->setCurrentIndex(index);
+    ui->tVImplants->expand(index);
 }

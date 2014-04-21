@@ -25,6 +25,13 @@ public:
         set = (bool)m_pSeries;
         reset();
     }
+    db::DbSeries * series()
+    {
+        return m_pSeries;
+    }
+
+signals:
+    void clicked();
 
 //	void setDir(QDir dir);
 //	void setDir(QString dir_path)
@@ -50,8 +57,11 @@ public:
     //QModelIndex	index(QString name);
     //void CreateIconMap();
 
-//public slots:
-//    void Update();
+public slots:
+    void Update()
+    {
+        reset();
+    }
 
 private:
     ModelType m_type;

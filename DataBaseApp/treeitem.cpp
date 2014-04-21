@@ -116,3 +116,115 @@ int TreeItem::row() const
     return 0;
 }
 //! [8]
+//! [9]
+Qt::CheckState TreeItem::state(ModelType type)
+{
+    int count = childCount();
+    if(count > 0)//providers
+    {
+        int i;
+        int ucCount = 0;
+        int pcCount = 0;
+        for(i = 0; i < count; i++ )
+        {
+            switch(child(i)->state(type))
+            {
+            case Qt::Unchecked:
+               ucCount++;
+               break;
+            case Qt::PartiallyChecked:
+               pcCount ++;
+               break;
+            default:
+                break;
+            }
+        }
+        if(ucCount == count)
+            return Qt::Unchecked;
+        if(ucCount > 0 || pcCount > 0)
+            return Qt::PartiallyChecked;
+        return Qt::Checked;
+    }
+    else//series
+    {
+        if(type == Implants)
+        {
+           QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(data()->GetImplants());
+           int i;
+           int c = 0;
+           for(i = 0; i < implants.count(); i ++)
+           {
+                if(implants.at(i)->state == db::ObjState::Nonactive)
+                {
+                    c++;
+                }
+           }
+           if(c == implants.count())
+               return Qt::Unchecked;
+           if(c > 0)
+               return Qt::PartiallyChecked;
+           return Qt::Checked;
+        }
+        else
+        {
+            QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(data()->GetAbutment());
+            int i;
+            int c = 0;
+            for(i = 0; i < abutments.count(); i ++)
+            {
+                 if(abutments.at(i)->state == db::ObjState::Nonactive)
+                 {
+                     c++;
+                 }
+            }
+            if(c == abutments.count())
+                return Qt::Unchecked;
+            if(c > 0)
+                return Qt::PartiallyChecked;
+            return Qt::Checked;
+        }
+
+    }
+    return Qt::Checked;
+}
+//! [9]
+
+void TreeItem::setState(ModelType type, bool state)
+{
+    int count = childCount();
+    if(count > 0)//providers
+    {
+        int i;
+        for(i = 0; i < count; i++ )
+        {
+            child(i)->setState(type, state);
+        }
+    }
+    else//series
+    {
+        if(type == Implants)
+        {
+           QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(data()->GetImplants());
+           int i;
+           for(i = 0; i < implants.count(); i ++)
+           {
+               if(state)
+                   implants[i]->state = db::ObjState::Active;
+               else
+                   implants[i]->state = db::ObjState::Nonactive;
+           }
+        }
+        else
+        {
+            QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(data()->GetAbutment());
+            int i;
+            for(i = 0; i < abutments.count(); i ++)
+            {
+                if(state)
+                    abutments[i]->state = db::ObjState::Active;
+                else
+                    abutments[i]->state = db::ObjState::Nonactive;
+            }
+        }
+    }
+}

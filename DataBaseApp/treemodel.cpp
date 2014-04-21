@@ -112,7 +112,7 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         }
         else  //series
         {
-        return QString(item->data()->name);
+            return QString(item->data()->name);
         }
     }
     else if(role == SeriesRole)
@@ -120,6 +120,11 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
         //QMetaType::VoidStar
         return QVariant::fromValue((void*)item->data());
+    }
+    else if(role == Qt::CheckStateRole)
+    {
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        return item->state(m_type);
     }
 
     return QVariant();
@@ -131,8 +136,11 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return 0;
-
-    return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    Qt::ItemFlags fl = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    TreeItem* item = static_cast<TreeItem*>(index.internalPointer());
+    if(!item->isRoot())
+        fl |= Qt::ItemIsTristate | Qt::ItemIsUserCheckable;
+    return fl;
 }
 //! [4]
 
@@ -200,6 +208,10 @@ int TreeModel::rowCount(const QModelIndex &parent) const
     return parentItem->childCount();
 }
 //! [8]
+QModelIndex TreeModel::rootIndex()
+{
+    return createIndex(0, 0, rootItem->child(0));
+}
 
 void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *parent)
 {
@@ -225,6 +237,16 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
         TreeItem * provider = new TreeItem(root);
         for(int i = 0; i < list.count(); i++)
         {
+            if(m_type == Implants)
+            {
+                if(list[i]->GetImplants().empty())
+                    continue;
+            }
+            else
+            {
+                if(list[i]->GetAbutment().empty())
+                    continue;
+            }
             provider->appendChild(new TreeItem(provider, list[i]));
         }
         root->appendChild(provider);
@@ -262,4 +284,24 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
 
         number++;
     }
+}
+
+void TreeModel::Update()
+{
+    reset();
+    //currentIndex()
+}
+
+bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if(!index.isValid())
+        return false;
+    if(role == Qt::CheckStateRole)
+    {
+        TreeItem * item = static_cast<TreeItem*>(index.internalPointer());
+        item->setState(m_type, value.toBool());
+        emit stateChanged(index);
+        return false;
+    }
+    return QAbstractItemModel::setData(index, value, role);
 }

@@ -23,7 +23,7 @@ public:
 
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
-    void fillModels(QString);
+    void fillModels();
 protected slots:
 //    void moveSplitter(int pos, int index);
 
@@ -31,6 +31,12 @@ private slots:
     void on_pB3DModel_clicked();
 
     void on_tVImplants_clicked(const QModelIndex &index);
+
+    void on_tVImplants_collapsed(const QModelIndex &index);
+
+    void tableImplantsClicked();
+
+    void treeImplantStateChanged(QModelIndex);
 
 private:
     Ui::MainWindow *ui;
@@ -40,6 +46,8 @@ private:
     TreeModel * m_pTreeModel;
     TableModel * m_pTableModel;
     QList<db::DbProvider*> providerList;
+    QString fileName;
+    int m_openGLwidth;
 //    bool m_bLeftSplitterCatched;
 //    bool m_bRightSplitterCatched;
 };
