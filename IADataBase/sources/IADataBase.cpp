@@ -190,39 +190,33 @@ bool IADataBase::LoadXml_All(const char* fileName)
 	
 bool IADataBase::LoadFromDir(IADataBase& indb, const char* dirName)
 {
-    WIN32_FIND_DATAA ffd;
-	HANDLE hFind = INVALID_HANDLE_VALUE;
+    //WIN32_FIND_DATAA ffd;
+    //HANDLE hFind = INVALID_HANDLE_VALUE;
 	
-	std::string strDir(dirName);
-	strDir+="*.iadbxml";
+    QString strDir;
+    strDir = "*.iadbxml";
 	bool bLoadLib = false;
 
-    hFind = FindFirstFileA(strDir.c_str(), &ffd);
-	if (INVALID_HANDLE_VALUE == hFind) 
-	{
-		// error loading DB files
-		return false;
-	} 
+    QDir directory(dirName);
+    QFileInfoList fiList =  directory.entryInfoList(QStringList()<<strDir,QDir::Files);
 
 	// List all the files in the directory with some info about them.
-	do
-	{
-		if (!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+    for(int i =0; i < fiList.count(); i++)
+    {
+        if (!fiList[i].isDir())
 		{
 			unsigned long load_flag=0;
-			std::string currFile(ffd.cFileName);
+            QString currFile(fiList[i].fileName());
 			//if(0==currFile.compare("user-defined.iadbxml"))
 			if(currFile == "user-defined.iadbxml")
 				load_flag = USERS_INTEMS;
 
 			currFile = dirName;
-			currFile+=ffd.cFileName;
-			bLoadLib |= LoadXml_2(indb, currFile.c_str(), load_flag);
+            currFile += fiList[i].fileName();
+            bLoadLib |= LoadXml_2(indb, currFile.toLocal8Bit().data(), load_flag);
 		}
-	}
-    while (FindNextFileA(hFind, &ffd) != 0);
+    }
 
-	FindClose(hFind);
 
 	return true;
 }
@@ -807,24 +801,24 @@ void DbSeries::RemoveAbutment(unsigned long index)
 	m_Abutments.erase(it);
 }
 
-COLORREF __stdcall GetDefColor(char* inColor)
+QColor __stdcall GetDefColor(char* inColor)
 {
 	typedef struct t_CrlMap
 	{
 		char szColor[ARTIKUL_SIZE];
-		COLORREF Color;
+        QColor Color;
 	} CrlMap;
 
 	CrlMap ColorMap[]=
 	{
-		{"red",    RGB(255,0,0)},
-		{"green",  RGB(0,255,0)},
-		{"blue",   RGB(0,0,255)},
-		{"grey",   RGB(128,128,128)},
-		{"white",  RGB(255,255,255)},
-		{"yellow", RGB(255,255,0)},
-		{"violet", RGB(255,0,255)},
-		{"black",  RGB(0,0,0)},
+        {"red",    Qt::red},
+        {"green",  Qt::green},
+        {"blue",   Qt::blue},
+        {"grey",   Qt::gray},
+        {"white",  Qt::white},
+        {"yellow", Qt::yellow},
+        {"violet", QColor(255,0,255)},
+        {"black",  Qt::black},
 	};
 
 	for(int i=0; i<sizeof(ColorMap)/sizeof(ColorMap[0]); i++)
@@ -833,6 +827,6 @@ COLORREF __stdcall GetDefColor(char* inColor)
 			return ColorMap[i].Color;
 	}
 
-	return RGB(0,255,0);
+    return Qt::green;
 };
 } // end namespace db

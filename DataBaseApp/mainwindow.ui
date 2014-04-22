@@ -42,8 +42,17 @@
              <height>189</height>
             </rect>
            </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::MultiSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>20</number>
            </attribute>
           </widget>
           <widget class="QTableView" name="tabVImplants">
@@ -54,6 +63,9 @@
              <width>256</width>
              <height>190</height>
             </rect>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::MultiSelection</enum>
            </property>
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
@@ -104,6 +116,12 @@
              <width>256</width>
              <height>189</height>
             </rect>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectItems</enum>
+           </property>
+           <property name="headerHidden">
+            <bool>true</bool>
            </property>
           </widget>
          </widget>
