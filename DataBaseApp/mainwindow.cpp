@@ -161,18 +161,14 @@ void MainWindow::on_pB3DModel_clicked()
 
 void MainWindow::fillModels(/*QString fileName*/)
 {
+    DbSeries * series;
+    DbProvider * provider;
+    QList<DbProvider *> providerList;
+
     iadb.LoadXml_All(fileName.toLocal8Bit().data());
 
     t_implantsEnumNFsp impl_enum = iadb.GetImplantsEnumerator(impl_length_comp<db::DbImplant>(), db::no_filter<db::DbImplant*>());
     DbImplant* pImplant = NULL;
-//    QStandardItem * parentItem = new QStandardItem("Implants");
-//    parentItem->setCheckable(true);
-//    parentItem->setCheckState(Qt::Checked);
-//    parentItem->setEditable(false);
-
-    DbSeries * series;
-    DbProvider * provider;
-    providerList.clear();
     while (impl_enum->MoveNext())
     {
         pImplant = impl_enum->GetCurrent();        
@@ -183,28 +179,59 @@ void MainWindow::fillModels(/*QString fileName*/)
             providerList << provider;
         }
     }
-    m_pTreeModel = new TreeModel(providerList, Implants, this);
+    m_pImpTreeModel = new TreeModel(providerList, Implants, this);
     //m_pImplantsTreeModel->appendRow(parentItem);
     delete impl_enum;
-    ui->tVImplants->setModel(m_pTreeModel);
-    ui->tVImplants->expand(m_pTreeModel->rootIndex());
-    m_pTableModel = new TableModel(Implants, this);
-    ui->tabVImplants->setModel(m_pTableModel);
+    ui->tVImplants->setModel(m_pImpTreeModel);
+    ui->tVImplants->expand(m_pImpTreeModel->rootIndex());
+    m_pImpTableModel = new TableModel(Implants, this);
+    ui->tabVImplants->setModel(m_pImpTableModel);
     ui->tabVImplants->horizontalHeader()->setVisible(false);
     ui->tabVImplants->resizeColumnsToContents();
 
-    connect(m_pTableModel, SIGNAL(stateChanged()), this, SLOT(tableImplantsStateChanged()));
-    connect(m_pTreeModel, SIGNAL(stateChanged(QModelIndex)), SLOT(treeImplantStateChanged(QModelIndex)));
+    connect(m_pImpTableModel, SIGNAL(stateChanged()), this, SLOT(tableImplantsStateChanged()));
+    connect(m_pImpTreeModel, SIGNAL(stateChanged(QModelIndex)), SLOT(treeImplantStateChanged(QModelIndex)));
+
+
+
+    t_abutmentEnumNFsp abut_enum = iadb.GetAbutmentsEnumerator(abut_length_comp<db::DbAbutment>(), db::no_filter<db::DbAbutment*>());
+    db::DbAbutment* pAbut = NULL;
+    providerList.clear();
+    while (abut_enum->MoveNext())
+    {
+        pAbut = abut_enum->GetCurrent();
+        series = pAbut->GetSeries();
+        provider = &(series->GetProvider());
+        if(!providerList.contains(provider))
+        {
+            providerList << provider;
+        }
+        //printf("Abutment: Name=%s, Le=%f, L1=%f, D1=%f\n", pAbut->name, pAbut->L1, pAbut->D1);
+    }
+
+    delete abut_enum;
+    m_pAbutTreeModel = new TreeModel(providerList, Abutments, this);
+    ui->tVAbutments->setModel(m_pAbutTreeModel);
+    ui->tVAbutments->expand(m_pAbutTreeModel->rootIndex());
+    m_pAbutTableModel = new TableModel(Abutments, this);
+    ui->tabVAbutments->setModel(m_pAbutTableModel);
+    ui->tabVAbutments->horizontalHeader()->setVisible(false);
+    ui->tabVAbutments->resizeColumnsToContents();
+
+    connect(m_pAbutTableModel, SIGNAL(stateChanged()), SLOT(tableAbutmentsStateChanged()));
+    connect(m_pAbutTreeModel, SIGNAL(stateChanged(QModelIndex)), SLOT(treeAbutmentsStateChanged(QModelIndex)));
+
+
 }
 
 void MainWindow::on_tVImplants_clicked(const QModelIndex &index)
 {
     if(!index.isValid())
         return;
-    db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pTreeModel->data(index, SeriesRole).value<void *>());
+    db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pImpTreeModel->data(index, SeriesRole).value<void *>());
     //if(series)
     //{
-    m_pTableModel->setSeries(series);
+    m_pImpTableModel->setSeries(series);
     ui->tabVImplants->horizontalHeader()->setVisible((bool)series);
     if(series && series->GetImplants().empty())
         ui->tabVImplants->horizontalHeader()->setVisible(false);
@@ -216,15 +243,15 @@ void MainWindow::on_tVImplants_collapsed(const QModelIndex &index)
 {
     if(ui->tabVImplants->model() && index.isValid())
     {
-        if(m_pTreeModel->rowCount(index) > 0)
+        if(m_pImpTreeModel->rowCount(index) > 0)
         {
-            for(int i = 0; i < m_pTreeModel->rowCount(index); i++)
+            for(int i = 0; i < m_pImpTreeModel->rowCount(index); i++)
             {
-                QModelIndex childIndex = m_pTreeModel->index(i, 0, index);
-                db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pTreeModel->data(childIndex, SeriesRole).value<void *>());
-                if(series == m_pTableModel->series())
+                QModelIndex childIndex = m_pImpTreeModel->index(i, 0, index);
+                db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pImpTreeModel->data(childIndex, SeriesRole).value<void *>());
+                if(series == m_pImpTableModel->series())
                 {
-                    m_pTableModel->setSeries(NULL);
+                    m_pImpTableModel->setSeries(NULL);
                     ui->tabVImplants->horizontalHeader()->setVisible(false);
                     //ui->tabVImplants->setCurrentIndex(index);
                     QItemSelectionModel * selectionModel = ui->tVImplants->selectionModel();
@@ -236,10 +263,10 @@ void MainWindow::on_tVImplants_collapsed(const QModelIndex &index)
         }
         else
         {
-            db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pTreeModel->data(index, SeriesRole).value<void *>());
-            if(series == m_pTableModel->series())
+            db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pImpTreeModel->data(index, SeriesRole).value<void *>());
+            if(series == m_pImpTableModel->series())
             {
-                m_pTableModel->setSeries(NULL);
+                m_pImpTableModel->setSeries(NULL);
                 ui->tabVImplants->horizontalHeader()->setVisible(false);
             }
         }
@@ -249,7 +276,7 @@ void MainWindow::on_tVImplants_collapsed(const QModelIndex &index)
 void MainWindow::tableImplantsStateChanged()
 {
     QModelIndex idx = ui->tVImplants->currentIndex();
-    m_pTreeModel->Update();
+    m_pImpTreeModel->Update();
     ui->tVImplants->setCurrentIndex(idx);
 }
 
@@ -257,8 +284,74 @@ void MainWindow::treeImplantStateChanged(QModelIndex index)
 {
     if(!index.isValid())
         return;
-    m_pTreeModel->Update();
+    m_pImpTreeModel->Update();
     on_tVImplants_clicked(index);
     ui->tVImplants->setCurrentIndex(index);
     ui->tVImplants->expand(index);
 }
+
+void MainWindow::on_tVAbutments_clicked(const QModelIndex &index)
+{
+    if(!index.isValid())
+        return;
+    db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pAbutTreeModel->data(index, SeriesRole).value<void *>());
+    //if(series)
+    //{
+    m_pAbutTableModel->setSeries(series);
+    ui->tabVAbutments->horizontalHeader()->setVisible((bool)series);
+    if(series && series->GetAbutment().empty())
+        ui->tabVAbutments->horizontalHeader()->setVisible(false);
+    ui->tabVAbutments->resizeColumnsToContents();
+}
+
+void MainWindow::on_tVAbutments_collapsed(const QModelIndex &index)
+{
+    if(ui->tabVAbutments->model() && index.isValid())
+    {
+        if(m_pAbutTreeModel->rowCount(index) > 0)
+        {
+            for(int i = 0; i < m_pAbutTreeModel->rowCount(index); i++)
+            {
+                QModelIndex childIndex = m_pAbutTreeModel->index(i, 0, index);
+                db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pAbutTreeModel->data(childIndex, SeriesRole).value<void *>());
+                if(series == m_pAbutTableModel->series())
+                {
+                    m_pAbutTableModel->setSeries(NULL);
+                    ui->tabVAbutments->horizontalHeader()->setVisible(false);
+                    //ui->tabVImplants->setCurrentIndex(index);
+                    QItemSelectionModel * selectionModel = ui->tVAbutments->selectionModel();
+                    selectionModel->clearSelection();
+                    selectionModel->select(index, QItemSelectionModel::Select | QItemSelectionModel::Current);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            db::DbSeries * series = reinterpret_cast<db::DbSeries *>(m_pAbutTreeModel->data(index, SeriesRole).value<void *>());
+            if(series == m_pAbutTableModel->series())
+            {
+                m_pAbutTableModel->setSeries(NULL);
+                ui->tabVAbutments->horizontalHeader()->setVisible(false);
+            }
+        }
+    }
+}
+
+void MainWindow::tableAbutmentsStateChanged()
+{
+    QModelIndex idx = ui->tVAbutments->currentIndex();
+    m_pAbutTreeModel->Update();
+    ui->tVAbutments->setCurrentIndex(idx);
+}
+
+void MainWindow::treeAbutmentsStateChanged(QModelIndex index)
+{
+    if(!index.isValid())
+        return;
+    m_pAbutTreeModel->Update();
+    on_tVAbutments_clicked(index);
+    ui->tVAbutments->setCurrentIndex(index);
+    ui->tVAbutments->expand(index);
+}
+

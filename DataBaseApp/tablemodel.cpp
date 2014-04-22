@@ -1,6 +1,7 @@
 #include "tablemodel.h"
 
-#define MAX_COLUMN 7
+#define MAX_IMP_COLUMN  7
+#define MAX_ABUT_COLUMN 5
 
 TableModel::TableModel(ModelType type, QObject *parent) :
     QAbstractTableModel(parent)
@@ -22,14 +23,21 @@ Qt::ItemFlags TableModel::flags ( const QModelIndex & index ) const
 }
 int	TableModel::columnCount ( const QModelIndex & parent) const
 {
-    return MAX_COLUMN;
+    if(m_type == Abutments)
+        return MAX_ABUT_COLUMN;
+    return MAX_IMP_COLUMN;
 }
 
 int	TableModel::rowCount ( const QModelIndex & parent) const
 {
     int ret = 0;
     if(set)
-        ret = m_pSeries->GetImplants().size();
+    {
+        if(m_type == Abutments)
+            ret = m_pSeries->GetAbutment().size();
+        else
+            ret = m_pSeries->GetImplants().size();
+    }
     return ret;
 }
 
@@ -41,7 +49,7 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation,
 
     if (orientation == Qt::Horizontal)
     {
-        if(section >= MAX_COLUMN)
+        if(section >= MAX_IMP_COLUMN)
             return QVariant();
         QString string;
         switch(section)
@@ -52,20 +60,30 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation,
         case 1:
             string = "Article";
             break;
-        case 2:
+        case 2:           
             string = "D1";
+            if(m_type == Abutments)
+                string = "Da";
             break;
         case 3:
             string = "D2";
+            if(m_type == Abutments)
+                string = "La";
             break;
         case 4:
             string = "L1";
+            if(m_type == Abutments)
+                string = "Alpha";
             break;
         case 5:
             string = "L2";
+            if(m_type == Abutments)
+                string = "?";
             break;
         case 6:
             string = "Le";
+            if(m_type == Abutments)
+                string = "?";
             break;
         default:
             string = "?";
@@ -90,59 +108,93 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
 {
     if (!index.isValid() || !set)
         return QVariant();
-
-    QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(m_pSeries->GetImplants());
-
-    if (index.row() >= implants.count() || index.column() >= MAX_COLUMN)
-        return QVariant();
-    int r = index.row();
-    int c = index.column();
-    switch(role)
+    if(m_type == Implants)
     {
-    case Qt::DisplayRole:
+        QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(m_pSeries->GetImplants());
+
+        if (index.row() >= implants.count() || index.column() >= MAX_IMP_COLUMN)
+            return QVariant();
+        int r = index.row();
+        int c = index.column();
+        switch(role)
         {
-            //QVariant ret;
-            switch(c)
+        case Qt::DisplayRole:
             {
-            case 0:
-                return implants[r]->name;
-            case 1:
-                return implants[r]->artikul;
-            case 2:
-                return implants[r]->D1;
-            case 3:
-                return implants[r]->D2;
-            case 4:
-                return implants[r]->L1;
-            case 5:
-                return implants[r]->L2;
-            case 6:
-                return implants[r]->Le;
-            default:
-                return "?";
+                //QVariant ret;
+                switch(c)
+                {
+                case 0:
+                    return implants[r]->name;
+                case 1:
+                    return implants[r]->artikul;
+                case 2:
+                    return implants[r]->D1;
+                case 3:
+                    return implants[r]->D2;
+                case 4:
+                    return implants[r]->L1;
+                case 5:
+                    return implants[r]->L2;
+                case 6:
+                    return implants[r]->Le;
+                default:
+                    return "?";
+                }
+            }
+        case Qt::CheckStateRole:
+            {
+                if(c == 0)
+                {
+                    if(implants[r]->state == db::ObjState::Active)
+                        return Qt::Checked;
+                    else
+                        return Qt::Unchecked;
+                }
+                return QVariant();
             }
         }
-    case Qt::CheckStateRole:
-    {
-        if(c == 0)
-        {
-            if(implants[r]->state == db::ObjState::Active)
-                return Qt::Checked;
-            else
-                return Qt::Unchecked;
-        }
-        return QVariant();
     }
-//	case Qt::ToolTipRole:
-//		return fiList.at(index.row()).completeBaseName();
-//	case Qt::DecorationRole:
-//		{
-//			if(index.column() == 0)
-//			{
-//				return m_IconMap[fiList[index.row()].suffix()];
-//			}
-//		}
-//		break;
+    else if(m_type == Abutments)
+    {
+        QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(m_pSeries->GetAbutment());
+
+        if (index.row() >= abutments.count() || index.column() >= MAX_ABUT_COLUMN)
+            return QVariant();
+        int r = index.row();
+        int c = index.column();
+        switch(role)
+        {
+        case Qt::DisplayRole:
+            {
+                //QVariant ret;
+                switch(c)
+                {
+                case 0:
+                    return abutments[r]->name;
+                case 1:
+                    return abutments[r]->artikul;
+                case 2:
+                    return abutments[r]->D1;
+                case 3:
+                    return abutments[r]->L1;
+                case 4:
+                    return abutments[r]->Alpha;
+                default:
+                    return "?";
+                }
+            }
+        case Qt::CheckStateRole:
+            {
+                if(c == 0)
+                {
+                    if(abutments[r]->state == db::ObjState::Active)
+                        return Qt::Checked;
+                    else
+                        return Qt::Unchecked;
+                }
+                return QVariant();
+            }
+        }
     }
     return QVariant();
 }
@@ -154,17 +206,35 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
     if (!index.isValid() || !set)
         return false;
 
-    QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(m_pSeries->GetImplants());
-    if (index.row() >= implants.count() || index.column() >= MAX_COLUMN)
-        return false;
-    if(role == Qt::CheckStateRole)
+    if(m_type == Implants)
     {
-        if(value.toBool())
-            implants[index.row()]->state = db::ObjState::Active;
-        else
-            implants[index.row()]->state = db::ObjState::Nonactive;
-        emit stateChanged();
-        return true;
+        QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(m_pSeries->GetImplants());
+        if (index.row() >= implants.count() || index.column() >= MAX_IMP_COLUMN)
+            return false;
+        if(role == Qt::CheckStateRole)
+        {
+            if(value.toBool())
+                implants[index.row()]->state = db::ObjState::Active;
+            else
+                implants[index.row()]->state = db::ObjState::Nonactive;
+            emit stateChanged();
+            return true;
+        }
+    }
+    else if(m_type == Abutments)
+    {
+        QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(m_pSeries->GetAbutment());
+        if (index.row() >= abutments.count() || index.column() >= MAX_ABUT_COLUMN)
+            return false;
+        if(role == Qt::CheckStateRole)
+        {
+            if(value.toBool())
+                abutments[index.row()]->state = db::ObjState::Active;
+            else
+                abutments[index.row()]->state = db::ObjState::Nonactive;
+            emit stateChanged();
+            return true;
+        }
     }
     return QAbstractTableModel::setData(index, value, role);
 }

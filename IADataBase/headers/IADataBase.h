@@ -406,7 +406,8 @@ namespace db
 		//}
 	}
 	//COLORREF __stdcall GetDefColor(char* inColor);
-	unsigned long __stdcall GetDefColor(char* inColor);
+    //unsigned long __stdcall GetDefColor(char* inColor);
+    QColor __stdcall GetDefColor(char* inColor);
 }
 	
 

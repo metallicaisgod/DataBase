@@ -149,6 +149,8 @@ Qt::CheckState TreeItem::state(ModelType type)
     {
         if(type == Implants)
         {
+           if(data() == NULL)
+                return Qt::Unchecked;
            QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(data()->GetImplants());
            int i;
            int c = 0;
@@ -167,6 +169,8 @@ Qt::CheckState TreeItem::state(ModelType type)
         }
         else
         {
+            if(data() == NULL)
+                return Qt::Unchecked;
             QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(data()->GetAbutment());
             int i;
             int c = 0;

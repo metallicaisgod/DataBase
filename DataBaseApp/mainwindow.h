@@ -41,14 +41,24 @@ private slots:
 
     void treeImplantStateChanged(QModelIndex);
 
+    void on_tVAbutments_clicked(const QModelIndex &index);
+
+    void on_tVAbutments_collapsed(const QModelIndex &index);
+
+    void tableAbutmentsStateChanged();
+
+    void treeAbutmentsStateChanged(QModelIndex);
+
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;
     //QStandardItemModel * m_pImplantsTreeModel;
     //QStandardItemModel * m_pAbutmentsTreeModel;
-    TreeModel * m_pTreeModel;
-    TableModel * m_pTableModel;
-    QList<db::DbProvider*> providerList;
+    TreeModel * m_pImpTreeModel;
+    TableModel * m_pImpTableModel;
+    TreeModel * m_pAbutTreeModel;
+    TableModel * m_pAbutTableModel;
+    //QList<db::DbProvider*> providerList;
     QString fileName;
     int m_openGLwidth;
 //    bool m_bLeftSplitterCatched;
