@@ -49,6 +49,8 @@ private slots:
 
     void treeAbutmentsStateChanged(QModelIndex);
 
+    void on_actionAdd_Provider_triggered();
+
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;

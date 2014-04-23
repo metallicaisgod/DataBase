@@ -56,7 +56,7 @@ TreeModel::TreeModel(QList<db::DbProvider*> providers, ModelType type, QObject *
 {
     m_providers = providers;
     m_type = type;
-    rootItem = new TreeItem(NULL, NULL, true);
+    rootItem = new TreeItem();
     setupModelData(providers, rootItem);
 }
 //! [0]
@@ -89,37 +89,42 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
     {
         //return QVariant();
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-        TreeItem * parent =  item->parent();
-        if(!parent)
-            return QVariant();
-        if(parent && item->isRoot())
+        switch(item->itemType())
         {
-            QString rootName;
-            switch(m_type)
+        case RootItem:
             {
-            case Implants:
-                rootName = "Implants";
-                break;
-            case Abutments:
-                rootName = "Abutments";
-                break;
+                QString rootName;
+                switch(m_type)
+                {
+                case Implants:
+                    rootName = "Implants";
+                    break;
+                case Abutments:
+                    rootName = "Abutments";
+                    break;
+                }
+                return rootName;
             }
-            return rootName;
-        }
-        else if(parent->isRoot()) //providers
-        {
-            return QString(m_providers[index.row()]->name);
-        }
-        else  //series
-        {
-            return QString(item->data()->name);
+        case ProviderItem: //providers
+            {
+                return QString(m_providers[index.row()]->name);
+            }
+        case SeriesItem:  //series
+            {
+                db::DbSeries * series = reinterpret_cast<db::DbSeries *>(item->data());
+                return QString(series->name);
+            }
         }
     }
     else if(role == SeriesRole)
     {
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
         //QMetaType::VoidStar
-        return QVariant::fromValue((void*)item->data());
+        if(item->itemType() == SeriesItem)
+            return QVariant::fromValue(item->data());
+        else
+            return NULL;
+
     }
     else if(role == Qt::CheckStateRole)
     {
@@ -130,19 +135,13 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
     {
         //return QVariant();
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-        TreeItem * parent =  item->parent();
-        if(!parent)
-            return QVariant();
-        if(parent && item->isRoot())
+        switch(item->itemType())
         {
+        case RootItem:
             return QIcon(":/files/Resources/folder_icon.png");
-        }
-        else if(parent->isRoot()) //providers
-        {
+        case ProviderItem: //providers
             return QIcon(":/files/Resources/provider_icon.png");
-        }
-        else  //series
-        {
+        case SeriesItem:
             return QIcon(":/files/Resources/series_icon.png");
         }
     }
@@ -156,10 +155,12 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return 0;
-    Qt::ItemFlags fl = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-    TreeItem* item = static_cast<TreeItem*>(index.internalPointer());
-    if(!item->isRoot())
-        fl |= Qt::ItemIsTristate | Qt::ItemIsUserCheckable;
+    Qt::ItemFlags fl = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsTristate | Qt::ItemIsUserCheckable;
+    TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+    if(item->itemType() != RootItem)
+    {
+        fl |= Qt::ItemIsEditable;
+    }
     return fl;
 }
 //! [4]
@@ -240,68 +241,31 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
     //parents << parent;
     //indentations << 0;
 
-    TreeItem * root = new TreeItem(parent, NULL, true);
+    TreeItem * root = new TreeItem(parent, NULL, RootItem);
     parent->appendChild(root);
     int number = 0;
 
     while (number < providers.count())
     {
-//        int position = 0;
-//        while (position < providers[number].length()) {
-//            if (lines[number].mid(position, 1) != " ")
-//                break;
-//            position++;
-//        }
+
         QList<db::DbSeries*> list = QList<db::DbSeries*>::fromStdList(providers.at(number)->GetSeriesList());
 
-        TreeItem * provider = new TreeItem(root);
+        TreeItem * provider = new TreeItem(root, reinterpret_cast<void *>(providers[number]), ProviderItem);
         for(int i = 0; i < list.count(); i++)
         {
             if(m_type == Implants)
             {
-                if(list[i]->GetImplants().empty())
+                if(list[i]->GetImplants().empty() && !list[i]->GetAbutment().empty())
                     continue;
             }
-            else
+            if(m_type == Abutments)
             {
-                if(list[i]->GetAbutment().empty())
+                if(!list[i]->GetImplants().empty() && list[i]->GetAbutment().empty())
                     continue;
             }
-            provider->appendChild(new TreeItem(provider, list[i]));
+            provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
         }
         root->appendChild(provider);
-//        if (!lineData.isEmpty())
-//        {
-//            // Read the column data from the rest of the line.
-//            QStringList columnStrings = lineData.split("\t", QString::SkipEmptyParts);
-//            QList<QVariant> columnData;
-//            for (int column = 0; column < columnStrings.count(); ++column)
-//                columnData << columnStrings[column];
-
-//            if (position > indentations.last())
-//            {
-//                // The last child of the current parent is now the new parent
-//                // unless the current parent has no children.
-
-//                if (parents.last()->childCount() > 0)
-//                {
-//                    parents << parents.last()->child(parents.last()->childCount()-1);
-//                    indentations << position;
-//                }
-//            }
-//            else
-//            {
-//                while (position < indentations.last() && parents.count() > 0)
-//                {
-//                    parents.pop_back();
-//                    indentations.pop_back();
-//                }
-//            }
-
-//            // Append a new item to the current parent's list of children.
-//            parents.last()->appendChild(new TreeItem(columnData, parents.last()));
-//        }
-
         number++;
     }
 }
@@ -321,6 +285,18 @@ bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int rol
         TreeItem * item = static_cast<TreeItem*>(index.internalPointer());
         item->setState(m_type, value.toBool());
         emit stateChanged(index);
+        return false;
+    }
+    else if(role == Qt::EditRole)
+    {
+        if(value.toString().isEmpty())
+            return true;
+        TreeItem * item = static_cast<TreeItem*>(index.internalPointer());
+        if(item->itemType() == ProviderItem)
+        {
+            strncpy(m_providers[index.row()]->name, value.toString().toLocal8Bit().data(), NAME_SIZE);
+        }
+        emit dataChanged(index, index);
         return false;
     }
     return QAbstractItemModel::setData(index, value, role);

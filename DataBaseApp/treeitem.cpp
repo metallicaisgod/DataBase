@@ -49,11 +49,11 @@
 #include "treeitem.h"
 
 //! [0]
-TreeItem::TreeItem(TreeItem *parent, db::DbSeries * data, bool root)
+TreeItem::TreeItem(TreeItem *parent, void * data, ItemType type)
 {
     parentItem = parent;
     itemData = data;
-    m_root = root;
+    m_type = type;
 }
 //! [0]
 
@@ -93,7 +93,7 @@ int TreeItem::columnCount() const
 //! [5]
 
 //! [6]
-db::DbSeries * TreeItem::data() const
+void * TreeItem::data() const
 {
     return itemData;
 }
@@ -119,9 +119,9 @@ int TreeItem::row() const
 //! [9]
 Qt::CheckState TreeItem::state(ModelType type)
 {
-    int count = childCount();
-    if(count > 0)//providers
+    if(m_type == ProviderItem)//providers
     {
+        int count = childCount();
         int i;
         int ucCount = 0;
         int pcCount = 0;
@@ -145,13 +145,14 @@ Qt::CheckState TreeItem::state(ModelType type)
             return Qt::PartiallyChecked;
         return Qt::Checked;
     }
-    else//series
+    else if(m_type == SeriesItem)//series
     {
+        if(data() == NULL)
+            return Qt::Unchecked;
+        db::DbSeries * series = reinterpret_cast<db::DbSeries *>(data());
         if(type == Implants)
-        {
-           if(data() == NULL)
-                return Qt::Unchecked;
-           QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(data()->GetImplants());
+        {           
+           QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(series->GetImplants());
            int i;
            int c = 0;
            for(i = 0; i < implants.count(); i ++)
@@ -169,9 +170,7 @@ Qt::CheckState TreeItem::state(ModelType type)
         }
         else
         {
-            if(data() == NULL)
-                return Qt::Unchecked;
-            QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(data()->GetAbutment());
+            QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(series->GetAbutment());
             int i;
             int c = 0;
             for(i = 0; i < abutments.count(); i ++)
@@ -194,21 +193,24 @@ Qt::CheckState TreeItem::state(ModelType type)
 //! [9]
 
 void TreeItem::setState(ModelType type, bool state)
-{
-    int count = childCount();
-    if(count > 0)//providers
+{    
+    if(m_type == ProviderItem)//providers
     {
+        int count = childCount();
         int i;
         for(i = 0; i < count; i++ )
         {
             child(i)->setState(type, state);
         }
     }
-    else//series
+    else if(m_type == SeriesItem)//series
     {
+        if(data() == NULL)
+            return;
+        db::DbSeries * series = reinterpret_cast<db::DbSeries *>(data());
         if(type == Implants)
         {
-           QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(data()->GetImplants());
+           QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(series->GetImplants());
            int i;
            for(i = 0; i < implants.count(); i ++)
            {
@@ -220,7 +222,7 @@ void TreeItem::setState(ModelType type, bool state)
         }
         else
         {
-            QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(data()->GetAbutment());
+            QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(series->GetAbutment());
             int i;
             for(i = 0; i < abutments.count(); i ++)
             {

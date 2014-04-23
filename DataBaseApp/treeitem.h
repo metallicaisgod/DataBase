@@ -46,12 +46,18 @@
 #include "types.h"
 #include "..\iadatabase\headers\IADataBase.h"
 
+typedef enum
+{
+    RootItem,
+    ProviderItem,
+    SeriesItem
+}ItemType;
 
 //! [0]
 class TreeItem
 {
 public:
-    TreeItem(TreeItem *parent = 0, db::DbSeries * data = NULL, bool root = false);
+    TreeItem(TreeItem *parent = 0, void * data = NULL, ItemType type = RootItem);
     ~TreeItem();
 
     void appendChild(TreeItem *child);
@@ -59,12 +65,12 @@ public:
     TreeItem *child(int row);
     int childCount() const;
     int columnCount() const;
-    db::DbSeries * data() const;
+    void * data() const;
     int row() const;
     TreeItem *parent();
-    bool isRoot()
+    ItemType itemType()
     {
-        return m_root;
+        return m_type;
     }
     Qt::CheckState state(ModelType type);
     void setState(ModelType, bool);
@@ -79,9 +85,10 @@ public:
 
 private:
     QList<TreeItem*> childItems;
-    db::DbSeries * itemData;
+    void * itemData;
     TreeItem *parentItem;
-    bool m_root;
+    ItemType m_type;
+    //bool m_root;
     Qt::CheckState m_state;
 };
 //! [0]

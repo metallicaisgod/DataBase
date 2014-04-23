@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 using namespace db;
 
 template <typename T>
@@ -53,9 +52,37 @@ struct compatible_abutment: public std::unary_function<T, bool>
 typedef db::enumerator<db::t_AbutmentList::iterator, compatible_abutment<db::DbAbutment*> > t_abutmentEnumComp;
 typedef t_abutmentEnumComp *t_abutmentEnumCompPtr;
 
+template <typename T>
+struct provider_filter_abutments: public std::unary_function<T, bool>
+{
+    //db::DbImplant* m_impl;
+    //provider_filter_implants(){};
+    bool operator()(const T prov)
+    {
+        // Check series
+        if(!prov->SeriesCount())
+            return true;
+        std::list<DbSeries*>::iterator iser = prov->GetSeriesList().begin();
+        for(; iser != prov->GetSeriesList().end(); iser++)
+        {
+            if(!(*(iser))->GetAbutment().empty())
+                return true;
+        }
+        return false;
+    }
+
+};
+
+typedef db::enumerator<db::t_ProvidersList::iterator,db::no_filter<db::DbProvider*> > t_ProviderEnumNF;
+typedef db::enumerator<db::t_ProvidersList::iterator,provider_filter_abutments<db::DbProvider*> > t_ProviderEnumFA;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    m_pImpTreeModel(NULL),
+    m_pImpTableModel(NULL),
+    m_pAbutTreeModel(NULL),
+    m_pAbutTableModel(NULL)
 {
     ui->setupUi(this);
     QWidgetList list;
@@ -76,7 +103,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addAction(ui->actionRemove_Note);
 
 
-    fileName = "..\\DataBase\\implants_db.xml";
+    fileName = "..\\DataBase\\implants_db.xml";    
+    iadb.LoadXml_All(fileName.toLocal8Bit().data());
     fillModels();
     //on_pB3DModel_clicked();
 //
@@ -174,29 +202,40 @@ void MainWindow::on_pB3DModel_clicked()
 
 void MainWindow::fillModels(/*QString fileName*/)
 {
-    DbSeries * series;
+   //DbSeries * series;
     DbProvider * provider;
     QList<DbProvider *> providerList;
 
-    iadb.LoadXml_All(fileName.toLocal8Bit().data());
+    t_ProviderEnumNF prov_enum = iadb.GetProvidersEnumerator(db::no_filter<db::DbProvider*>());
 
-    t_implantsEnumNFsp impl_enum = iadb.GetImplantsEnumerator(impl_length_comp<db::DbImplant>(), db::no_filter<db::DbImplant*>());
-    DbImplant* pImplant = NULL;
-    while (impl_enum->MoveNext())
+    while(prov_enum.MoveNext())
     {
-        pImplant = impl_enum->GetCurrent();        
-        series = pImplant->GetSeries();
-        provider = &(series->GetProvider());
+        provider = prov_enum.GetCurrent();
         if(!providerList.contains(provider))
         {
             providerList << provider;
         }
     }
+
+//    t_implantsEnumNFsp impl_enum = iadb.GetImplantsEnumerator(impl_length_comp<db::DbImplant>(), db::no_filter<db::DbImplant*>());
+//    DbImplant* pImplant = NULL;
+//    while (impl_enum->MoveNext())
+//    {
+//        pImplant = impl_enum->GetCurrent();
+//        series = pImplant->GetSeries();
+//        provider = &(series->GetProvider());
+//        if(!providerList.contains(provider))
+//        {
+//            providerList << provider;
+//        }
+//    }
+    if(m_pImpTreeModel) delete m_pImpTreeModel;
     m_pImpTreeModel = new TreeModel(providerList, Implants, this);
     //m_pImplantsTreeModel->appendRow(parentItem);
-    delete impl_enum;
+//    delete impl_enum;
     ui->tVImplants->setModel(m_pImpTreeModel);
     ui->tVImplants->expand(m_pImpTreeModel->rootIndex());
+    if(m_pImpTableModel) delete m_pImpTableModel;
     m_pImpTableModel = new TableModel(Implants, this);
     ui->tabVImplants->setModel(m_pImpTableModel);
     ui->tabVImplants->horizontalHeader()->setVisible(false);
@@ -207,25 +246,38 @@ void MainWindow::fillModels(/*QString fileName*/)
 
 
 
-    t_abutmentEnumNFsp abut_enum = iadb.GetAbutmentsEnumerator(abut_length_comp<db::DbAbutment>(), db::no_filter<db::DbAbutment*>());
-    db::DbAbutment* pAbut = NULL;
+    t_ProviderEnumFA prov_abut_enum = iadb.GetProvidersEnumerator(provider_filter_abutments<db::DbProvider*>());
     providerList.clear();
-    while (abut_enum->MoveNext())
+    while(prov_abut_enum.MoveNext())
     {
-        pAbut = abut_enum->GetCurrent();
-        series = pAbut->GetSeries();
-        provider = &(series->GetProvider());
+        provider = prov_abut_enum.GetCurrent();
         if(!providerList.contains(provider))
         {
             providerList << provider;
         }
-        //printf("Abutment: Name=%s, Le=%f, L1=%f, D1=%f\n", pAbut->name, pAbut->L1, pAbut->D1);
     }
+//    t_abutmentEnumNFsp abut_enum = iadb.GetAbutmentsEnumerator(abut_length_comp<db::DbAbutment>(), db::no_filter<db::DbAbutment*>());
+//    db::DbAbutment* pAbut = NULL;
+//    providerList.clear();
+//    while (abut_enum->MoveNext())
+//    {
+//        pAbut = abut_enum->GetCurrent();
+//        series = pAbut->GetSeries();
+//        provider = &(series->GetProvider());
+//        if(!providerList.contains(provider))
+//        {
+//            providerList << provider;
+//        }
+//        //printf("Abutment: Name=%s, Le=%f, L1=%f, D1=%f\n", pAbut->name, pAbut->L1, pAbut->D1);
+//    }
 
-    delete abut_enum;
+//    delete abut_enum;
+    if(m_pAbutTreeModel) delete m_pAbutTreeModel;
     m_pAbutTreeModel = new TreeModel(providerList, Abutments, this);
     ui->tVAbutments->setModel(m_pAbutTreeModel);
     ui->tVAbutments->expand(m_pAbutTreeModel->rootIndex());
+
+    if(m_pAbutTableModel) delete m_pAbutTableModel;
     m_pAbutTableModel = new TableModel(Abutments, this);
     ui->tabVAbutments->setModel(m_pAbutTableModel);
     ui->tabVAbutments->horizontalHeader()->setVisible(false);
@@ -368,3 +420,15 @@ void MainWindow::treeAbutmentsStateChanged(QModelIndex index)
     ui->tVAbutments->expand(index);
 }
 
+
+
+void MainWindow::on_actionAdd_Provider_triggered()
+{
+    iadb.AddProvider("\0");
+    fillModels();
+    QModelIndex index = m_pImpTreeModel->index(m_pImpTreeModel->rowCount(m_pImpTreeModel->rootIndex()) - 1, 0, m_pImpTreeModel->rootIndex());
+    if(index.isValid())
+    {
+        ui->tVImplants->edit(index);
+    }
+}
