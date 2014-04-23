@@ -13,10 +13,53 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QTreeView::branch:has-siblings:!adjoins-item  {
+    border-image: url(:/files/Resources/stem.png) 0;
+}
+ 
+QTreeView::branch:has-siblings:adjoins-item  {
+    border-image: url(:/files/Resources/branch.png) 0;
+}
+ 
+QTreeView::branch:!has-children:!has-siblings:adjoins-item  {
+    border-image: url(:/files/Resources/branch-end.png) 0;
+}
+ 
+QTreeView::branch:closed:has-children:has-siblings  {
+        border-image: none;
+        image: url(:/files/Resources/plus.png);
+}
+
+QTreeView::branch:has-children:!has-siblings:closed {
+		border-image: none;
+        image: url(:/files/Resources/plus-end.png);
+}
+ 
+QTreeView::branch:open:has-children:has-siblings   {
+        border-image: none;
+        image: url(:/files/Resources/minus.png);
+}
+
+QTreeView::branch:open:has-children:!has-siblings {
+		border-image: none;
+        image: url(:/files/Resources/minus-end.png);
+}
+</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
     <property name="topMargin">
      <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>5</number>
     </property>
     <item>
      <widget class="QSplitter" name="splitter">
@@ -43,7 +86,7 @@
             </rect>
            </property>
            <property name="selectionMode">
-            <enum>QAbstractItemView::MultiSelection</enum>
+            <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
@@ -64,8 +107,11 @@
              <height>190</height>
             </rect>
            </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
            <property name="selectionMode">
-            <enum>QAbstractItemView::MultiSelection</enum>
+            <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
@@ -74,7 +120,10 @@
             <bool>false</bool>
            </attribute>
            <attribute name="verticalHeaderDefaultSectionSize">
-            <number>20</number>
+            <number>16</number>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>16</number>
            </attribute>
           </widget>
           <widget class="QTreeView" name="tVImplants">
@@ -93,7 +142,7 @@
             <number>20</number>
            </property>
            <property name="rootIsDecorated">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="uniformRowHeights">
             <bool>false</bool>
@@ -119,6 +168,9 @@
            </property>
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectItems</enum>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
            </property>
            <property name="headerHidden">
             <bool>true</bool>
@@ -183,7 +235,7 @@
               <string>View/Hide  3D Model</string>
              </property>
              <property name="text">
-              <string>3D Model  &lt;&lt;</string>
+              <string>3D Model  &gt;&gt;</string>
              </property>
             </widget>
            </item>
@@ -199,7 +251,16 @@
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="movable">
-    <bool>true</bool>
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::TopToolBarArea</set>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -208,6 +269,89 @@
     <bool>false</bool>
    </attribute>
   </widget>
+  <action name="actionLoad">
+   <property name="icon">
+    <iconset>
+     <normalon>:/files/Resources/load_icon.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
+  <action name="actionAdd_Provider">
+   <property name="icon">
+    <iconset>
+     <normalon>:/files/Resources/add_provider_icon.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Add Provider</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Provider</string>
+   </property>
+  </action>
+  <action name="actionAdd_Series">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/files/Resources/add_series_icon.png</normaloff>:/files/Resources/add_series_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Series</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Series</string>
+   </property>
+  </action>
+  <action name="actionAdd_Implant">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/files/Resources/add_imp_icon.png</normaloff>:/files/Resources/add_imp_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Implant</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Implant</string>
+   </property>
+  </action>
+  <action name="actionAdd_Abutment">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/files/Resources/add_abut_icon.png</normaloff>:/files/Resources/add_abut_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Abutment</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Abutment</string>
+   </property>
+  </action>
+  <action name="actionEdit_Note">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/files/Resources/add_note_icon.png</normaloff>:/files/Resources/add_note_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit Note</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit Note</string>
+   </property>
+  </action>
+  <action name="actionRemove_Note">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/files/Resources/delete_note_icon.png</normaloff>:/files/Resources/delete_note_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Note</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Note</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -218,6 +362,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

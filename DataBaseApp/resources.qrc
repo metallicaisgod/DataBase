@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/files">
+        <file>Resources/add_abut_icon.png</file>
+        <file>Resources/add_imp_icon.png</file>
+        <file>Resources/add_note_icon.png</file>
+        <file>Resources/add_provider_icon.png</file>
+        <file>Resources/add_series_icon.png</file>
+        <file>Resources/delete_note_icon.png</file>
+        <file>Resources/folder_icon.png</file>
+        <file>Resources/load_icon.png</file>
+        <file>Resources/note_icon.png</file>
+        <file>Resources/provider_icon.png</file>
+        <file>Resources/series_icon.png</file>
+        <file>Resources/branch.png</file>
+        <file>Resources/branch-end.png</file>
+        <file>Resources/minus.png</file>
+        <file>Resources/plus.png</file>
+        <file>Resources/stem.png</file>
+        <file>Resources/minus-end.png</file>
+        <file>Resources/plus-end.png</file>
+    </qresource>
+</RCC>

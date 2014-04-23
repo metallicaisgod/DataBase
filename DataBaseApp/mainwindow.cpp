@@ -63,6 +63,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->frame_2->setWidgets(list, 2, 2);
     //m_pImplantsTreeModel = new QStandardItemModel();
     //m_pAbutmentsTreeModel = new QStandardItemModel();
+
+    ui->mainToolBar->addAction(ui->actionLoad);
+    ui->mainToolBar->addSeparator();
+    ui->mainToolBar->addAction(ui->actionAdd_Provider);
+    ui->mainToolBar->addAction(ui->actionAdd_Series);
+    ui->mainToolBar->addAction(ui->actionAdd_Implant);
+    ui->mainToolBar->addAction(ui->actionAdd_Abutment);
+    ui->mainToolBar->addSeparator();
+    ui->mainToolBar->addAction(ui->actionEdit_Note);
+    ui->mainToolBar->addSeparator();
+    ui->mainToolBar->addAction(ui->actionRemove_Note);
+
+
     fileName = "..\\DataBase\\implants_db.xml";
     fillModels();
     //on_pB3DModel_clicked();

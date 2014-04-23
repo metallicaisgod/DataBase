@@ -126,6 +126,26 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
         return item->state(m_type);
     }
+    else if (role == Qt::DecorationRole)
+    {
+        //return QVariant();
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        TreeItem * parent =  item->parent();
+        if(!parent)
+            return QVariant();
+        if(parent && item->isRoot())
+        {
+            return QIcon(":/files/Resources/folder_icon.png");
+        }
+        else if(parent->isRoot()) //providers
+        {
+            return QIcon(":/files/Resources/provider_icon.png");
+        }
+        else  //series
+        {
+            return QIcon(":/files/Resources/series_icon.png");
+        }
+    }
 
     return QVariant();
 }

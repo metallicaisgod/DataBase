@@ -14,7 +14,7 @@ TableModel::TableModel(ModelType type, QObject *parent) :
 
 Qt::ItemFlags TableModel::flags ( const QModelIndex & index ) const
 {
-    Qt::ItemFlags flag = Qt::ItemIsEnabled | Qt::ItemIsEditable;
+    Qt::ItemFlags flag = Qt::ItemIsEnabled | Qt::ItemIsEditable | Qt::ItemIsSelectable;
     if(index.column() == 0)
     {
         flag |= Qt::ItemIsUserCheckable;
@@ -151,7 +151,13 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
                         return Qt::Unchecked;
                 }
                 return QVariant();
+            }        
+        case Qt::DecorationRole:
+            if(c == 0)
+            {
+                return QIcon(":/files/Resources/note_icon.png");
             }
+            return QVariant();
         }
     }
     else if(m_type == Abutments)
@@ -194,6 +200,12 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
                 }
                 return QVariant();
             }
+        case Qt::DecorationRole:
+            if(c == 0)
+            {
+                return QIcon(":/files/Resources/note_icon.png");
+            }
+            return QVariant();
         }
     }
     return QVariant();
