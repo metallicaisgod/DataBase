@@ -47,8 +47,6 @@
 #include "types.h"
 #include "..\iadatabase\headers\IADataBase.h"
 
-#define SeriesRole Qt::UserRole + 1
-
 class TreeItem;
 
 //! [0]

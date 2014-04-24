@@ -116,15 +116,17 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
             }
         }
     }
-    else if(role == SeriesRole)
+    else if(role == DataRole)
     {
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
         //QMetaType::VoidStar
-        if(item->itemType() == SeriesItem)
-            return QVariant::fromValue(item->data());
-        else
-            return NULL;
-
+        return QVariant::fromValue(item->data());
+    }
+    else if(role == ItemTypeRole)
+    {
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        //QMetaType::VoidStar
+        return item->itemType();
     }
     else if(role == Qt::CheckStateRole)
     {
@@ -145,7 +147,6 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
             return QIcon(":/files/Resources/series_icon.png");
         }
     }
-
     return QVariant();
 }
 //! [3]
@@ -296,6 +297,15 @@ bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int rol
         {
             strncpy(m_providers[index.row()]->name, value.toString().toLocal8Bit().data(), NAME_SIZE);
         }
+        else if(item->itemType() == SeriesItem)
+        {
+            db::DbSeries * series = reinterpret_cast<db::DbSeries *>(item->data());
+            if(series)
+            {
+                strncpy(series->name, value.toString().toLocal8Bit().data(), NAME_SIZE);
+            }
+        }
+
         emit dataChanged(index, index);
         return false;
     }

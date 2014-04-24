@@ -46,13 +46,6 @@
 #include "types.h"
 #include "..\iadatabase\headers\IADataBase.h"
 
-typedef enum
-{
-    RootItem,
-    ProviderItem,
-    SeriesItem
-}ItemType;
-
 //! [0]
 class TreeItem
 {

@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     crosssplitterhandle.cpp \
     treemodel.cpp \
     treeitem.cpp \
-    tablemodel.cpp
+    tablemodel.cpp \
+    implantdialog.cpp \
+    abutmentdialog.cpp
 
 HEADERS  += mainwindow.h \
     stdafx.h \
@@ -33,9 +35,13 @@ HEADERS  += mainwindow.h \
     treemodel.h \
     treeitem.h \
     tablemodel.h \
-    types.h
+    types.h \
+    implantdialog.h \
+    abutmentdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    implantdialog.ui \
+    abutmentdialog.ui
 
 RESOURCES += \
     resources.qrc

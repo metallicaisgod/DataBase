@@ -18,5 +18,6 @@
         <file>Resources/stem.png</file>
         <file>Resources/minus-end.png</file>
         <file>Resources/plus-end.png</file>
+        <file>Resources/scheme.png</file>
     </qresource>
 </RCC>

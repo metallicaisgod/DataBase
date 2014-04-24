@@ -158,6 +158,8 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
                 return QIcon(":/files/Resources/note_icon.png");
             }
             return QVariant();
+        case DataRole:
+             return QVariant::fromValue(reinterpret_cast<void*>(implants[r]));
         }
     }
     else if(m_type == Abutments)
@@ -205,7 +207,9 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
             {
                 return QIcon(":/files/Resources/note_icon.png");
             }
-            return QVariant();
+            return QVariant();        
+        case DataRole:
+             return QVariant::fromValue(reinterpret_cast<void*>(abutments[r]));
         }
     }
     return QVariant();

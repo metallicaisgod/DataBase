@@ -5,6 +5,8 @@
 
 #include "treemodel.h"
 #include "tablemodel.h"
+#include "implantdialog.h"
+#include "abutmentdialog.h"
 #include "..\iadatabase\headers\IADataBase.h"
 
 Q_DECLARE_METATYPE(db::DbSeries*)
@@ -23,7 +25,7 @@ public:
 
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
-    void fillModels();
+    void fillModels(ModelType);
     void closeEvent(QCloseEvent * ev);
     void showEvent(QShowEvent * ev);
 
@@ -51,6 +53,18 @@ private slots:
 
     void on_actionAdd_Provider_triggered();
 
+    void disableActions(ItemType type, ModelType modelType);
+
+    void on_tabVImplants_clicked(const QModelIndex &index);
+
+    void on_tabVAbutments_clicked(const QModelIndex &index);
+
+    void on_actionAdd_Series_triggered();
+
+    void on_actionAdd_Implant_triggered();
+
+    void on_actionAdd_Abutment_triggered();
+
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;
@@ -61,6 +75,8 @@ private:
     TreeModel * m_pAbutTreeModel;
     TableModel * m_pAbutTableModel;
     //QList<db::DbProvider*> providerList;
+    ImplantDialog * m_pImplantDialog;
+    AbutmentDialog * m_pAbutmentDialog;
     QString fileName;
     int m_openGLwidth;
 //    bool m_bLeftSplitterCatched;
