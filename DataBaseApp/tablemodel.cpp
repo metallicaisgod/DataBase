@@ -159,7 +159,10 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
             }
             return QVariant();
         case DataRole:
-             return QVariant::fromValue(reinterpret_cast<void*>(implants[r]));
+            if(c == 0)
+            {
+                return QVariant::fromValue(reinterpret_cast<void*>(implants[r]));
+            }
         }
     }
     else if(m_type == Abutments)

@@ -65,6 +65,10 @@ private slots:
 
     void on_actionAdd_Abutment_triggered();
 
+    void on_actionEdit_Note_triggered();
+
+    void on_actionRemove_Note_triggered();
+
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;

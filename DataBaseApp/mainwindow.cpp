@@ -153,7 +153,11 @@ void MainWindow::showEvent(QShowEvent * ev)
     ui->frame_2->setVerticalRatio(fromVariantToDouble(list));
     //settings.setValue("LeftGeometry", ui->widget->geometry());
     setGeometry(settings.value("Geometry", geometry()).toRect());
+
     ev->accept();
+    ui->tVImplants->setFocus();
+    if(m_pImpTreeModel)
+        ui->tVImplants->setCurrentIndex(m_pImpTreeModel->rootIndex());
 }
 
 void MainWindow::closeEvent(QCloseEvent * ev)
@@ -567,14 +571,14 @@ void MainWindow::on_actionAdd_Implant_triggered()
     {
         DbImplant & implant = series->AddImplant(ImplantData());
         m_pImpTableModel->setSeries(series);
-        ui->tabVImplants->horizontalHeader()->setVisible(true);
-        ui->tabVImplants->resizeColumnsToContents();
         ui->tabVImplants->setCurrentIndex(m_pImpTableModel->index(m_pImpTableModel->rowCount() - 1, 0));
         ui->tabVImplants->scrollToBottom();
         m_pImplantDialog->setImplant(&implant);
         int ret = m_pImplantDialog->exec();
         if(ret == QDialog::Rejected)
             series->RemoveImplant(implant);
+        ui->tabVImplants->horizontalHeader()->setVisible(!(series->GetImplants().empty()));
+        ui->tabVImplants->resizeColumnsToContents();
         m_pImpTableModel->Update();
     }
 }
@@ -589,14 +593,217 @@ void MainWindow::on_actionAdd_Abutment_triggered()
     {
         DbAbutment & abutment = series->AddAbutment(AbutmentData());
         m_pAbutTableModel->setSeries(series);
-        ui->tabVAbutments->horizontalHeader()->setVisible(true);
-        ui->tabVAbutments->resizeColumnsToContents();
         ui->tabVAbutments->setCurrentIndex(m_pAbutTableModel->index(m_pAbutTableModel->rowCount() - 1, 0));
         ui->tabVAbutments->scrollToBottom();
         m_pAbutmentDialog->setAbutment(&abutment);
         int ret = m_pAbutmentDialog->exec();
         if(ret == QDialog::Rejected)
+        {
             series->RemoveAbutment(abutment);
+        }
+        ui->tabVAbutments->horizontalHeader()->setVisible(!(series->GetAbutment().empty()));
+        ui->tabVAbutments->resizeColumnsToContents();
         m_pAbutTableModel->Update();
+    }
+}
+
+void MainWindow::on_actionEdit_Note_triggered()
+{
+    QWidget * fWidget = focusWidget();
+    if(fWidget == ui->tVImplants)
+    {
+        QModelIndex idx = ui->tVImplants->currentIndex();
+        if(!idx.isValid())
+            return;
+        ItemType type = (ItemType)m_pImpTreeModel->data(idx, ItemTypeRole).toInt();
+        if(type != RootItem)
+            ui->tVImplants->edit(idx);
+    }
+    else if(fWidget == ui->tVAbutments)
+    {
+        QModelIndex idx = ui->tVAbutments->currentIndex();
+        if(!idx.isValid())
+            return;
+        ItemType type = (ItemType)m_pAbutTreeModel->data(idx, ItemTypeRole).toInt();
+        if(type != RootItem)
+            ui->tVAbutments->edit(idx);
+    }
+    else if(fWidget == ui->tabVImplants)
+    {
+        QModelIndex idx = ui->tabVImplants->currentIndex();
+        if(!idx.isValid())
+            return;
+        DbImplant * implant = reinterpret_cast<DbImplant*>(m_pImpTableModel->data(idx, DataRole).value<void*>());
+        DbImplant tempImplant(implant->GetSeries());
+        tempImplant = *implant;
+        m_pImplantDialog->setImplant(&tempImplant);
+        int ret = m_pImplantDialog->exec();
+        if(ret == QDialog::Accepted)
+        {
+            *implant = tempImplant;
+        }
+        m_pImpTableModel->Update();
+        ui->tabVImplants->setCurrentIndex(idx);
+        ui->tabVImplants->resizeColumnsToContents();
+    }
+    else if(fWidget == ui->tabVAbutments)
+    {
+        QModelIndex idx = ui->tabVAbutments->currentIndex();
+        if(!idx.isValid())
+            return;
+        DbAbutment * abutment = reinterpret_cast<DbAbutment*>(m_pAbutTableModel->data(idx, DataRole).value<void*>());
+        DbAbutment tempAbutment(abutment->GetSeries());
+        tempAbutment = *abutment;
+        m_pAbutmentDialog->setAbutment(&tempAbutment);
+        int ret = m_pAbutmentDialog->exec();
+        if(ret == QDialog::Accepted)
+        {
+            *abutment = tempAbutment;
+        }
+        m_pAbutTableModel->Update();
+        ui->tabVAbutments->setCurrentIndex(idx);
+        ui->tabVAbutments->resizeColumnsToContents();
+    }
+}
+
+void MainWindow::on_actionRemove_Note_triggered()
+{
+    QWidget * fWidget = focusWidget();
+    if(fWidget == ui->tVImplants)
+    {
+        QModelIndex idx = ui->tVImplants->currentIndex();
+        if(!idx.isValid())
+            return;
+        if(QMessageBox::question(this, "IA DataBase", "Remove all data?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+        {
+            ItemType type = (ItemType)m_pImpTreeModel->data(idx, ItemTypeRole).toInt();
+            if(type == ProviderItem)
+            {
+                 DbProvider * provider = reinterpret_cast<DbProvider*>(m_pImpTreeModel->data(idx, DataRole).value<void*>());
+                 if(provider)
+                     iadb.RemoveProvider(*provider);
+                 fillModels(Implants);
+                 fillModels(Abutments);
+                 ui->tVImplants->expand(m_pImpTreeModel->rootIndex());
+                 ui->tVImplants->setCurrentIndex(m_pImpTreeModel->rootIndex());
+    //             m_pImpTableModel->setSeries(NULL);
+    //             m_pImpTableModel->Update();
+    //             ui->tabVImplants->horizontalHeader()->setVisible(false);
+            }
+            if(type == SeriesItem)
+            {
+
+                QModelIndex parentIndex = m_pImpTreeModel->parent(idx);
+                int row = parentIndex.row();
+                DbSeries * series = reinterpret_cast<DbSeries*>(m_pImpTreeModel->data(idx, DataRole).value<void*>());
+                if(!series)
+                    return;
+                DbProvider & provider = series->GetProvider();
+                provider.RemoveSeries(*series);
+                fillModels(Implants);
+                fillModels(Abutments);
+                parentIndex = m_pImpTreeModel->index(row, 0, m_pImpTreeModel->rootIndex());
+                if(parentIndex.isValid())
+                {
+                    ui->tVImplants->setCurrentIndex(parentIndex);
+                    ui->tVImplants->expand(parentIndex);
+                }
+                m_pImpTableModel->setSeries(NULL);
+                m_pImpTableModel->Update();
+                ui->tabVImplants->horizontalHeader()->setVisible(false);
+                disableActions(ProviderItem, Implants);
+            }
+        }
+    }
+    else if(fWidget == ui->tVAbutments)
+    {
+        QModelIndex idx = ui->tVAbutments->currentIndex();
+        if(!idx.isValid())
+            return;
+        if(QMessageBox::question(this, "IA DataBase", "Remove all data?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+        {
+            ItemType type = (ItemType)m_pAbutTreeModel->data(idx, ItemTypeRole).toInt();
+            if(type == ProviderItem)
+            {
+                 DbProvider * provider = reinterpret_cast<DbProvider*>(m_pAbutTreeModel->data(idx, DataRole).value<void*>());
+                 if(provider)
+                     iadb.RemoveProvider(*provider);
+                 fillModels(Implants);
+                 fillModels(Abutments);
+                 ui->tVAbutments->expand(m_pAbutTreeModel->rootIndex());
+                 ui->tVAbutments->setCurrentIndex(m_pAbutTreeModel->rootIndex());
+    //             m_pImpTableModel->setSeries(NULL);
+    //             m_pImpTableModel->Update();
+    //             ui->tabVImplants->horizontalHeader()->setVisible(false);
+            }
+            if(type == SeriesItem)
+            {
+
+                QModelIndex parentIndex = m_pAbutTreeModel->parent(idx);
+                DbSeries * series = reinterpret_cast<DbSeries*>(m_pAbutTreeModel->data(idx, DataRole).value<void*>());
+                if(!series)
+                    return;
+                DbProvider & provider = series->GetProvider();
+                provider.RemoveSeries(*series);
+                m_pAbutTreeModel->Update();
+                if(parentIndex.isValid())
+                {
+                    ui->tVAbutments->setCurrentIndex(parentIndex);
+                    ui->tVAbutments->expand(parentIndex);
+                }
+                m_pAbutTableModel->setSeries(NULL);
+                m_pAbutTableModel->Update();
+                ui->tabVAbutments->horizontalHeader()->setVisible(false);
+                disableActions(ProviderItem, Implants);
+            }
+        }
+    }
+    else if(fWidget == ui->tabVImplants)
+    {
+        QItemSelectionModel * selectionModel  = ui->tabVImplants->selectionModel();
+        QModelIndexList miList = selectionModel->selectedIndexes();
+        DbSeries * series = reinterpret_cast<DbSeries*>(m_pImpTreeModel->data(ui->tVImplants->currentIndex(), DataRole).value<void*>());;
+        if(!series)
+            return;
+        QList<DbImplant *> impList;
+        foreach(QModelIndex idx, miList)
+        {
+            if(!idx.isValid())
+                return;
+            if(idx.column() > 0)
+                continue;
+            DbImplant * implant = reinterpret_cast<DbImplant*>(m_pImpTableModel->data(idx, DataRole).value<void*>());
+            if(implant)
+                impList << implant;
+        }
+        for(int i = 0; i < impList.count(); i++)
+            series->RemoveImplant(*(impList[i]));
+        m_pImpTableModel->Update();
+        ui->tabVImplants->horizontalHeader()->setVisible(!(series->GetImplants().empty()));
+        ui->tabVImplants->resizeColumnsToContents();
+    }
+    else if(fWidget == ui->tabVAbutments)
+    {
+        QItemSelectionModel * selectionModel  = ui->tabVAbutments->selectionModel();
+        QModelIndexList miList = selectionModel->selectedIndexes();
+        DbSeries * series = reinterpret_cast<DbSeries*>(m_pAbutTreeModel->data(ui->tVAbutments->currentIndex(), DataRole).value<void*>());;
+        if(!series)
+            return;
+        QList<DbAbutment *> abutList;
+        foreach(QModelIndex idx, miList)
+        {
+            if(!idx.isValid())
+                return;
+            if(idx.column() > 0)
+                continue;
+            DbAbutment * abutment = reinterpret_cast<DbAbutment*>(m_pAbutTableModel->data(idx, DataRole).value<void*>());
+            if(abutment)
+                abutList << abutment;
+        }
+        for(int i = 0; i < abutList.count(); i++)
+            series->RemoveAbutment(*(abutList[i]));
+        m_pAbutTableModel->Update();
+        ui->tabVAbutments->horizontalHeader()->setVisible(!(series->GetAbutment().empty()));
+        ui->tabVAbutments->resizeColumnsToContents();
     }
 }
