@@ -69,6 +69,10 @@ private slots:
 
     void on_actionRemove_Note_triggered();
 
+    void on_actionLoad_triggered();
+
+    void on_pBOK_clicked();
+
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;

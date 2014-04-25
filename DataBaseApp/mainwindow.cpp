@@ -106,8 +106,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addSeparator();
     ui->mainToolBar->addAction(ui->actionRemove_Note);
 
+    QSettings settings("IA", "Database");
+    fileName = settings.value("fileName", fileName).toString();
 
-    fileName = "..\\DataBase\\implants_db.xml";    
+    if(fileName.isEmpty())
+    {
+        QSettings set(QSettings::NativeFormat, QSettings::SystemScope, "CDI Soft", "IA_DEMO");
+        fileName = set.value("ImplantDB", "").toString();
+    }
+    if(fileName.isEmpty())
+    {
+        QMessageBox::critical(this, "Load database error!", "Load database error!");
+        return;
+    }
+
+    //fileName = "..\\DataBase\\implants_db.xml";
     iadb.LoadXml_All(fileName.toLocal8Bit().data());
     fillModels(Implants);
     fillModels(Abutments);
@@ -115,7 +128,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    iadb.SaveXml_All(fileName.toLocal8Bit().data());
+    QSettings settings("IA", "Database");
+    settings.setValue("fileName", fileName);
     delete ui;
 }
 
@@ -145,7 +159,7 @@ void MainWindow::showEvent(QShowEvent * ev)
         ui->wOpenGL->setVisible(false);
         setGeometry(rect);
     }
-    QSettings settings("AI","DataBase");
+    QSettings settings("IA","DataBase");
     //QVariant var();
     QList<QVariant> list = settings.value("LeftHorizontalRatio", QVariant::fromValue(fromDoubleToVariant(ui->frame_2->horizontalRatio()))).toList();
     ui->frame_2->setHorizontalRatio(fromVariantToDouble(list));
@@ -170,7 +184,7 @@ void MainWindow::closeEvent(QCloseEvent * ev)
         ui->wOpenGL->setVisible(false);
         setGeometry(rect);
     }
-    QSettings settings("AI","DataBase");
+    QSettings settings("IA","DataBase");
     //QVariant var();
     settings.setValue("LeftHorizontalRatio", QVariant::fromValue(fromDoubleToVariant(ui->frame_2->horizontalRatio())));
     settings.setValue("LeftVerticalRatio", QVariant::fromValue(fromDoubleToVariant(ui->frame_2->verticalRatio())));
@@ -806,4 +820,29 @@ void MainWindow::on_actionRemove_Note_triggered()
         ui->tabVAbutments->horizontalHeader()->setVisible(!(series->GetAbutment().empty()));
         ui->tabVAbutments->resizeColumnsToContents();
     }
+}
+
+void MainWindow::on_actionLoad_triggered()
+{
+    QString dir = qApp->applicationDirPath();
+    if(!fileName.isEmpty())
+    {
+        QFileInfo fi(fileName);
+        dir = fi.absolutePath();
+    }
+    QString name = QFileDialog::getOpenFileName(this, tr("Load Data Base"), dir, tr("Data Base (*.xml)"));
+    if(name.isEmpty() || name == fileName)
+        return;
+    if(!fileName.isEmpty() && QMessageBox::question(this, tr("Save data base"), tr("Do you want to save the current data base?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+        iadb.SaveXml_All(fileName.toLocal8Bit().data());
+    fileName = name;
+    iadb.LoadXml_All(fileName.toLocal8Bit().data());
+    fillModels(Implants);
+    fillModels(Abutments);
+}
+
+void MainWindow::on_pBOK_clicked()
+{
+    iadb.SaveXml_All(fileName.toLocal8Bit().data());
+    close();
 }

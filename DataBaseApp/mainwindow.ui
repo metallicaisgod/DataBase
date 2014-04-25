@@ -365,5 +365,22 @@ QTreeView::branch:open:has-children:!has-siblings {
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pBCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>653</x>
+     <y>582</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>765</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
