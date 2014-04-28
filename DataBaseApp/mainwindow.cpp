@@ -250,7 +250,7 @@ void MainWindow::fillModels(ModelType modelType)
     //        }
     //    }
         if(m_pImpTreeModel) delete m_pImpTreeModel;
-        m_pImpTreeModel = new TreeModel(providerList, modelType, this);
+        m_pImpTreeModel = new TreeModel(providerList, modelType, NULL,this);
         //m_pImplantsTreeModel->appendRow(parentItem);
     //    delete impl_enum;
         ui->tVImplants->setModel(m_pImpTreeModel);
@@ -266,35 +266,42 @@ void MainWindow::fillModels(ModelType modelType)
 
     }
     else if(modelType == Abutments)
-    {
-        t_ProviderEnumFA prov_abut_enum = iadb.GetProvidersEnumerator(provider_filter_abutments<db::DbProvider*>());
-        //providerList.clear();
-        while(prov_abut_enum.MoveNext())
+    {        
+        QModelIndex index = ui->tabVImplants->currentIndex();
+        if(!index.isValid())
+            return;
+        DbImplant * implant = reinterpret_cast<DbImplant *>(m_pImpTableModel->data(index, DataRole).value<void*>());
+//        t_ProviderEnumFA prov_abut_enum = iadb.GetProvidersEnumerator(provider_filter_abutments<db::DbProvider*>());
+//        //providerList.clear();
+//        while(prov_abut_enum.MoveNext())
+//        {
+//            provider = prov_abut_enum.GetCurrent();
+//            if(!providerList.contains(provider))
+//            {
+//                providerList << provider;
+//            }
+//        }
+        t_abutmentEnumCompPtr abut_enum = iadb.GetAbutmentsEnumerator(abut_length_comp<db::DbAbutment>(), compatible_abutment<db::DbAbutment*>(implant));
+        db::DbAbutment* pAbut = NULL;
+        DbSeries * series = NULL;
+        DbProvider * provider;
+        providerList.clear();
+        while (abut_enum->MoveNext())
         {
-            provider = prov_abut_enum.GetCurrent();
+            pAbut = abut_enum->GetCurrent();
+            series = pAbut->GetSeries();
+            provider = &(series->GetProvider());
             if(!providerList.contains(provider))
             {
                 providerList << provider;
             }
+            //printf("Abutment: Name=%s, Le=%f, L1=%f, D1=%f\n", pAbut->name, pAbut->L1, pAbut->D1);
         }
-    //    t_abutmentEnumNFsp abut_enum = iadb.GetAbutmentsEnumerator(abut_length_comp<db::DbAbutment>(), db::no_filter<db::DbAbutment*>());
-    //    db::DbAbutment* pAbut = NULL;
-    //    providerList.clear();
-    //    while (abut_enum->MoveNext())
-    //    {
-    //        pAbut = abut_enum->GetCurrent();
-    //        series = pAbut->GetSeries();
-    //        provider = &(series->GetProvider());
-    //        if(!providerList.contains(provider))
-    //        {
-    //            providerList << provider;
-    //        }
-    //        //printf("Abutment: Name=%s, Le=%f, L1=%f, D1=%f\n", pAbut->name, pAbut->L1, pAbut->D1);
-    //    }
 
-    //    delete abut_enum;
+        delete abut_enum;
         if(m_pAbutTreeModel) delete m_pAbutTreeModel;
-        m_pAbutTreeModel = new TreeModel(providerList, modelType, this);
+        m_pAbutTreeModel = new TreeModel(providerList, modelType, implant,this);
+//        m_pAbutTreeModel->setImplantForFilter(implant);
         ui->tVAbutments->setModel(m_pAbutTreeModel);
         ui->tVAbutments->expand(m_pAbutTreeModel->rootIndex());
 
@@ -328,6 +335,8 @@ void MainWindow::on_tVImplants_clicked(const QModelIndex &index)
     if(series && series->GetImplants().empty())
         ui->tabVImplants->horizontalHeader()->setVisible(false);
     ui->tabVImplants->resizeColumnsToContents();
+    ui->tabVImplants->setCurrentIndex(m_pImpTableModel->index(0,0));
+    fillModels(Abutments);
     disableActions(itemType, Implants);
     //}
 }

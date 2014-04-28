@@ -51,11 +51,12 @@
 #include "treemodel.h"
 
 //! [0]
-TreeModel::TreeModel(QList<db::DbProvider*> providers, ModelType type, QObject *parent)
+TreeModel::TreeModel(QList<db::DbProvider*> providers, ModelType type, db::DbImplant * implant, QObject *parent)
     : QAbstractItemModel(parent)
 {
     m_providers = providers;
     m_type = type;
+    m_implant_filter = implant;
     rootItem = new TreeItem();
     setupModelData(providers, rootItem);
 }
@@ -241,6 +242,8 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
     //QList<int> indentations;
     //parents << parent;
     //indentations << 0;
+    if(m_type == Abutments && !m_implant_filter)
+        return;
 
     TreeItem * root = new TreeItem(parent, NULL, RootItem);
     parent->appendChild(root);
@@ -258,13 +261,47 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
             {
                 if(list[i]->GetImplants().empty() && !list[i]->GetAbutment().empty())
                     continue;
+                provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
             }
             if(m_type == Abutments)
             {
-                if(!list[i]->GetImplants().empty() && list[i]->GetAbutment().empty())
+//                if(!list[i]->GetImplants().empty() && list[i]->GetAbutment().empty())
+//                    continue;
+                if(m_implant_filter->GetSeries() == list[i] && !list[i]->GetAbutment().empty())
+                {
+                    provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
                     continue;
+                }
+                bool found = false;
+                std::vector<db::CompatibleSeries>::iterator icms= m_implant_filter->GetSeries()->m_CompSer.begin();
+                for(; icms!=m_implant_filter->GetSeries()->m_CompSer.end();icms++)
+                {
+                    if( (0==strncmp((*icms).ser, list[i]->name, NAME_SIZE)) &&
+                        (0==strncmp((*icms).prov, list[i]->GetProvider().name, NAME_SIZE)))
+                    {
+                        provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found)
+                {
+                    QVector<db::DbAbutment *> abutList = QVector<db::DbAbutment *>::fromStdVector(list[i]->GetAbutment());
+                    if(abutList.isEmpty())
+                        continue;
+                    for(int j = 0; j < abutList.count(); j++)
+                    {
+                    // Check szCompatibility (ABComp) compatibility
+                        if(0==strncmp(m_implant_filter->szCompatibility, abutList[j]->szCompatibility, _MAX_PATH))
+                        {
+                            provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
+                            break;
+                        }
+
+                    // Check CompatibleSeries
+                    }
+                }
             }
-            provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
         }
         root->appendChild(provider);
         number++;

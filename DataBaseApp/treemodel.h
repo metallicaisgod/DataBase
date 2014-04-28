@@ -55,7 +55,7 @@ class TreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    TreeModel(QList<db::DbProvider*> providers, ModelType type,QObject *parent = 0);
+    TreeModel(QList<db::DbProvider*> providers, ModelType type, db::DbImplant * implant = NULL, QObject *parent = 0);
     ~TreeModel();
 
     QVariant data(const QModelIndex &index, int role) const;
@@ -69,6 +69,10 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QModelIndex rootIndex();
     bool setData(const QModelIndex &index, const QVariant &value, int role);
+//    void implantFilter(db::DbImplant * implant)
+//    {
+//        m_implant_filter = implant;
+//    }
 
 public slots:
     void Update();
@@ -81,6 +85,7 @@ private:
     QList<db::DbProvider*> m_providers;
     ModelType m_type;
     TreeItem *rootItem;
+    db::DbImplant * m_implant_filter;
 };
 //! [0]
 

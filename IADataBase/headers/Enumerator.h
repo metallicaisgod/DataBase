@@ -54,9 +54,12 @@ namespace db
 		bool MoveNext()
 		{
 			if (m_atStart)
+            {
 				m_atStart = false;
+                satisfy_predicate();
+            }
 			else
-			increment();
+                increment();
 			if (m_current == m_end)
 				return false;
 			return true;

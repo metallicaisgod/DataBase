@@ -9,7 +9,7 @@
 #include "abutmentdialog.h"
 #include "..\iadatabase\headers\IADataBase.h"
 
-Q_DECLARE_METATYPE(db::DbSeries*)
+//Q_DECLARE_METATYPE(db::DbSeries*)
 
 namespace Ui {
 class MainWindow;
