@@ -267,7 +267,7 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
             {
 //                if(!list[i]->GetImplants().empty() && list[i]->GetAbutment().empty())
 //                    continue;
-                if(m_implant_filter->GetSeries() == list[i] && !list[i]->GetAbutment().empty())
+                if(m_implant_filter->GetSeries() == list[i] /*&& !list[i]->GetAbutment().empty()*/)
                 {
                     provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
                     continue;
@@ -297,8 +297,6 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
                             provider->appendChild(new TreeItem(provider, list[i], SeriesItem));
                             break;
                         }
-
-                    // Check CompatibleSeries
                     }
                 }
             }

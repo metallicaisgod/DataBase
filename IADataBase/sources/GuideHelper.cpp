@@ -5,43 +5,44 @@ GuideHelper::GuideHelper(void)
 {
 }
 
-TiXmlElement* GuideHelper::ToXml(const db::GuideDataBase& indb, unsigned long flags)
+QDomElement& GuideHelper::ToXml(const db::GuideDataBase& indb, QDomDocument& document, unsigned long flags)
 {
-	TiXmlElement * root = new TiXmlElement( "database" );
+    QDomElement root = document.createElement("database" );
 	db::GuideDataBase* pDB= const_cast<db::GuideDataBase*>(&indb);
 
     db::enumerator<db::t_GuideProvidersList::iterator> providersEnum = pDB->GetProvidersEnumerator(db::no_filter<db::DbGuideProvider*>());
 	while (providersEnum.MoveNext())
 	{
 		db::DbGuideProvider* pProvider = providersEnum.GetCurrent();
-		TiXmlElement* elProvider = GuideHelper::ToXml(pProvider, flags);
-		if (elProvider != NULL)
+        QDomElement elProvider = GuideHelper::ToXml(pProvider, document, flags);
+        if (!elProvider.isNull())
 		{
-			root->LinkEndChild( elProvider );
+            root.appendChild( elProvider );
 		}
 	}
 	return root;
 }
 
-TiXmlElement* GuideHelper::ToXml(const db::DbGuideProvider* provider, unsigned long flags)
+QDomElement& GuideHelper::ToXml(const db::DbGuideProvider* provider, QDomDocument& document, unsigned long flags)
 {
 	db::DbGuideProvider* pProvider = const_cast<db::DbGuideProvider*>(provider);
 
 	bool bNotEmpty = false;
 	bool bWithoutCondition = (flags == 0);
 
-	TiXmlElement* elProvider = new TiXmlElement( "provider" );
-	TiXmlElement* elName = new TiXmlElement( "name" );
-	elName->LinkEndChild( new TiXmlText( pProvider->name ));
-	elProvider->LinkEndChild(elName);
+    QDomElement elProvider = document.createElement( "provider" );
+    QDomElement elName = document.createElement( "name" );
+    QDomText name = document.createTextNode(pProvider->name);
+    elName.appendChild(name);// new TiXmlText( pProvider->name ));
+    elProvider.appendChild(elName);
 	db::enumerator<db::t_GuideSeriesList::iterator> seriesEnum = pProvider->GetSeriesEnumerator(db::no_filter<db::DbGuideSeries*>());
 	while (seriesEnum.MoveNext())
 	{
 		db::DbGuideSeries* pSeries = seriesEnum.GetCurrent();
-		TiXmlElement* elSeries = GuideHelper::ToXml(pSeries, flags);
-		if (elSeries != NULL)
+        QDomElement elSeries = GuideHelper::ToXml(pSeries, document, flags);
+        if (!elSeries.isNull())
 		{
-			elProvider->LinkEndChild( elSeries );
+            elProvider.appendChild( elSeries );
 			bNotEmpty = true;
 		}
 	}
@@ -51,24 +52,25 @@ TiXmlElement* GuideHelper::ToXml(const db::DbGuideProvider* provider, unsigned l
 	}
 	else
 	{
-		delete elProvider;
-		return NULL;
+        //delete elProvider;
+        return QDomElement();
 	}
 }
 
-TiXmlElement* GuideHelper::ToXml(const db::DbGuideSeries* series, unsigned long flags)
+QDomElement& GuideHelper::ToXml(const db::DbGuideSeries* series, QDomDocument& document, unsigned long flags)
 {
 	db::DbGuideSeries* pSeries = const_cast<db::DbGuideSeries*>(series);
-	TiXmlElement* elSeries = new TiXmlElement( "series" );
-	TiXmlElement* elName = new TiXmlElement( "name" );
-	elName->LinkEndChild( new TiXmlText( pSeries->name ));
-	elSeries->LinkEndChild(elName);
+    QDomElement elSeries = document.createElement ( "series" );
+    QDomElement elName = document.createElement( "name" );
+    QDomText serName = document.createTextNode(pSeries->name);
+    elName.appendChild(serName);//LinkEndChild( new TiXmlText( pSeries->name ));
+    elSeries.appendChild(elName);
 
 	bool bNotEmpty = false;
 	bool bWithoutCondition = (flags == 0);
 	bool condition = (flags == USERS_INTEMS);
 
-	TiXmlElement* elScrews = new TiXmlElement( "screws" );
+    QDomElement elScrews = document.createElement( "screws" );
 	const db::t_ScrewList& screwsList = pSeries->GetScrews();
 	db::t_ScrewList::const_iterator it = screwsList.begin();
 	for (; it != screwsList.end(); ++it)
@@ -76,26 +78,26 @@ TiXmlElement* GuideHelper::ToXml(const db::DbGuideSeries* series, unsigned long 
 		db::ScrewData* pScrew = *it;
 		if (bWithoutCondition || (condition == pScrew->editable))
 		{
-			TiXmlElement* elScrew = new TiXmlElement( "screw" );
-			elScrew->LinkEndChild( MakeStringElement("name", pScrew->name));
-			elScrew->LinkEndChild( MakeIntElement("state", (unsigned int)pScrew->state) );
-			elScrew->LinkEndChild( MakeDoubleElement("D", pScrew->D) );
-			elScrew->LinkEndChild( MakeDoubleElement("Dh", pScrew->Dh) );
-			elScrew->LinkEndChild( MakeDoubleElement("L", pScrew->L) );
-			elScrew->LinkEndChild( MakeDoubleElement("Lt", pScrew->Lt) );
-			elScrew->LinkEndChild( MakeDoubleElement("Lh", pScrew->Lh) );
-			elScrew->LinkEndChild( MakeStringElement("model", pScrew->szModelName));
-			elScrew->LinkEndChild( MakeStringElement("article", pScrew->artikul));
-			elScrew->LinkEndChild( MakeBoolElement("ed", pScrew->editable) );
-			elScrew->LinkEndChild( MakeStringElement("color", pScrew->defcolor) );
+            QDomElement elScrew =  document.createElement( "screw" );
+            elScrew.appendChild( MakeStringElement("name", pScrew->name, document));
+            elScrew.appendChild( MakeIntElement("state", (unsigned int)pScrew->state, document) );
+            elScrew.appendChild( MakeDoubleElement("D", pScrew->D, document) );
+            elScrew.appendChild( MakeDoubleElement("Dh", pScrew->Dh, document) );
+            elScrew.appendChild( MakeDoubleElement("L", pScrew->L, document) );
+            elScrew.appendChild( MakeDoubleElement("Lt", pScrew->Lt, document) );
+            elScrew.appendChild( MakeDoubleElement("Lh", pScrew->Lh, document) );
+            elScrew.appendChild( MakeStringElement("model", pScrew->szModelName, document));
+            elScrew.appendChild( MakeStringElement("article", pScrew->artikul, document));
+            elScrew.appendChild( MakeBoolElement("ed", pScrew->editable, document) );
+            elScrew.appendChild( MakeStringElement("color", pScrew->defcolor, document) );
 
-			elScrews->LinkEndChild(elScrew);
+            elScrews.appendChild(elScrew);
 			bNotEmpty = true;
 		}
 	}
-	elSeries->LinkEndChild(elScrews);
+    elSeries.appendChild(elScrews);
 
-	TiXmlElement* elCutters = new TiXmlElement( "cutters" );
+    QDomElement elCutters = document.createElement( "cutters" );
 	const db::t_CutterList& cutterList = pSeries->GetCutters();
 	db::t_CutterList::const_iterator itCutter = cutterList.begin();
 	for (; itCutter != cutterList.end(); ++itCutter)
@@ -103,27 +105,27 @@ TiXmlElement* GuideHelper::ToXml(const db::DbGuideSeries* series, unsigned long 
 		db::CutterData* pCutter = *itCutter;
 		if (bWithoutCondition || (condition == pCutter->editable))
 		{
-			TiXmlElement* elCutter = new TiXmlElement( "cutter" );
-			elCutter->LinkEndChild(MakeStringElement("name", pCutter->name));
-			elCutter->LinkEndChild( MakeIntElement("state", (unsigned int)pCutter->state) );
-			elCutter->LinkEndChild( MakeDoubleElement("D", pCutter->D) );
-			elCutter->LinkEndChild( MakeDoubleElement("Ds", pCutter->Ds) );
-			elCutter->LinkEndChild( MakeDoubleElement("Dw", pCutter->Dw) );
-			elCutter->LinkEndChild( MakeDoubleElement("L", pCutter->L) );
-			elCutter->LinkEndChild( MakeDoubleElement("Ls", pCutter->Ls) );
-			elCutter->LinkEndChild( MakeDoubleElement("Lw", pCutter->Lw) );
-			elCutter->LinkEndChild( MakeIntElement("type", pCutter->type) );
-			elCutter->LinkEndChild( MakeStringElement("model", pCutter->szModelName));
-			elCutter->LinkEndChild( MakeStringElement("article", pCutter->artikul));
-			elCutter->LinkEndChild( MakeBoolElement("ed", pCutter->editable) );
-			elCutter->LinkEndChild( MakeStringElement("color", pCutter->defcolor) );
-			elCutters->LinkEndChild(elCutter);
+            QDomElement elCutter = document.createElement( "cutter" );
+            elCutter.appendChild(MakeStringElement("name", pCutter->name, document));
+            elCutter.appendChild( MakeIntElement("state", (unsigned int)pCutter->state, document) );
+            elCutter.appendChild( MakeDoubleElement("D", pCutter->D, document) );
+            elCutter.appendChild( MakeDoubleElement("Ds", pCutter->Ds, document) );
+            elCutter.appendChild( MakeDoubleElement("Dw", pCutter->Dw, document) );
+            elCutter.appendChild( MakeDoubleElement("L", pCutter->L, document) );
+            elCutter.appendChild( MakeDoubleElement("Ls", pCutter->Ls, document) );
+            elCutter.appendChild( MakeDoubleElement("Lw", pCutter->Lw, document) );
+            elCutter.appendChild( MakeIntElement("type", pCutter->type, document) );
+            elCutter.appendChild( MakeStringElement("model", pCutter->szModelName, document));
+            elCutter.appendChild( MakeStringElement("article", pCutter->artikul, document));
+            elCutter.appendChild( MakeBoolElement("ed", pCutter->editable, document) );
+            elCutter.appendChild( MakeStringElement("color", pCutter->defcolor, document) );
+            elCutters.appendChild(elCutter);
 			bNotEmpty = true;
 		}
 	}
-	elSeries->LinkEndChild(elCutters);
+    elSeries.appendChild(elCutters);
 
-	TiXmlElement* elSleeves = new TiXmlElement( "sleeves" );
+    QDomElement elSleeves = document.createElement( "sleeves" );
 	const db::t_SleeveList& sleeveList = pSeries->GetSleeves();
 	db::t_SleeveList::const_iterator itSleeve = sleeveList.begin();
 	for (; itSleeve != sleeveList.end(); ++itSleeve)
@@ -131,30 +133,30 @@ TiXmlElement* GuideHelper::ToXml(const db::DbGuideSeries* series, unsigned long 
 		db::SleeveData* pSleeve = *itSleeve;
 		if (bWithoutCondition || (condition == pSleeve->editable))
 		{
-			TiXmlElement* elSleeve = new TiXmlElement( "sleeve" );
-			elSleeve->LinkEndChild(MakeStringElement("name", pSleeve->name));
-			elSleeve->LinkEndChild( MakeIntElement("state", (unsigned int)pSleeve->state) );
-			elSleeve->LinkEndChild( MakeDoubleElement("D", pSleeve->D) );
-			elSleeve->LinkEndChild( MakeDoubleElement("Do", pSleeve->Do) );
-			elSleeve->LinkEndChild( MakeDoubleElement("Dh", pSleeve->Dh) );
-			elSleeve->LinkEndChild( MakeDoubleElement("Df", pSleeve->Df) );
-			elSleeve->LinkEndChild( MakeDoubleElement("Lw", pSleeve->Lw) );
-			elSleeve->LinkEndChild( MakeDoubleElement("Lh", pSleeve->Lh) );
-			elSleeve->LinkEndChild( MakeStringElement("model", pSleeve->szModelName));
-			elSleeve->LinkEndChild( MakeStringElement("article", pSleeve->artikul));
-			elSleeve->LinkEndChild( MakeBoolElement("ed", pSleeve->editable) );
-			elSleeve->LinkEndChild( MakeStringElement("color", pSleeve->defcolor) );
-			TiXmlElement* elSegments = GuideHelper::ToXml(pSleeve);
-			if (elSegments != NULL)
+            QDomElement elSleeve = document.createElement( "sleeve" );
+            elSleeve.appendChild(MakeStringElement("name", pSleeve->name, document));
+            elSleeve.appendChild( MakeIntElement("state", (unsigned int)pSleeve->state, document) );
+            elSleeve.appendChild( MakeDoubleElement("D", pSleeve->D, document) );
+            elSleeve.appendChild( MakeDoubleElement("Do", pSleeve->Do, document) );
+            elSleeve.appendChild( MakeDoubleElement("Dh", pSleeve->Dh, document) );
+            elSleeve.appendChild( MakeDoubleElement("Df", pSleeve->Df, document) );
+            elSleeve.appendChild( MakeDoubleElement("Lw", pSleeve->Lw, document) );
+            elSleeve.appendChild( MakeDoubleElement("Lh", pSleeve->Lh, document) );
+            elSleeve.appendChild( MakeStringElement("model", pSleeve->szModelName, document));
+            elSleeve.appendChild( MakeStringElement("article", pSleeve->artikul, document));
+            elSleeve.appendChild( MakeBoolElement("ed", pSleeve->editable, document) );
+            elSleeve.appendChild( MakeStringElement("color", pSleeve->defcolor, document) );
+            QDomElement elSegments = GuideHelper::ToXml(pSleeve, document);
+            if (!elSegments.isNull())
 			{
-				elSleeve->LinkEndChild( elSegments );
+                elSleeve.appendChild( elSegments );
 			}
 
-			elSleeves->LinkEndChild(elSleeve);
+            elSleeves.appendChild(elSleeve);
 			bNotEmpty = true;
 		}
 	}
-	elSeries->LinkEndChild(elSleeves);
+    elSeries.appendChild(elSleeves);
 
 	if (bWithoutCondition || bNotEmpty)
 	{
@@ -162,114 +164,124 @@ TiXmlElement* GuideHelper::ToXml(const db::DbGuideSeries* series, unsigned long 
 	}
 	else
 	{
-		delete elSeries;
-		return NULL;
+        //delete elSeries;
+        return QDomElement();
 	}
 }
 
-TiXmlElement* GuideHelper::ToXml(const db::ProductionBase* prodbase)
+QDomElement& GuideHelper::ToXml(const db::ProductionBase* prodbase, QDomDocument& document)
 {
 	if (prodbase->Segments.size() > 0)
 	{
-		TiXmlElement* elSegments = new TiXmlElement( "segments" );
+        QDomElement elSegments = document.createElement( "segments" );
 		std::vector<db::Segment>::const_iterator itSegment = prodbase->Segments.begin();
 		for (; itSegment != prodbase->Segments.end(); ++itSegment)
 		{
 			db::Segment segment = *itSegment;
-			TiXmlElement* elSegment = new TiXmlElement( "segment" );
-			elSegment->LinkEndChild(MakeDoubleElement("D1", segment.D1));
-			elSegment->LinkEndChild(MakeDoubleElement("D2", segment.D2));
-			elSegment->LinkEndChild(MakeDoubleElement("L", segment.L));
+            QDomElement elSegment = document.createElement( "segment" );
+            elSegment.appendChild(MakeDoubleElement("D1", segment.D1, document));
+            elSegment.appendChild(MakeDoubleElement("D2", segment.D2, document));
+            elSegment.appendChild(MakeDoubleElement("L", segment.L, document));
 			
-			elSegments->LinkEndChild(elSegment);
+            elSegments.appendChild(elSegment);
 		}
 
 		return elSegments;
 	}
-	return NULL;
+    return QDomElement();
 }
 
-TiXmlElement* GuideHelper::MakeStringElement( const char *name, const char * _value )
+QDomElement& GuideHelper::MakeStringElement( const char *name, const char * _value, QDomDocument& document )
 {
-	TiXmlElement* element = new TiXmlElement( name );
-	element->LinkEndChild( new TiXmlText( _value ));
+    QDomElement& element = document.createElement( name );
+    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
 	return element;
 }
 
-TiXmlElement* GuideHelper::MakeIntElement( const char *name, int _value )
+QDomElement& GuideHelper::MakeIntElement( const char *name, int _value, QDomDocument& document )
 {
-	char buf [64];
-	#if defined(TIXML_SNPRINTF)
-		TIXML_SNPRINTF(buf, sizeof(buf), "%d", _value);
-	#else
-		sprintf (buf, "%d", _value);
-	#endif
-	TiXmlElement* element = new TiXmlElement( name );
-	element->LinkEndChild( new TiXmlText( buf ));
-	return element;
+//	char buf [64];
+//	#if defined(TIXML_SNPRINTF)
+//		TIXML_SNPRINTF(buf, sizeof(buf), "%d", _value);
+//	#else
+//		sprintf (buf, "%d", _value);
+//	#endif
+//	QDomElement* element = new QDomElement( name );
+//	element.appendChild( new TiXmlText( buf ));
+//	return element;
+    QDomElement& element = document.createElement( name );
+    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
+    return element;
 }
 
-TiXmlElement* GuideHelper::MakeDoubleElement( const char *name, double _value )
+QDomElement& GuideHelper::MakeDoubleElement( const char *name, double _value, QDomDocument& document )
 {
-	char buf [256];
-	#if defined(TIXML_SNPRINTF)
-		TIXML_SNPRINTF( buf, sizeof(buf), "%g", _value);
-	#else
-		sprintf (buf, "%g", _value);
-	#endif
-	TiXmlElement* element = new TiXmlElement( name );
-	element->LinkEndChild( new TiXmlText( buf ));
-	return element;
+//	char buf [256];
+//	#if defined(TIXML_SNPRINTF)
+//		TIXML_SNPRINTF( buf, sizeof(buf), "%g", _value);
+//	#else
+//		sprintf (buf, "%g", _value);
+//	#endif
+//	QDomElement* element = new QDomElement( name );
+//	element.appendChild( new TiXmlText( buf ));
+//	return element;
+    QDomElement& element = document.createElement( name );
+    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
+    return element;
 }
 
 
-TiXmlElement* GuideHelper::MakeBoolElement( const char *name, bool _value )
+QDomElement& GuideHelper::MakeBoolElement( const char *name, bool _value, QDomDocument& document )
 {
-	TiXmlElement* element = new TiXmlElement( name );
-	element->LinkEndChild( new TiXmlText( _value ? "1" : "0" ));
-	return element;
+//	QDomElement* element = new QDomElement( name );
+//	element.appendChild( new TiXmlText( _value ? "1" : "0" ));
+//	return element;
+    QDomElement& element = document.createElement( name );
+    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
+    return element;
 }
 
 
-void GuideHelper::ParseDataBase(db::GuideDataBase& indb, const char* fileName, const ticpp::Element* element, unsigned long flags)
+void GuideHelper::ParseDataBase(db::GuideDataBase& indb, const char* fileName, const QDomElement& element, unsigned long flags)
 {
-	ticpp::Iterator<ticpp::Element> child;
-	ticpp::Element* pProvider = element->FirstChildElement("provider", false);
-	std::string attrStr = pProvider->GetAttribute(std::string("ext_file"));
-	if(!attrStr.empty())
+    //ticpp::Iterator<ticpp::Element> child;
+    QDomElement Provider = element.firstChildElement("provider");
+    //QDomElement pProvider = element.firstChildElement("provider", false);
+    QString attrStr = Provider.attribute("ext_file");
+    if(!attrStr.isEmpty())
 	{
-		indb.LoadXml(attrStr.c_str());
+        indb.LoadXml(attrStr.toLocal8Bit().data());
 		return;
 	}
-	for( pProvider; pProvider; pProvider=pProvider->NextSiblingElement("provider", false))
+    for( Provider; !Provider.isNull(); Provider=Provider.nextSiblingElement("provider"))
 	{
-        std::string strName = ParseStringValue(pProvider, "name");
-		db::DbGuideProvider& newProvider = indb.AddProvider(strName.c_str());
-		ParseProvider(newProvider, *pProvider, flags);
+        QString strName = ParseStringValue(Provider, "name");
+        db::DbGuideProvider& newProvider = indb.AddProvider(strName.toLocal8Bit().data());
+        ParseProvider(newProvider, Provider, flags);
 	}
 }
 
-void GuideHelper::ParseProvider(db::DbGuideProvider& provider, const ticpp::Element& element, unsigned long flags)
+void GuideHelper::ParseProvider(db::DbGuideProvider& provider, const QDomElement& element, unsigned long flags)
 {
-	ticpp::Element* pSeries = element.FirstChildElement("series", false);
-	for( pSeries; pSeries; pSeries=pSeries->NextSiblingElement("series", false))
+    QDomElement pSeries = element.firstChildElement("series");
+    for( pSeries; !pSeries.isNull(); pSeries=pSeries.nextSiblingElement("series"))
 	{
-        std::string strName = ParseStringValue(pSeries, "name");
-		db::DbGuideSeries& series = provider.AddSeries(strName.c_str());
-		ParseSeries(series, *pSeries, flags);
+        QString strName = ParseStringValue(pSeries, "name");
+        db::DbGuideSeries& series = provider.AddSeries(strName.toLocal8Bit().data());
+        ParseSeries(series, pSeries, flags);
 	}
 }
 
-void GuideHelper::ParseSeries(db::DbGuideSeries& series, const ticpp::Element& element, unsigned long flags)
+void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& element, unsigned long flags)
 {
 	bool bWithoutCondition = (flags == 0);
 	bool condition = (flags == USERS_INTEMS);
 
-	ticpp::Element* pScrews = element.FirstChildElement("screws", false);
-	if (pScrews != NULL)
+    QDomElement pScrews = element.firstChildElement("screws");
+    if (!pScrews.isNull())
 	{
-		ticpp::Element* pScrew = pScrews->FirstChildElement("screw", false);
-		for( pScrew; pScrew; pScrew=pScrew->NextSiblingElement("screw", false))
+        QDomElement pScrew = pScrews.firstChildElement("screw");
+        for( pScrew; !pScrew.isNull(); pScrew=pScrew.nextSiblingElement("screw"))
 		{
 			bool editable = ParseBoolValue(pScrew, "ed");
 			if (bWithoutCondition || (condition == editable))
@@ -291,11 +303,11 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const ticpp::Element& e
 			}
 		}
 	}
-	ticpp::Element* pCutters = element.FirstChildElement("cutters", false);
-	if (pCutters != NULL)
+    QDomElement pCutters = element.firstChildElement("cutters");
+    if (!pCutters.isNull())
 	{
-		ticpp::Element* pCutter = pCutters->FirstChildElement("cutter", false);
-		for( pCutter; pCutter; pCutter=pCutter->NextSiblingElement("cutter", false))
+        QDomElement pCutter = pCutters.firstChildElement("cutter");
+        for( pCutter; !pCutter.isNull(); pCutter=pCutter.nextSiblingElement("cutter"))
 		{
 			bool editable = ParseBoolValue(pCutter, "ed");
 			if (bWithoutCondition || (condition == editable))
@@ -318,11 +330,11 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const ticpp::Element& e
 			}
 		}
 	}
-	ticpp::Element* pSleeves = element.FirstChildElement("sleeves", false);
-	if (pSleeves != NULL)
+    QDomElement pSleeves = element.firstChildElement("sleeves");
+    if (!pSleeves.isNull())
 	{
-		ticpp::Element* pSleeve = pSleeves->FirstChildElement("sleeve", false);
-		for( pSleeve; pSleeve; pSleeve=pSleeve->NextSiblingElement("sleeve", false))
+        QDomElement pSleeve = pSleeves.firstChildElement("sleeve");
+        for( pSleeve; !pSleeve.isNull(); pSleeve=pSleeve.nextSiblingElement("sleeve"))
 		{
 			bool editable = ParseBoolValue(pSleeve, "ed");
 			if (bWithoutCondition || (condition == editable))
@@ -345,21 +357,21 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const ticpp::Element& e
 			}
 		}
 	}
-	ticpp::Element* pICMap = element.FirstChildElement("impl_ctrs_map", false);
-	if (pICMap != NULL)
+    QDomElement pICMap = element.firstChildElement("impl_ctrs_map");
+    if (!pICMap.isNull())
 	{
-		ticpp::Element* pPair = pICMap->FirstChildElement("pair", false);
-		for( pPair; pPair; pPair=pPair->NextSiblingElement("pair", false))
+        QDomElement pPair = pICMap.firstChildElement("pair");
+        for( pPair; !pPair.isNull(); pPair=pPair.nextSiblingElement("pair"))
 		{
-			std::string impl_article= ParseStringValue(pPair, "impl");
-			std::string cutr_article= ParseStringValue(pPair, "ctr");
+            QString impl_article= ParseStringValue(pPair, "impl");
+            QString cutr_article= ParseStringValue(pPair, "ctr");
 			const db::t_CutterList& cutterList = series.GetCutters();
 			db::t_CutterList::const_iterator itCutter = cutterList.begin();
 			for (; itCutter != cutterList.end(); ++itCutter)
 			{
 				db::DbCutter* pCtr = *itCutter;
 				db::t_ImplCtrMap& icmap = series.GetImCtrMap();
-				if( cutr_article==std::string(pCtr->artikul))
+                if( cutr_article==QString(pCtr->artikul))
 				{
 					icmap[impl_article].push_back(pCtr);
 					break;
@@ -370,16 +382,16 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const ticpp::Element& e
 	}
 }
 
-void GuideHelper::ParseSegments(db::ProductionBase& prodbase, const ticpp::Element* element)
+void GuideHelper::ParseSegments(db::ProductionBase& prodbase, const QDomElement& element)
 {
-	ticpp::Element* pSegments = element->FirstChildElement("segments", false);
-	if (pSegments != NULL)
+    QDomElement pSegments = element.firstChildElement("segments");
+    if (!pSegments.isNull())
 	{
-		ticpp::Element* pSegment = pSegments->FirstChildElement("segment", false);
-		if (pSegment != NULL)
+        QDomElement pSegment = pSegments.firstChildElement("segment");
+        if (!pSegment.isNull())
 		{
 			prodbase.Segments.clear();
-			for( pSegment; pSegment; pSegment=pSegment->NextSiblingElement("segment", false))
+            for( pSegment; !pSegment.isNull(); pSegment=pSegment.nextSiblingElement("segment"))
 			{
 				db::Segment data;
 				data.D1 = ParseDoubleValue(pSegment, "D1");
@@ -392,46 +404,46 @@ void GuideHelper::ParseSegments(db::ProductionBase& prodbase, const ticpp::Eleme
 }
 
 
-void GuideHelper::ParseOldDataBase(db::GuideDataBase& indb, const ticpp::Element* element)
+void GuideHelper::ParseOldDataBase(db::GuideDataBase& indb, const QDomElement& element)
 {
-	ticpp::Element* pDataBase = element->FirstChildElement("database", false);
-	if (pDataBase == NULL)
-		pDataBase = element->FirstChildElement("indb", false);
-	if (pDataBase != NULL)
+    QDomElement pDataBase = element.firstChildElement("database");
+    if (pDataBase.isNull())
+        pDataBase = element.firstChildElement("indb");
+    if (!pDataBase.isNull())
 	{
-		ticpp::Element* pProviders = pDataBase->FirstChildElement("providers", false);
-		if (pProviders != NULL)
+        QDomElement pProviders = pDataBase.firstChildElement("providers");
+        if (!pProviders.isNull())
 		{
-			ticpp::Element* pProvider = pProviders->FirstChildElement("item", false);
-			for( pProvider; pProvider; pProvider=pProvider->NextSiblingElement("item", false))
+            QDomElement pProvider = pProviders.firstChildElement("item");
+            for( pProvider; !pProvider.isNull(); pProvider=pProvider.nextSiblingElement("item"))
 			{
-				std::string strName = ParseStringValue(pProvider, "name");
-				db::DbGuideProvider& newProvider = indb.AddProvider(strName.c_str());
-				ParseOldProvider(newProvider, *pProvider);
+                QString strName = ParseStringValue(pProvider, "name");
+                db::DbGuideProvider& newProvider = indb.AddProvider(strName.toLocal8Bit().data());
+                ParseOldProvider(newProvider, pProvider);
 			}
 		}
 	}
 }
 
-void GuideHelper::ParseOldProvider(db::DbGuideProvider& provider, const ticpp::Element& element)
+void GuideHelper::ParseOldProvider(db::DbGuideProvider& provider, const QDomElement& element)
 {
-	ticpp::Element* pSeriesRoot = element.FirstChildElement("series", false);
-	ticpp::Element* pSeries = pSeriesRoot->FirstChildElement("item", false);
-	for( pSeries; pSeries; pSeries=pSeries->NextSiblingElement("item", false))
+    QDomElement pSeriesRoot = element.firstChildElement("series");
+    QDomElement pSeries = pSeriesRoot.firstChildElement("item");
+    for( pSeries; !pSeries.isNull(); pSeries=pSeries.nextSiblingElement("item"))
 	{
-        std::string strName = ParseStringValue(pSeries, "name");
-		db::DbGuideSeries& series = provider.AddSeries(strName.c_str());
-		ParseOldSeries(series, *pSeries);
+        QString strName = ParseStringValue(pSeries, "name");
+        db::DbGuideSeries& series = provider.AddSeries(strName.toLocal8Bit().data());
+        ParseOldSeries(series, pSeries);
 	}
 }
 
-void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const ticpp::Element& element)
+void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const QDomElement& element)
 {
-	ticpp::Element* pScrews = element.FirstChildElement("screws", false);
-	if (pScrews != NULL)
+    QDomElement pScrews = element.firstChildElement("screws");
+    if (!pScrews.isNull())
 	{
-		ticpp::Element* pScrew = pScrews->FirstChildElement("item", false);
-		for( pScrew; pScrew; pScrew=pScrew->NextSiblingElement("item", false))
+        QDomElement pScrew = pScrews.firstChildElement("item");
+        for( pScrew; !pScrew.isNull(); pScrew=pScrew.nextSiblingElement("item"))
 		{
 			db::ScrewData screwData;
 			ParseStringValue(pScrew, "name", screwData.name, NAME_SIZE);
@@ -448,11 +460,11 @@ void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const ticpp::Element
 			db::DbScrew& implant = series.AddScrew(screwData);
 		}
 	}
-	ticpp::Element* pCutters = element.FirstChildElement("cutters", false);
-	if (pCutters != NULL)
+    QDomElement pCutters = element.firstChildElement("cutters");
+    if (!pCutters.isNull())
 	{
-		ticpp::Element* pCutter = pCutters->FirstChildElement("item", false);
-		for( pCutter; pCutter; pCutter=pCutter->NextSiblingElement("item", false))
+        QDomElement pCutter = pCutters.firstChildElement("item");
+        for( pCutter; !pCutter.isNull(); pCutter=pCutter.nextSiblingElement("item"))
 		{
 			db::CutterData data;
 			ParseStringValue(pCutter, "name", data.name, NAME_SIZE);
@@ -469,11 +481,11 @@ void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const ticpp::Element
 			db::DbCutter& cutter = series.AddCutter(data);
 		}
 	}
-	ticpp::Element* pSleeves = element.FirstChildElement("sleeves", false);
-	if (pSleeves != NULL)
+    QDomElement pSleeves = element.firstChildElement("sleeves");
+    if (!pSleeves.isNull())
 	{
-		ticpp::Element* pSleeve = pSleeves->FirstChildElement("item", false);
-		for( pSleeve; pSleeve; pSleeve=pSleeve->NextSiblingElement("item", false))
+        QDomElement pSleeve = pSleeves.firstChildElement("item");
+        for( pSleeve; !pSleeve.isNull(); pSleeve=pSleeve.nextSiblingElement("item"))
 		{
 			db::SleeveData data;
 			ParseStringValue(pSleeve, "name", data.name, NAME_SIZE);
@@ -493,16 +505,16 @@ void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const ticpp::Element
 	}
 }
 
-void GuideHelper::ParseOldSegments(db::ProductionBase& prodbase, const ticpp::Element* element)
+void GuideHelper::ParseOldSegments(db::ProductionBase& prodbase, const QDomElement& element)
 {
-	ticpp::Element* pSegments = element->FirstChildElement("segments", false);
-	if (pSegments != NULL)
+    QDomElement pSegments = element.firstChildElement("segments");
+    if (!pSegments.isNull())
 	{
-		ticpp::Element* pSegment = pSegments->FirstChildElement("item", false);
-		if (pSegment != NULL)
+        QDomElement pSegment = pSegments.firstChildElement("item");
+        if (!pSegment.isNull())
 		{
 			prodbase.Segments.clear();
-			for( pSegment; pSegment; pSegment=pSegment->NextSiblingElement("item", false))
+            for( pSegment; !pSegment.isNull(); pSegment=pSegment.nextSiblingElement("item"))
 			{
 				db::Segment data;
 				data.D1 = ParseDoubleValue(pSegment, "D1");
@@ -516,31 +528,33 @@ void GuideHelper::ParseOldSegments(db::ProductionBase& prodbase, const ticpp::El
 
 
 
-std::string GuideHelper::ParseStringValue( ticpp::Element* element, const char *name )
+QString GuideHelper::ParseStringValue( QDomElement element, const char *name )
 {
-	ticpp::Element* el = element->FirstChildElement(name, false);
-	std::string svalue;
-	el->GetText(&svalue, false);
-	return svalue;
+    QDomElement el = element.firstChildElement(name);
+    QString string;
+    if(!el.isNull())
+        string = el.text();
+    return string;
 }
 
-void GuideHelper::ParseStringValue( ticpp::Element* element, const char *name, char* field, size_t length )
+void GuideHelper::ParseStringValue( QDomElement element, const char *name, char* field, size_t length )
 {
 	try
 	{
-		ticpp::Element* el = element->FirstChildElement(name, false);
-		std::string svalue;
-		el->GetText(&svalue, false);
-		if (!svalue.empty())
+        QDomElement el = element.firstChildElement(name);
+        QString string;
+        if(!el.isNull())
+            string = el.text();
+        if (!string.isEmpty())
 		{
-            strncpy(field, svalue.c_str(), length);
+            strncpy(field, string.toLocal8Bit().data(), length);
             field[length-1] = '\0';
 		}
 	}
-    catch(ticpp::Exception& ex)
-    {
-		std::cout << "error parse string value:" << ex.m_details << std::endl;
-    }
+//    catch(ticpp::Exception& ex)
+//    {
+//		std::cout << "error parse string value:" << ex.m_details << std::endl;
+//    }
 	catch(...)
     {
 		std::cerr << "unknown error" ;
@@ -548,20 +562,21 @@ void GuideHelper::ParseStringValue( ticpp::Element* element, const char *name, c
     }
 }
 
-int GuideHelper::ParseIntValue( ticpp::Element* element, const char *name )
+int GuideHelper::ParseIntValue( QDomElement element, const char *name )
 {
 	try 
 	{
-		ticpp::Element* el = element->FirstChildElement(name, false);
+        QDomElement el = element.firstChildElement(name);
 		int ivalue;
-		el->GetText(&ivalue);
+        if(!el.isNull())
+            ivalue = el.text().toInt();
 		return ivalue;
 	}
-	catch(ticpp::Exception& ex)
-    {
-		std::cerr << "error parse int value:" << ex.m_details << std::endl;
-		return 0;
-    }
+//	catch(ticpp::Exception& ex)
+//    {
+//		std::cerr << "error parse int value:" << ex.m_details << std::endl;
+//		return 0;
+//    }
 	catch(...)
     {
 		std::cerr << "unknown error" ;
@@ -569,20 +584,21 @@ int GuideHelper::ParseIntValue( ticpp::Element* element, const char *name )
     }
 }
 
-double GuideHelper::ParseDoubleValue( ticpp::Element* element, const char *name )
+double GuideHelper::ParseDoubleValue( QDomElement element, const char *name )
 {
 	try
 	{
-		ticpp::Element* el = element->FirstChildElement(name, false);
+        QDomElement el = element.firstChildElement(name);
 		double dvalue;
-		el->GetText(&dvalue);
+        if(!el.isNull())
+            dvalue = el.text().toDouble();
 		return dvalue;
 	}
-	catch(ticpp::Exception& ex)
-    {
-		std::cout << "error parse double value:" << ex.m_details << std::endl;
-		return 0.0;
-    }
+//	catch(ticpp::Exception& ex)
+//    {
+//		std::cout << "error parse double value:" << ex.m_details << std::endl;
+//		return 0.0;
+//    }
 	catch(...)
     {
 		std::cerr << "unknown error" ;
@@ -590,20 +606,21 @@ double GuideHelper::ParseDoubleValue( ticpp::Element* element, const char *name 
     }
 }
 
-bool GuideHelper::ParseBoolValue( ticpp::Element* element, const char *name )
+bool GuideHelper::ParseBoolValue( QDomElement element, const char *name )
 {
 	try
 	{
-		ticpp::Element* el = element->FirstChildElement(name, false);
+        QDomElement el = element.firstChildElement(name);
 		bool bvalue;
-		el->GetText(&bvalue);
+        if(!el.isNull())
+            bvalue = (bool)el.text().toInt();
 		return bvalue;
 	}
-	catch(ticpp::Exception& ex)
-    {
-		std::cout << "error parse bool value:" << ex.m_details << std::endl;
-		return false;
-    }
+//	catch(ticpp::Exception& ex)
+//    {
+//		std::cout << "error parse bool value:" << ex.m_details << std::endl;
+//		return false;
+//    }
 	catch(...)
     {
 		std::cerr << "unknown error" ;

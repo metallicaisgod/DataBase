@@ -189,7 +189,7 @@ namespace db
 	typedef std::vector<DbScrew*>  t_ScrewList;
 	typedef std::vector<DbCutter*> t_CutterList;
 	typedef std::vector<DbSleeve*> t_SleeveList;
-	typedef std::map<std::string, t_CutterList> t_ImplCtrMap;
+    typedef std::map<QString, t_CutterList> t_ImplCtrMap;
 		
 	class DbGuideSeries : public Series
 	{
@@ -216,7 +216,7 @@ namespace db
 		{
 			return m_ImCtrMap;
 		}
-		t_CutterList* GetMapCutters(std::string impl_id)                                                                            
+        t_CutterList* GetMapCutters(QString impl_id)
 		{
 			if(m_ImCtrMap.find(impl_id)==m_ImCtrMap.end())
 				return NULL;

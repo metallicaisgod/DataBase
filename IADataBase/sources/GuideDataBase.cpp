@@ -3,8 +3,9 @@
 
 #include "GuideDataBase.h"
 #include "ext_resources.h"
-#include "ticpp.h"
+//#include "ticpp.h"
 #include "GuideHelper.h"
+#include <QFile>
 
 #include <iostream>
 
@@ -70,25 +71,32 @@ namespace db
     bool GuideDataBase::LoadXml(GuideDataBase& indb, const char* fileName)
 	{
 		bool loaded = false;
-		ticpp::Document* pDoc = NULL;
-		try
-		{
-			pDoc = new ticpp::Document(fileName);
-			pDoc->LoadFile(TIXML_ENCODING_UTF8);
-			ticpp::Element* root = pDoc->FirstChildElement();
-			std::string v = root->Value();
+        QDomDocument Doc;
+        try
+        {
+            QFile file(fileName);
+            if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+            {
+                return false;
+            }
+            if(!Doc.setContent(&file))
+            {
+                file.close();
+                return false;
+            }
+            file.close();
+            QDomElement root = Doc.firstChildElement();
+            QString v = root.tagName();
 			if (v == "boost_serialization")
 				GuideHelper::ParseOldDataBase(indb, root);
 			else
 				GuideHelper::ParseDataBase(indb, fileName, root);
-				loaded = true;
-		}
-		catch (ticpp::Exception& e) 
-		{
-			std::cout << "error:" << e.m_details << std::endl;
-		}
-		if (pDoc != NULL)
-			delete pDoc;
+            loaded = true;
+        }
+        catch (...)
+        {
+            std::cout << "unknown error " << std::endl;
+        }
 		return loaded;
 	}
 
@@ -99,11 +107,18 @@ namespace db
 
     void GuideDataBase::SaveXml(const GuideDataBase& indb, const char* fileName)
 	{
-		TiXmlDocument doc;
-		TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "" );
-		doc.LinkEndChild( decl );
-		doc.LinkEndChild( GuideHelper::ToXml(indb) );
-		doc.SaveFile(fileName);
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
+        QDomDocument doc;
+        QDomProcessingInstruction xmlDeclaration = doc.createProcessingInstruction("xml", "version=\"1.0\" ");
+        doc.appendChild(xmlDeclaration);
+        doc.appendChild( GuideHelper::ToXml(indb, doc) );
+
+        QTextStream out(&file);
+        out << doc.toString();
+
+        file.close();
 	}
 
 	GuideDataBase& GuideDataBase::operator+=(const GuideDataBase& extraDB)

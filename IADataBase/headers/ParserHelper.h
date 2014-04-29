@@ -1,32 +1,33 @@
 #pragma once
 #include "IADataBase.h"
-#include "ticpp.h"
+#include <QDomElement>
+//#include "ticpp.h"
 
 class ParserHelper
 {
 public:
 	ParserHelper(void);
 
-    static void ParseDataBase(db::IADataBase& indb, const char* fileName, const ticpp::Element* element, unsigned long flags = 0x00);
-	static void ParseProvider(db::DbProvider& provider, const ticpp::Element& element, unsigned long flags = 0x00);
-	static void ParseSeries(db::DbSeries& series, const ticpp::Element& element, unsigned long flags = 0x00);
+    static void ParseDataBase(db::IADataBase& indb, const char* fileName, const QDomElement& element, unsigned long flags = 0x00);
+    static void ParseProvider(db::DbProvider& provider, const QDomElement& element, unsigned long flags = 0x00);
+    static void ParseSeries(db::DbSeries& series, const QDomElement& element, unsigned long flags = 0x00);
 
-	static void ParseOldDataBase(db::IADataBase& indb, const ticpp::Element* element);
-	static void ParseOldProvider(db::DbProvider& provider, const ticpp::Element& element);
-	static void ParseOldSeries(db::DbSeries& series, const ticpp::Element& element);
+    static void ParseOldDataBase(db::IADataBase& indb, const QDomElement& element);
+    static void ParseOldProvider(db::DbProvider& provider, const QDomElement& element);
+    static void ParseOldSeries(db::DbSeries& series, const QDomElement& element);
 
-    static TiXmlElement* ToXml(const db::IADataBase& indb, const char* fileName, unsigned long flags = 0x00);
-	static TiXmlElement* ToXml(const db::DbProvider* provider, unsigned long flags = 0x00);
-	static TiXmlElement* ToXml(const db::DbSeries* series, unsigned long flags = 0x00);
+    static QDomElement* ToXml(const db::IADataBase& indb, const char* fileName, QDomDocument document, unsigned long flags = 0x00);
+    static QDomElement* ToXml(const db::DbProvider* provider, QDomDocument document, unsigned long flags = 0x00);
+    static QDomElement* ToXml(const db::DbSeries* series, QDomDocument document, unsigned long flags = 0x00);
 
-	static std::string ParseStringValue( ticpp::Element* element, const char *name );
-	static void ParseStringValue( ticpp::Element* element, const char *name, char* field, size_t length );
-	static int ParseIntValue( ticpp::Element* element, const char *name );
-	static double ParseDoubleValue( ticpp::Element* element, const char *name );
-	static bool ParseBoolValue( ticpp::Element* element, const char *name );
+    static QString ParseStringValue( QDomElement& element, const char *name );
+    static void ParseStringValue( QDomElement& element, const char *name, char* field, size_t length );
+    static int ParseIntValue( QDomElement& element, const char *name );
+    static double ParseDoubleValue( QDomElement& element, const char *name );
+    static bool ParseBoolValue( QDomElement& element, const char *name );
 
-	static TiXmlElement* MakeStringElement( const char *name, const char * _value );
-	static TiXmlElement* MakeIntElement( const char *name, int _value );
-	static TiXmlElement* MakeDoubleElement( const char *name, double _value );
-	static TiXmlElement* MakeBoolElement( const char *name, bool _value );
+    static QDomElement* MakeStringElement( const char *name, const char * _value, QDomDocument document );
+    static QDomElement* MakeIntElement( const char *name, int _value, QDomDocument document );
+    static QDomElement* MakeDoubleElement( const char *name, double _value, QDomDocument document );
+    static QDomElement* MakeBoolElement( const char *name, bool _value, QDomDocument document );
 };

@@ -3,9 +3,9 @@
 
 #include "IADataBase.h"
 #include "ext_resources.h"
-#include "ticpp.h"
+//#include "ticpp.h"
 #include "ParserHelper.h"
-
+#include <QFile>
 #include <iostream>
 
 //char szProvArr[3][30]=
@@ -97,39 +97,47 @@ bool IADataBase::LoadXml(IADataBase& indb, const char* fileName)
 	//	std::cout << "error:" << e.m_details << std::endl;
 	//}
 	//return loaded;
-};
+}
 
 bool IADataBase::LoadXml_2( IADataBase& indb, const char* fileName, unsigned long flags)
 {
 	bool loaded = false;
-	ticpp::Document* pDoc = NULL;
+    QDomDocument pDoc;
 	try
 	{
-		//pDoc = new ticpp::Document(fileName);
-		//pDoc->LoadFile(TIXML_ENCODING_UTF8);
-		//ticpp::Element* root = pDoc->FirstChildElement();
-		//ParserHelper::ParseDataBase(indb, root, flags);
-		//loaded = true;
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            return false;
+        }
+        if(!pDoc.setContent(&file))
+        {
+            file.close();
+            return false;
+        }
+        file.close();
+        QDomElement root = pDoc.firstChildElement();
+        QString v = root.tagName();
 
-		pDoc = new ticpp::Document(fileName);
-		pDoc->LoadFile(TIXML_ENCODING_UTF8);
-		ticpp::Element* root = pDoc->FirstChildElement();
-		std::string v = root->Value();
+        //pDoc = new ticpp::Document(fileName);
+        //pDoc->LoadFile(TIXML_ENCODING_UTF8);
+        //ticpp::Element* root = pDoc->FirstChildElement();
+        //std::string v = root->Value();
 		if (v == "boost_serialization")
-			ParserHelper::ParseOldDataBase(indb, root);
+            ParserHelper::ParseOldDataBase(indb, root);
 		else
-			ParserHelper::ParseDataBase(indb, fileName, root, flags);
+            ParserHelper::ParseDataBase(indb, fileName, root, flags);
 
 		loaded = true;
 
 
 	}
-	catch (ticpp::Exception& e) 
+    catch (...)
 	{
-		std::cout << "error:" << e.m_details << std::endl;
+        std::cout << "unknown error" /*<< e.m_details*/ << std::endl;
 	}
-	if (pDoc != NULL)
-		delete pDoc;
+//	if (pDoc != NULL)
+//		delete pDoc;
 	return loaded;
 }
 
@@ -146,47 +154,59 @@ void IADataBase::SaveXml(const char* fileName)
 void IADataBase::SaveXml(const IADataBase& indb, const char* fileName)
 {
 	SaveXml_All(indb, fileName);
-};
+}
 
 void IADataBase::SaveXml_2(const char* fileName, unsigned long flags)
 {
 	return IADataBase::SaveXml_2(*this, fileName, flags);
-};
+}
 void IADataBase::SaveXml_2(const IADataBase& indb, const char* fileName, unsigned long flags)
 {
-	TiXmlDocument* pDoc = NULL;
-	try
-	{
-		pDoc = new TiXmlDocument();
-		TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "" );
-		pDoc->LinkEndChild( decl );
-		pDoc->LinkEndChild( ParserHelper::ToXml(indb, fileName, flags) );
-		pDoc->SaveFile(fileName);
-	}
-	catch (ticpp::Exception& e) 
-	{
-	}
-	if (pDoc != NULL)
-		delete pDoc;
-};
+//	QDomDocument pDoc;
+//	try
+//	{
+//		pDoc = new TiXmlDocument();
+//		TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "" );
+//		pDoc->LinkEndChild( decl );
+//		pDoc->LinkEndChild( ParserHelper::ToXml(indb, fileName, flags) );
+//		pDoc->SaveFile(fileName);
+//	}
+//	catch (ticpp::Exception& e)
+//	{
+//	}
+//	if (pDoc != NULL)
+//		delete pDoc;
+
+    QDomDocument doc;
+    QDomProcessingInstruction xmlDeclaration = doc.createProcessingInstruction("xml", "version=\"1.0\" ");
+    doc.appendChild(xmlDeclaration);
+    doc.appendChild(*(ParserHelper::ToXml(indb, fileName, doc, flags)));
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+    QTextStream out(&file);
+    out << doc.toString();
+
+    file.close();
+}
 
 bool IADataBase::LoadXml_All(IADataBase& indb, const char* fileName)
 {
-	std::string strFileN(fileName);
-	std::string strExt = strFileN.substr(strFileN.length()-1, 1);
-	if(0==strExt.compare("\\"))
-		return LoadFromDir(indb, strFileN.c_str());
-
+    QString strFileN(fileName);
+    QChar strExt = strFileN.at(strFileN.length() - 1);
+    if(strExt == QChar('\\'))
+        return LoadFromDir(indb, strFileN.toLocal8Bit().data());
 	bool bLoadLib = LoadXml_2(indb, fileName, 0);
 	strFileN+=".usr";
-	bool bLoadUsr = LoadXml_2(indb, strFileN.c_str(), USERS_INTEMS);
+    bool bLoadUsr = LoadXml_2(indb, strFileN.toLocal8Bit().data(), USERS_INTEMS);
 	return bLoadLib || bLoadUsr;
 	
-};
+}
 bool IADataBase::LoadXml_All(const char* fileName)
 {
 	return IADataBase::LoadXml_All(*this, fileName);
-};
+}
 	
 bool IADataBase::LoadFromDir(IADataBase& indb, const char* dirName)
 {
@@ -223,9 +243,9 @@ bool IADataBase::LoadFromDir(IADataBase& indb, const char* dirName)
 void IADataBase::SaveXml_All(const IADataBase& indb, const char* fileName)
 {
 	SaveXml_2(indb, fileName, LIBRARY_INTEMS);
-	std::string strFileN(fileName);
+    QString strFileN(fileName);
 	strFileN+=".usr";
-	SaveXml_2(indb, strFileN.c_str(), USERS_INTEMS);
+    SaveXml_2(indb, strFileN.toLocal8Bit().data(), USERS_INTEMS);
 	
 };
 void IADataBase::SaveXml_All(const char* fileName)
