@@ -186,7 +186,9 @@ void IADataBase::SaveXml_2(const IADataBase& indb, const char* fileName, unsigne
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         return;
     QTextStream out(&file);
-    out << doc.toString();
+    doc.save(out, 4);
+
+    //out << doc.toString();
 
     file.close();
 }

@@ -113,7 +113,10 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
         case SeriesItem:  //series
             {
                 db::DbSeries * series = reinterpret_cast<db::DbSeries *>(item->data());
-                return QString(series->name);
+               // QByteArray encodedString(series->name);
+               // QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+                QString svalue(series->name);
+                return svalue;
             }
         }
     }

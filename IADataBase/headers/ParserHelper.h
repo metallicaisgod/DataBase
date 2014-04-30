@@ -30,4 +30,7 @@ public:
     static QDomElement* MakeIntElement( const char *name, int _value, QDomDocument document );
     static QDomElement* MakeDoubleElement( const char *name, double _value, QDomDocument document );
     static QDomElement* MakeBoolElement( const char *name, bool _value, QDomDocument document );
+
+    template <typename T>
+    static  void AddElement(const char *name, T _value, QDomDocument document, QDomElement parent);
 };
