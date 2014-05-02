@@ -564,53 +564,53 @@ void ParserHelper::AddElement(const char *name, T _value, QDomDocument document,
 
 //}
 
-QDomElement* ParserHelper::MakeStringElement( const char *name, const char * _value, QDomDocument document )
-{
-    QDomElement * element = new QDomElement();
-    *element = document.createElement( name );
-    element->appendChild( document.createTextNode(QString("%1").arg( _value )));
-    return element;
-}
+//QDomElement* ParserHelper::MakeStringElement( const char *name, const char * _value, QDomDocument document )
+//{
+//    QDomElement * element = new QDomElement();
+//    *element = document.createElement( name );
+//    element->appendChild( document.createTextNode(QString("%1").arg( _value )));
+//    return element;
+//}
 
-QDomElement* ParserHelper::MakeIntElement( const char *name, int _value, QDomDocument document )
-{
-//	char buf [64];
-//	#if defined(TIXML_SNPRINTF)
-//		TIXML_SNPRINTF(buf, sizeof(buf), "%d", _value);
-//	#else
-//		sprintf (buf, "%d", _value);
-//	#endif
-//	QDomElement& element = document.createElement( name );
-//	element.appendChild( new TiXmlText( buf ));
-//	return element;
-    QDomElement element = document.createElement( name );
-    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
-    return &element;
-}
+//QDomElement* ParserHelper::MakeIntElement( const char *name, int _value, QDomDocument document )
+//{
+////	char buf [64];
+////	#if defined(TIXML_SNPRINTF)
+////		TIXML_SNPRINTF(buf, sizeof(buf), "%d", _value);
+////	#else
+////		sprintf (buf, "%d", _value);
+////	#endif
+////	QDomElement& element = document.createElement( name );
+////	element.appendChild( new TiXmlText( buf ));
+////	return element;
+//    QDomElement element = document.createElement( name );
+//    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
+//    return &element;
+//}
 
-QDomElement* ParserHelper::MakeDoubleElement( const char *name, double _value, QDomDocument document )
-{
-//	char buf [256];
-//	#if defined(TIXML_SNPRINTF)
-//		TIXML_SNPRINTF( buf, sizeof(buf), "%g", _value);
-//	#else
-//		sprintf (buf, "%g", _value);
-//	#endif
-//	QDomElement& element = document.createElement( name );
-//	element.appendChild( new TiXmlText( buf ));
-//	return element;
-    QDomElement element = document.createElement( name );
-    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
-    return &element;
-}
+//QDomElement* ParserHelper::MakeDoubleElement( const char *name, double _value, QDomDocument document )
+//{
+////	char buf [256];
+////	#if defined(TIXML_SNPRINTF)
+////		TIXML_SNPRINTF( buf, sizeof(buf), "%g", _value);
+////	#else
+////		sprintf (buf, "%g", _value);
+////	#endif
+////	QDomElement& element = document.createElement( name );
+////	element.appendChild( new TiXmlText( buf ));
+////	return element;
+//    QDomElement element = document.createElement( name );
+//    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
+//    return &element;
+//}
 
 
-QDomElement* ParserHelper::MakeBoolElement( const char *name, bool _value, QDomDocument document )
-{
-//	QDomElement& element = document.createElement( name );
-//	element.appendChild( new TiXmlText( _value ? "1" : "0" ));
-//	return element;
-    QDomElement element = document.createElement( name );
-    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
-    return &element;
-}
+//QDomElement* ParserHelper::MakeBoolElement( const char *name, bool _value, QDomDocument document )
+//{
+////	QDomElement& element = document.createElement( name );
+////	element.appendChild( new TiXmlText( _value ? "1" : "0" ));
+////	return element;
+//    QDomElement element = document.createElement( name );
+//    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
+//    return &element;
+//}

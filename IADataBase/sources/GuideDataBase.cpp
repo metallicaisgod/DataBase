@@ -107,16 +107,16 @@ namespace db
 
     void GuideDataBase::SaveXml(const GuideDataBase& indb, const char* fileName)
 	{
-        QFile file(fileName);
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-            return;
         QDomDocument doc;
         QDomProcessingInstruction xmlDeclaration = doc.createProcessingInstruction("xml", "version=\"1.0\" ");
         doc.appendChild(xmlDeclaration);
-        doc.appendChild( GuideHelper::ToXml(indb, doc) );
+        doc.appendChild( *(GuideHelper::ToXml(indb, doc)) );
 
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
         QTextStream out(&file);
-        out << doc.toString();
+        doc.save(out, 4);
 
         file.close();
 	}
