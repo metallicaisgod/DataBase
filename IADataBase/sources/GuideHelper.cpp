@@ -5,44 +5,46 @@ GuideHelper::GuideHelper(void)
 {
 }
 
-QDomElement& GuideHelper::ToXml(const db::GuideDataBase& indb, QDomDocument& document, unsigned long flags)
+QDomElement* GuideHelper::ToXml(const db::GuideDataBase& indb, QDomDocument& document, unsigned long flags)
 {
-    QDomElement root = document.createElement("database" );
+    QDomElement * root = new QDomElement();
+    *root = document.createElement("database" );
 	db::GuideDataBase* pDB= const_cast<db::GuideDataBase*>(&indb);
 
     db::enumerator<db::t_GuideProvidersList::iterator> providersEnum = pDB->GetProvidersEnumerator(db::no_filter<db::DbGuideProvider*>());
 	while (providersEnum.MoveNext())
 	{
 		db::DbGuideProvider* pProvider = providersEnum.GetCurrent();
-        QDomElement elProvider = GuideHelper::ToXml(pProvider, document, flags);
-        if (!elProvider.isNull())
+        QDomElement * elProvider = GuideHelper::ToXml(pProvider, document, flags);
+        if (elProvider && !elProvider->isNull())
 		{
-            root.appendChild( elProvider );
+            root->appendChild(*elProvider );
 		}
 	}
 	return root;
 }
 
-QDomElement& GuideHelper::ToXml(const db::DbGuideProvider* provider, QDomDocument& document, unsigned long flags)
+QDomElement* GuideHelper::ToXml(const db::DbGuideProvider* provider, QDomDocument& document, unsigned long flags)
 {
 	db::DbGuideProvider* pProvider = const_cast<db::DbGuideProvider*>(provider);
 
 	bool bNotEmpty = false;
 	bool bWithoutCondition = (flags == 0);
 
-    QDomElement elProvider = document.createElement( "provider" );
+    QDomElement * elProvider = new QDomElement();
+    *elProvider = document.createElement( "provider" );
     QDomElement elName = document.createElement( "name" );
     QDomText name = document.createTextNode(pProvider->name);
     elName.appendChild(name);// new TiXmlText( pProvider->name ));
-    elProvider.appendChild(elName);
+    elProvider->appendChild(elName);
 	db::enumerator<db::t_GuideSeriesList::iterator> seriesEnum = pProvider->GetSeriesEnumerator(db::no_filter<db::DbGuideSeries*>());
 	while (seriesEnum.MoveNext())
 	{
 		db::DbGuideSeries* pSeries = seriesEnum.GetCurrent();
-        QDomElement elSeries = GuideHelper::ToXml(pSeries, document, flags);
-        if (!elSeries.isNull())
+        QDomElement * elSeries = GuideHelper::ToXml(pSeries, document, flags);
+        if (elSeries && !elSeries->isNull())
 		{
-            elProvider.appendChild( elSeries );
+            elProvider->appendChild( *elSeries );
 			bNotEmpty = true;
 		}
 	}
@@ -53,18 +55,19 @@ QDomElement& GuideHelper::ToXml(const db::DbGuideProvider* provider, QDomDocumen
 	else
 	{
         //delete elProvider;
-        return QDomElement();
+        return NULL;
 	}
 }
 
-QDomElement& GuideHelper::ToXml(const db::DbGuideSeries* series, QDomDocument& document, unsigned long flags)
+QDomElement* GuideHelper::ToXml(const db::DbGuideSeries* series, QDomDocument& document, unsigned long flags)
 {
 	db::DbGuideSeries* pSeries = const_cast<db::DbGuideSeries*>(series);
-    QDomElement elSeries = document.createElement ( "series" );
+    QDomElement * elSeries = new QDomElement();
+    *elSeries = document.createElement ( "series" );
     QDomElement elName = document.createElement( "name" );
     QDomText serName = document.createTextNode(pSeries->name);
     elName.appendChild(serName);//LinkEndChild( new TiXmlText( pSeries->name ));
-    elSeries.appendChild(elName);
+    elSeries->appendChild(elName);
 
 	bool bNotEmpty = false;
 	bool bWithoutCondition = (flags == 0);
@@ -79,23 +82,33 @@ QDomElement& GuideHelper::ToXml(const db::DbGuideSeries* series, QDomDocument& d
 		if (bWithoutCondition || (condition == pScrew->editable))
 		{
             QDomElement elScrew =  document.createElement( "screw" );
-            elScrew.appendChild( MakeStringElement("name", pScrew->name, document));
-            elScrew.appendChild( MakeIntElement("state", (unsigned int)pScrew->state, document) );
-            elScrew.appendChild( MakeDoubleElement("D", pScrew->D, document) );
-            elScrew.appendChild( MakeDoubleElement("Dh", pScrew->Dh, document) );
-            elScrew.appendChild( MakeDoubleElement("L", pScrew->L, document) );
-            elScrew.appendChild( MakeDoubleElement("Lt", pScrew->Lt, document) );
-            elScrew.appendChild( MakeDoubleElement("Lh", pScrew->Lh, document) );
-            elScrew.appendChild( MakeStringElement("model", pScrew->szModelName, document));
-            elScrew.appendChild( MakeStringElement("article", pScrew->artikul, document));
-            elScrew.appendChild( MakeBoolElement("ed", pScrew->editable, document) );
-            elScrew.appendChild( MakeStringElement("color", pScrew->defcolor, document) );
+            AddElement("name", pScrew->name, document, elScrew);
+            AddElement("state", (unsigned int)pScrew->state, document, elScrew);
+            AddElement("D", pScrew->D, document, elScrew);
+            AddElement("Dh", pScrew->Dh, document, elScrew);
+            AddElement("L", pScrew->L, document, elScrew);
+            AddElement("Lt", pScrew->Lt, document, elScrew);
+            AddElement("Lh", pScrew->Lh, document, elScrew);
+            AddElement("model", pScrew->szModelName, document, elScrew);
+            AddElement("article", pScrew->artikul, document, elScrew);
+            AddElement("ed", pScrew->editable, document, elScrew);
+            AddElement("color", pScrew->defcolor, document, elScrew);
+//            elScrew.appendChild( MakeIntElement("state", (unsigned int)pScrew->state, document) );
+//            elScrew.appendChild( MakeDoubleElement("D", pScrew->D, document) );
+//            elScrew.appendChild( MakeDoubleElement("Dh", pScrew->Dh, document) );
+//            elScrew.appendChild( MakeDoubleElement("L", pScrew->L, document) );
+//            elScrew.appendChild( MakeDoubleElement("Lt", pScrew->Lt, document) );
+//            elScrew.appendChild( MakeDoubleElement("Lh", pScrew->Lh, document) );
+//            elScrew.appendChild( MakeStringElement("model", pScrew->szModelName, document));
+//            elScrew.appendChild( MakeStringElement("article", pScrew->artikul, document));
+//            elScrew.appendChild( MakeBoolElement("ed", pScrew->editable, document) );
+//            elScrew.appendChild( MakeStringElement("color", pScrew->defcolor, document) );
 
             elScrews.appendChild(elScrew);
 			bNotEmpty = true;
 		}
 	}
-    elSeries.appendChild(elScrews);
+    elSeries->appendChild(elScrews);
 
     QDomElement elCutters = document.createElement( "cutters" );
 	const db::t_CutterList& cutterList = pSeries->GetCutters();
@@ -106,24 +119,37 @@ QDomElement& GuideHelper::ToXml(const db::DbGuideSeries* series, QDomDocument& d
 		if (bWithoutCondition || (condition == pCutter->editable))
 		{
             QDomElement elCutter = document.createElement( "cutter" );
-            elCutter.appendChild(MakeStringElement("name", pCutter->name, document));
-            elCutter.appendChild( MakeIntElement("state", (unsigned int)pCutter->state, document) );
-            elCutter.appendChild( MakeDoubleElement("D", pCutter->D, document) );
-            elCutter.appendChild( MakeDoubleElement("Ds", pCutter->Ds, document) );
-            elCutter.appendChild( MakeDoubleElement("Dw", pCutter->Dw, document) );
-            elCutter.appendChild( MakeDoubleElement("L", pCutter->L, document) );
-            elCutter.appendChild( MakeDoubleElement("Ls", pCutter->Ls, document) );
-            elCutter.appendChild( MakeDoubleElement("Lw", pCutter->Lw, document) );
-            elCutter.appendChild( MakeIntElement("type", pCutter->type, document) );
-            elCutter.appendChild( MakeStringElement("model", pCutter->szModelName, document));
-            elCutter.appendChild( MakeStringElement("article", pCutter->artikul, document));
-            elCutter.appendChild( MakeBoolElement("ed", pCutter->editable, document) );
-            elCutter.appendChild( MakeStringElement("color", pCutter->defcolor, document) );
+            AddElement("name", pCutter->name, document, elCutter);
+            AddElement("state", (unsigned int)pCutter->state, document, elCutter);
+            AddElement("D", pCutter->D, document, elCutter);
+            AddElement("Ds", pCutter->Ds, document, elCutter);
+            AddElement("Dw", pCutter->Dw, document, elCutter);
+            AddElement("L", pCutter->L, document, elCutter);
+            AddElement("Ls", pCutter->Ls, document, elCutter);
+            AddElement("Lw", pCutter->Lw, document, elCutter);
+            AddElement("type", pCutter->type, document, elCutter);
+            AddElement("model", pCutter->szModelName, document, elCutter);
+            AddElement("article", pCutter->artikul, document, elCutter);
+            AddElement("ed", pCutter->editable, document, elCutter);
+            AddElement("color", pCutter->defcolor, document, elCutter);
+//            elCutter.appendChild(MakeStringElement("name", pCutter->name, document));
+//            elCutter.appendChild( MakeIntElement("state", (unsigned int)pCutter->state, document) );
+//            elCutter.appendChild( MakeDoubleElement("D", pCutter->D, document) );
+//            elCutter.appendChild( MakeDoubleElement("Ds", pCutter->Ds, document) );
+//            elCutter.appendChild( MakeDoubleElement("Dw", pCutter->Dw, document) );
+//            elCutter.appendChild( MakeDoubleElement("L", pCutter->L, document) );
+//            elCutter.appendChild( MakeDoubleElement("Ls", pCutter->Ls, document) );
+//            elCutter.appendChild( MakeDoubleElement("Lw", pCutter->Lw, document) );
+//            elCutter.appendChild( MakeIntElement("type", pCutter->type, document) );
+//            elCutter.appendChild( MakeStringElement("model", pCutter->szModelName, document));
+//            elCutter.appendChild( MakeStringElement("article", pCutter->artikul, document));
+//            elCutter.appendChild( MakeBoolElement("ed", pCutter->editable, document) );
+//            elCutter.appendChild( MakeStringElement("color", pCutter->defcolor, document) );
             elCutters.appendChild(elCutter);
 			bNotEmpty = true;
 		}
 	}
-    elSeries.appendChild(elCutters);
+    elSeries->appendChild(elCutters);
 
     QDomElement elSleeves = document.createElement( "sleeves" );
 	const db::t_SleeveList& sleeveList = pSeries->GetSleeves();
@@ -134,29 +160,41 @@ QDomElement& GuideHelper::ToXml(const db::DbGuideSeries* series, QDomDocument& d
 		if (bWithoutCondition || (condition == pSleeve->editable))
 		{
             QDomElement elSleeve = document.createElement( "sleeve" );
-            elSleeve.appendChild(MakeStringElement("name", pSleeve->name, document));
-            elSleeve.appendChild( MakeIntElement("state", (unsigned int)pSleeve->state, document) );
-            elSleeve.appendChild( MakeDoubleElement("D", pSleeve->D, document) );
-            elSleeve.appendChild( MakeDoubleElement("Do", pSleeve->Do, document) );
-            elSleeve.appendChild( MakeDoubleElement("Dh", pSleeve->Dh, document) );
-            elSleeve.appendChild( MakeDoubleElement("Df", pSleeve->Df, document) );
-            elSleeve.appendChild( MakeDoubleElement("Lw", pSleeve->Lw, document) );
-            elSleeve.appendChild( MakeDoubleElement("Lh", pSleeve->Lh, document) );
-            elSleeve.appendChild( MakeStringElement("model", pSleeve->szModelName, document));
-            elSleeve.appendChild( MakeStringElement("article", pSleeve->artikul, document));
-            elSleeve.appendChild( MakeBoolElement("ed", pSleeve->editable, document) );
-            elSleeve.appendChild( MakeStringElement("color", pSleeve->defcolor, document) );
-            QDomElement elSegments = GuideHelper::ToXml(pSleeve, document);
-            if (!elSegments.isNull())
+            AddElement("name", pSleeve->name, document, elSleeve);
+            AddElement("state", (unsigned int)pSleeve->state, document, elSleeve);
+            AddElement("D", pSleeve->D, document, elSleeve);
+            AddElement("Do", pSleeve->Do, document, elSleeve);
+            AddElement("Dh", pSleeve->Dh, document, elSleeve);
+            AddElement("Df", pSleeve->Df, document, elSleeve);
+            AddElement("Lw", pSleeve->Lw, document, elSleeve);
+            AddElement("Lh", pSleeve->Lh, document, elSleeve);
+            AddElement("model", pSleeve->szModelName, document, elSleeve);
+            AddElement("article", pSleeve->artikul, document, elSleeve);
+            AddElement("ed", pSleeve->editable, document, elSleeve);
+            AddElement("color", pSleeve->defcolor, document, elSleeve);
+//            elSleeve.appendChild(MakeStringElement("name", pSleeve->name, document));
+//            elSleeve.appendChild( MakeIntElement("state", (unsigned int)pSleeve->state, document) );
+//            elSleeve.appendChild( MakeDoubleElement("D", pSleeve->D, document) );
+//            elSleeve.appendChild( MakeDoubleElement("Do", pSleeve->Do, document) );
+//            elSleeve.appendChild( MakeDoubleElement("Dh", pSleeve->Dh, document) );
+//            elSleeve.appendChild( MakeDoubleElement("Df", pSleeve->Df, document) );
+//            elSleeve.appendChild( MakeDoubleElement("Lw", pSleeve->Lw, document) );
+//            elSleeve.appendChild( MakeDoubleElement("Lh", pSleeve->Lh, document) );
+//            elSleeve.appendChild( MakeStringElement("model", pSleeve->szModelName, document));
+//            elSleeve.appendChild( MakeStringElement("article", pSleeve->artikul, document));
+//            elSleeve.appendChild( MakeBoolElement("ed", pSleeve->editable, document) );
+//            elSleeve.appendChild( MakeStringElement("color", pSleeve->defcolor, document) );
+            QDomElement* elSegments = GuideHelper::ToXml(pSleeve, document);
+            if (elSegments && !elSegments->isNull())
 			{
-                elSleeve.appendChild( elSegments );
+                elSleeve.appendChild( *elSegments );
 			}
 
             elSleeves.appendChild(elSleeve);
 			bNotEmpty = true;
 		}
 	}
-    elSeries.appendChild(elSleeves);
+    elSeries->appendChild(elSleeves);
 
 	if (bWithoutCondition || bNotEmpty)
 	{
@@ -165,81 +203,100 @@ QDomElement& GuideHelper::ToXml(const db::DbGuideSeries* series, QDomDocument& d
 	else
 	{
         //delete elSeries;
-        return QDomElement();
+        return NULL;
 	}
 }
 
-QDomElement& GuideHelper::ToXml(const db::ProductionBase* prodbase, QDomDocument& document)
+QDomElement* GuideHelper::ToXml(const db::ProductionBase* prodbase, QDomDocument& document)
 {
 	if (prodbase->Segments.size() > 0)
 	{
-        QDomElement elSegments = document.createElement( "segments" );
+        QDomElement * elSegments = new QDomElement();
+        *elSegments = document.createElement( "segments" );
 		std::vector<db::Segment>::const_iterator itSegment = prodbase->Segments.begin();
 		for (; itSegment != prodbase->Segments.end(); ++itSegment)
 		{
 			db::Segment segment = *itSegment;
             QDomElement elSegment = document.createElement( "segment" );
-            elSegment.appendChild(MakeDoubleElement("D1", segment.D1, document));
-            elSegment.appendChild(MakeDoubleElement("D2", segment.D2, document));
-            elSegment.appendChild(MakeDoubleElement("L", segment.L, document));
+            AddElement("D1", segment.D1, document, elSegment);
+            AddElement("D2", segment.D2, document, elSegment);
+            AddElement("L", segment.L, document, elSegment);
+//            elSegment.appendChild(MakeDoubleElement("D1", segment.D1, document));
+//            elSegment.appendChild(MakeDoubleElement("D2", segment.D2, document));
+//            elSegment.appendChild(MakeDoubleElement("L", segment.L, document));
 			
-            elSegments.appendChild(elSegment);
+            elSegments->appendChild(elSegment);
 		}
 
 		return elSegments;
 	}
-    return QDomElement();
+    return NULL;
 }
 
-QDomElement& GuideHelper::MakeStringElement( const char *name, const char * _value, QDomDocument& document )
+
+template <typename T>
+void GuideHelper::AddElement(const char *name, T _value, QDomDocument document, QDomElement parent)
 {
-    QDomElement& element = document.createElement( name );
+    //QDomElement * element = new QDomElement();
+    QDomElement element = document.createElement(QString(name));
     element.appendChild( document.createTextNode(QString("%1").arg( _value )));
-	return element;
+    parent.appendChild(element);
+    //return element;
 }
 
-QDomElement& GuideHelper::MakeIntElement( const char *name, int _value, QDomDocument& document )
-{
-//	char buf [64];
-//	#if defined(TIXML_SNPRINTF)
-//		TIXML_SNPRINTF(buf, sizeof(buf), "%d", _value);
-//	#else
-//		sprintf (buf, "%d", _value);
-//	#endif
-//	QDomElement* element = new QDomElement( name );
-//	element.appendChild( new TiXmlText( buf ));
+//QDomElement* GuideHelper::MakeStringElement( const char *name, const char * _value, QDomDocument& document )
+//{
+//    QDomElement* element = new QDomElement();
+//    *element = document.createElement( name );
+//    element->appendChild( document.createTextNode(QString("%1").arg( _value )));
 //	return element;
-    QDomElement& element = document.createElement( name );
-    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
-    return element;
-}
+//}
 
-QDomElement& GuideHelper::MakeDoubleElement( const char *name, double _value, QDomDocument& document )
-{
-//	char buf [256];
-//	#if defined(TIXML_SNPRINTF)
-//		TIXML_SNPRINTF( buf, sizeof(buf), "%g", _value);
-//	#else
-//		sprintf (buf, "%g", _value);
-//	#endif
-//	QDomElement* element = new QDomElement( name );
-//	element.appendChild( new TiXmlText( buf ));
+//QDomElement* GuideHelper::MakeIntElement( const char *name, int _value, QDomDocument& document )
+//{
+////	char buf [64];
+////	#if defined(TIXML_SNPRINTF)
+////		TIXML_SNPRINTF(buf, sizeof(buf), "%d", _value);
+////	#else
+////		sprintf (buf, "%d", _value);
+////	#endif
+////	QDomElement* element = new QDomElement( name );
+////	element.appendChild( new TiXmlText( buf ));
+////	return element;
+//    QDomElement* element = new QDomElement();
+//    *element = document.createElement( name );
+//    element->appendChild( document.createTextNode(QString("%1").arg( _value )));
 //	return element;
-    QDomElement& element = document.createElement( name );
-    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
-    return element;
-}
+//}
 
-
-QDomElement& GuideHelper::MakeBoolElement( const char *name, bool _value, QDomDocument& document )
-{
-//	QDomElement* element = new QDomElement( name );
-//	element.appendChild( new TiXmlText( _value ? "1" : "0" ));
+//QDomElement* GuideHelper::MakeDoubleElement( const char *name, double _value, QDomDocument& document )
+//{
+////	char buf [256];
+////	#if defined(TIXML_SNPRINTF)
+////		TIXML_SNPRINTF( buf, sizeof(buf), "%g", _value);
+////	#else
+////		sprintf (buf, "%g", _value);
+////	#endif
+////	QDomElement* element = new QDomElement( name );
+////	element.appendChild( new TiXmlText( buf ));
+////	return element;
+//    QDomElement* element = new QDomElement();
+//    *element = document.createElement( name );
+//    element->appendChild( document.createTextNode(QString("%1").arg( _value )));
 //	return element;
-    QDomElement& element = document.createElement( name );
-    element.appendChild( document.createTextNode(QString("%1").arg( _value )));
-    return element;
-}
+//}
+
+
+//QDomElement* GuideHelper::MakeBoolElement( const char *name, bool _value, QDomDocument& document )
+//{
+////	QDomElement* element = new QDomElement( name );
+////	element.appendChild( new TiXmlText( _value ? "1" : "0" ));
+////	return element;
+//    QDomElement* element = new QDomElement();
+//    *element = document.createElement( name );
+//    element->appendChild( document.createTextNode(QString("%1").arg( _value )));
+//	return element;
+//}
 
 
 void GuideHelper::ParseDataBase(db::GuideDataBase& indb, const char* fileName, const QDomElement& element, unsigned long flags)

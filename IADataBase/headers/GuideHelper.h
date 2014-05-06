@@ -9,15 +9,18 @@ class GuideHelper
 public:
 	GuideHelper(void);
 
-    static QDomElement& ToXml(const db::GuideDataBase& indb, QDomDocument& document, unsigned long flags = 0x00);
-    static QDomElement& ToXml(const db::DbGuideProvider* provider, QDomDocument& document, unsigned long flags = 0x00);
-    static QDomElement& ToXml(const db::DbGuideSeries* series, QDomDocument& document, unsigned long flags = 0x00);
-    static QDomElement& ToXml(const db::ProductionBase* prodbase, QDomDocument& document);
+    static QDomElement* ToXml(const db::GuideDataBase& indb, QDomDocument& document, unsigned long flags = 0x00);
+    static QDomElement* ToXml(const db::DbGuideProvider* provider, QDomDocument& document, unsigned long flags = 0x00);
+    static QDomElement* ToXml(const db::DbGuideSeries* series, QDomDocument& document, unsigned long flags = 0x00);
+    static QDomElement* ToXml(const db::ProductionBase* prodbase, QDomDocument& document);
 
-    static QDomElement& MakeStringElement( const char *name, const char * _value, QDomDocument& document);
-    static QDomElement& MakeIntElement( const char *name, int _value, QDomDocument& document );
-    static QDomElement& MakeDoubleElement( const char *name, double _value, QDomDocument& document );
-    static QDomElement& MakeBoolElement( const char *name, bool _value, QDomDocument& document );
+//    static QDomElement* MakeStringElement( const char *name, const char * _value, QDomDocument& document);
+//    static QDomElement* MakeIntElement( const char *name, int _value, QDomDocument& document );
+//    static QDomElement* MakeDoubleElement( const char *name, double _value, QDomDocument& document );
+//    static QDomElement* MakeBoolElement( const char *name, bool _value, QDomDocument& document );
+
+    template <typename T>
+    static  void AddElement(const char *name, T _value, QDomDocument document, QDomElement parent);
 
     static void ParseDataBase(db::GuideDataBase& indb, const char* fileName, const QDomElement& element, unsigned long flags = 0x00);
     static void ParseProvider(db::DbGuideProvider& provider, const QDomElement& element, unsigned long flags = 0x00);
