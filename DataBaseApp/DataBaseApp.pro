@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     treeitem.cpp \
     tablemodel.cpp \
     implantdialog.cpp \
-    abutmentdialog.cpp
+    abutmentdialog.cpp \
+    glmodel.cpp
 
 HEADERS  += mainwindow.h \
     stdafx.h \
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h \
     tablemodel.h \
     types.h \
     implantdialog.h \
-    abutmentdialog.h
+    abutmentdialog.h \
+    glmodel.h
 
 FORMS    += mainwindow.ui \
     implantdialog.ui \

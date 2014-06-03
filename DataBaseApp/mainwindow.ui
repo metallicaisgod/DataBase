@@ -244,7 +244,7 @@ QTreeView::branch:open:has-children:!has-siblings {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="wOpenGL" native="true"/>
+      <widget class="GLModel" name="wOpenGL" native="true"/>
      </widget>
     </item>
    </layout>
@@ -359,6 +359,12 @@ QTreeView::branch:open:has-children:!has-siblings {
    <class>CGridSplitter</class>
    <extends>QFrame</extends>
    <header location="global">gridsplitter.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GLModel</class>
+   <extends>QWidget</extends>
+   <header location="global">glmodel.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
