@@ -2,11 +2,17 @@
 #include <math.h>
 #include "glmodel.h"
 
+#define NUM_OF_FACES        50
+#define NUM_OF_TRIANGLES    4 * NUM_OF_FACES - 4
+
+
 const static float pi=3.141593, k=pi/180;
 
-GLfloat VertexArray[12][3];
-GLfloat ColorArray[12][3];
-GLubyte IndexArray[20][3];
+//int ng = 12;
+
+GLfloat VertexArray[NUM_OF_FACES * 2][3];
+GLfloat ColorArray[NUM_OF_FACES * 2][3];
+GLubyte IndexArray[NUM_OF_TRIANGLES][3];
 
 GLModel::GLModel(QWidget* parent) : QGLWidget(parent)
 {
@@ -17,10 +23,47 @@ void GLModel::initializeGL()
 {
    qglClearColor(Qt::blue);
 
-   glDisable(GL_DEPTH_TEST);
-   //glEnable(GL_DEPTH_TEST);
+   //glDisable(GL_DEPTH_TEST);
+   glEnable(GL_DEPTH_TEST);
    glShadeModel(GL_FLAT);
-   glEnable(GL_CULL_FACE);
+//   GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+//   GLfloat light_diffuse[] = {1.0, 1.0, 1.0, 1.0};
+//   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+//   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+//   glEnable(GL_LIGHTING);
+//   glEnable(GL_LIGHT0);
+//   float pos[4] = {3,3,3,1};
+//   float color[4] = {1,1,1,1};
+//   float sp[4] = {1,1,1,1};
+//   float mat_specular[] = {1,1,1,1};
+//   glEnable(GL_COLOR_MATERIAL);
+//   float ambient[4] = {0.5, 0.5, 0.5, 1};
+//   glEnable(GL_LIGHTING);
+//   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+//   glEnable(GL_LIGHT3);
+//       glEnable(GL_LIGHT5);
+//       glEnable(GL_LIGHT6);
+//   glLightfv(GL_LIGHT3, GL_SPECULAR, sp);
+//   glLightfv(GL_LIGHT5, GL_SPECULAR, sp);
+//   glLightfv(GL_LIGHT6, GL_SPECULAR, sp);
+//   color[1]=color[2]=0;
+//   glLightfv(GL_LIGHT3, GL_DIFFUSE, color);
+//   color[0]=0;
+//       color[1]=1;
+//   glLightfv(GL_LIGHT5, GL_DIFFUSE, color);
+//   color[1]=0;
+//       color[2]=1;
+//   glLightfv(GL_LIGHT6, GL_DIFFUSE, color);
+//   glLightfv(GL_LIGHT3, GL_POSITION, pos);
+//       pos[0] = -3;
+//   glLightfv(GL_LIGHT5, GL_POSITION, pos);
+//       pos[0]=0;pos[1]=-3;
+//   glLightfv(GL_LIGHT6, GL_POSITION, pos);
+//   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+//   glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
+  // glEnable(GL_LIGHT0);
+   //glEnable(GL_CULL_FACE);
 
    getVertexArray();
    getColorArray();
@@ -228,156 +271,137 @@ void GLModel::drawAxis()
 
 void GLModel::getVertexArray()
 {
-   GLfloat R=0.75;
+    int ng = NUM_OF_FACES;
+   // float vert[12+1][2];
+    /// при инициализации
+    float rad = 0.25;
 
-   GLfloat a=4*R/sqrt((double)(10+2*sqrt(5.)));
-   GLfloat alpha=acos((1-a*a/2/R/R));
+    for(int i = 0; i < ng; i++)
+    {
+        float seta = i*360.0/ng;
+        float vx = sin(M_PI * seta / 180.0)*rad;
+        float vy = cos(M_PI * seta / 180.0)*rad;
 
-   VertexArray[0][0]=0;
-   VertexArray[0][1]=0;
-   VertexArray[0][2]=R;
+        VertexArray[2 * i][0] = vx;
+        VertexArray[2 * i][1] = vy;
+        VertexArray[2 * i][2] = 0.5;
 
-   VertexArray[1][0]=R*sin(alpha)*sin(0.0);
-   VertexArray[1][1]=R*sin(alpha)*cos(0.0);
-   VertexArray[1][2]=R*cos(alpha);
+        VertexArray[2 * i + 1][0] = vx;
+        VertexArray[2 * i + 1][1] = vy;
+        VertexArray[2 * i + 1][2] = -0.5;
 
-   VertexArray[2][0]=R*sin(alpha)*sin(72*k);
-   VertexArray[2][1]=R*sin(alpha)*cos(72*k);
-   VertexArray[2][2]=R*cos(alpha);
+    }
 
-   VertexArray[3][0]=R*sin(alpha)*sin(2*72*k);
-   VertexArray[3][1]=R*sin(alpha)*cos(2*72*k);
-   VertexArray[3][2]=R*cos(alpha);
+    //glColor3f(255,0,0);
+    //glBegin(GL_TRIANGLES);
 
-   VertexArray[4][0]=R*sin(alpha)*sin(3*72*k);
-   VertexArray[4][1]=R*sin(alpha)*cos(3*72*k);
-   VertexArray[4][2]=R*cos(alpha);
+    //glEnd();
 
-   VertexArray[5][0]=R*sin(alpha)*sin(4*72*k);
-   VertexArray[5][1]=R*sin(alpha)*cos(4*72*k);
-   VertexArray[5][2]=R*cos(alpha);
+//   GLfloat R=0.75;
 
-   VertexArray[6][0]=R*sin(pi-alpha)*sin(-36*k);
-   VertexArray[6][1]=R*sin(pi-alpha)*cos(-36*k);
-   VertexArray[6][2]=R*cos(pi-alpha);
+//   GLfloat a=4*R/sqrt((double)(10+2*sqrt(5.)));
+//   GLfloat alpha=acos((1-a*a/2/R/R));
 
-   VertexArray[7][0]=R*sin(pi-alpha)*sin(36*k);
-   VertexArray[7][1]=R*sin(pi-alpha)*cos(36*k);
-   VertexArray[7][2]=R*cos(pi-alpha);
+//   VertexArray[0][0]=0;
+//   VertexArray[0][1]=0;
+//   VertexArray[0][2]=R;
 
-   VertexArray[8][0]=R*sin(pi-alpha)*sin((36+72)*k);
-   VertexArray[8][1]=R*sin(pi-alpha)*cos((36+72)*k);
-   VertexArray[8][2]=R*cos(pi-alpha);
+//   VertexArray[1][0]=R*sin(alpha)*sin(0.0);
+//   VertexArray[1][1]=R*sin(alpha)*cos(0.0);
+//   VertexArray[1][2]=R*cos(alpha);
 
-   VertexArray[9][0]=R*sin(pi-alpha)*sin((36+2*72)*k);
-   VertexArray[9][1]=R*sin(pi-alpha)*cos((36+2*72)*k);
-   VertexArray[9][2]=R*cos(pi-alpha);
+//   VertexArray[2][0]=R*sin(alpha)*sin(72*k);
+//   VertexArray[2][1]=R*sin(alpha)*cos(72*k);
+//   VertexArray[2][2]=R*cos(alpha);
 
-   VertexArray[10][0]=R*sin(pi-alpha)*sin((36+3*72)*k);
-   VertexArray[10][1]=R*sin(pi-alpha)*cos((36+3*72)*k);
-   VertexArray[10][2]=R*cos(pi-alpha);
+//   VertexArray[3][0]=R*sin(alpha)*sin(2*72*k);
+//   VertexArray[3][1]=R*sin(alpha)*cos(2*72*k);
+//   VertexArray[3][2]=R*cos(alpha);
 
-   VertexArray[11][0]=0;
-   VertexArray[11][1]=0;
-   VertexArray[11][2]=-R;
+//   VertexArray[4][0]=R*sin(alpha)*sin(3*72*k);
+//   VertexArray[4][1]=R*sin(alpha)*cos(3*72*k);
+//   VertexArray[4][2]=R*cos(alpha);
+
+//   VertexArray[5][0]=R*sin(alpha)*sin(4*72*k);
+//   VertexArray[5][1]=R*sin(alpha)*cos(4*72*k);
+//   VertexArray[5][2]=R*cos(alpha);
+
+//   VertexArray[6][0]=R*sin(pi-alpha)*sin(-36*k);
+//   VertexArray[6][1]=R*sin(pi-alpha)*cos(-36*k);
+//   VertexArray[6][2]=R*cos(pi-alpha);
+
+//   VertexArray[7][0]=R*sin(pi-alpha)*sin(36*k);
+//   VertexArray[7][1]=R*sin(pi-alpha)*cos(36*k);
+//   VertexArray[7][2]=R*cos(pi-alpha);
+
+//   VertexArray[8][0]=R*sin(pi-alpha)*sin((36+72)*k);
+//   VertexArray[8][1]=R*sin(pi-alpha)*cos((36+72)*k);
+//   VertexArray[8][2]=R*cos(pi-alpha);
+
+//   VertexArray[9][0]=R*sin(pi-alpha)*sin((36+2*72)*k);
+//   VertexArray[9][1]=R*sin(pi-alpha)*cos((36+2*72)*k);
+//   VertexArray[9][2]=R*cos(pi-alpha);
+
+//   VertexArray[10][0]=R*sin(pi-alpha)*sin((36+3*72)*k);
+//   VertexArray[10][1]=R*sin(pi-alpha)*cos((36+3*72)*k);
+//   VertexArray[10][2]=R*cos(pi-alpha);
+
+//   VertexArray[11][0]=0;
+//   VertexArray[11][1]=0;
+//   VertexArray[11][2]=-R;
 }
 
 void GLModel::getColorArray()
 {
-   for (int i=0; i<12; i++)
+   for (int i=0; i < NUM_OF_FACES * 2; i++)
    {
-      ColorArray[i][0]=0.1f*(qrand()%11);
-      ColorArray[i][1]=0.1f*(qrand()%11);
-      ColorArray[i][2]=0.1f*(qrand()%11);
+      ColorArray[i][0]=1.0f;
+      ColorArray[i][1]=0.0f;
+      ColorArray[i][2]=0.0f;
    }
 }
 
 void GLModel::getIndexArray()
 {
-   IndexArray[0][0]=0;
-   IndexArray[0][1]=2;
-   IndexArray[0][2]=1;
+    for(int i = 0; i < NUM_OF_FACES - 1; i++)
+    {
+        IndexArray[2 * i][0] = 2 * i;
+        IndexArray[2 * i][1] = 2 * i + 1;
+        IndexArray[2 * i][2] = 2 * i + 3;
 
-   IndexArray[1][0]=0;
-   IndexArray[1][1]=3;
-   IndexArray[1][2]=2;
+        IndexArray[2 * i + 1][0] = 2 * i;
+        IndexArray[2 * i + 1][1] = 2 * i + 2;
+        IndexArray[2 * i + 1][2] = 2 * i + 3;
+    }
 
-   IndexArray[2][0]=0;
-   IndexArray[2][1]=4;
-   IndexArray[2][2]=3;
+   IndexArray[NUM_OF_FACES * 2 - 2][0] = NUM_OF_FACES * 2 - 2;
+   IndexArray[NUM_OF_FACES * 2 - 2][1] = NUM_OF_FACES * 2 - 1;
+   IndexArray[NUM_OF_FACES * 2 - 2][2] = 1;
 
-   IndexArray[3][0]=0;
-   IndexArray[3][1]=5;
-   IndexArray[3][2]=4;
+   IndexArray[NUM_OF_FACES * 2 - 1][0] = NUM_OF_FACES * 2 - 2;
+   IndexArray[NUM_OF_FACES * 2 - 1][1] = 0;
+   IndexArray[NUM_OF_FACES * 2 - 1][2] = 1;
 
-   IndexArray[4][0]=0;
-   IndexArray[4][1]=1;
-   IndexArray[4][2]=5;
-
-   IndexArray[5][0]=6;
-   IndexArray[5][1]=1;
-   IndexArray[5][2]=7;
-
-   IndexArray[6][0]=7;
-   IndexArray[6][1]=1;
-   IndexArray[6][2]=2;
-
-   IndexArray[7][0]=7;
-   IndexArray[7][1]=2;
-   IndexArray[7][2]=8;
-
-   IndexArray[8][0]=8;
-   IndexArray[8][1]=2;
-   IndexArray[8][2]=3;
-
-   IndexArray[9][0]=8;
-   IndexArray[9][1]=3;
-   IndexArray[9][2]=9;
-
-   IndexArray[10][0]=9;
-   IndexArray[10][1]=3;
-   IndexArray[10][2]=4;
-
-   IndexArray[11][0]=9;
-   IndexArray[11][1]=4;
-   IndexArray[11][2]=10;
-
-   IndexArray[12][0]=10;
-   IndexArray[12][1]=4;
-   IndexArray[12][2]=5;
-
-   IndexArray[13][0]=10;
-   IndexArray[13][1]=5;
-   IndexArray[13][2]=6;
-
-   IndexArray[14][0]=6;
-   IndexArray[14][1]=5;
-   IndexArray[14][2]=1;
-
-   IndexArray[15][0]=7;
-   IndexArray[15][1]=11;
-   IndexArray[15][2]=6;
-
-   IndexArray[16][0]=8;
-   IndexArray[16][1]=11;
-   IndexArray[16][2]=7;
-
-   IndexArray[17][0]=9;
-   IndexArray[17][1]=11;
-   IndexArray[17][2]=8;
-
-   IndexArray[18][0]=10;
-   IndexArray[18][1]=11;
-   IndexArray[18][2]=9;
-
-   IndexArray[19][0]=6;
-   IndexArray[19][1]=11;
-   IndexArray[19][2]=10;
+   //верхняя грань
+   int st = NUM_OF_FACES * 2;
+   for(int i = 0; i < NUM_OF_FACES - 2; i++)
+   {
+       IndexArray[st + i][0] = 0;
+       IndexArray[st + i][1] = i * 2 + 2;
+       IndexArray[st + i][2] = i * 2 + 4;
+   }
+   st = NUM_OF_FACES * 2 + NUM_OF_FACES - 2;
+   for(int i = 0; i < NUM_OF_FACES - 2; i++)
+   {
+        IndexArray[st + i][0] = 1;
+        IndexArray[st + i][1] = i * 2 + 3;
+        IndexArray[st + i][2] = i * 2 + 5;
+   }
 }
 
 void GLModel::drawFigure()
 {
-   glVertexPointer(3, GL_FLOAT, 0, VertexArray);
+    glVertexPointer(3, GL_FLOAT, 0, VertexArray);
    glColorPointer(3, GL_FLOAT, 0, ColorArray);
-   glDrawElements(GL_TRIANGLES, 60, GL_UNSIGNED_BYTE, IndexArray);
+   glDrawElements(GL_TRIANGLES, (NUM_OF_TRIANGLES) * 3, GL_UNSIGNED_BYTE, IndexArray);
 }

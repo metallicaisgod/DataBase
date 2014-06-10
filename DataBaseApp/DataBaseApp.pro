@@ -13,7 +13,8 @@ TEMPLATE = app
 DESTDIR = "../"
 DEFINES += _CRT_SECURE_NO_WARNINGS
 LIBS += -L"$${DESTDIR}" \
-    -lIADataBase
+    -lIADataBase \
+
 PRECOMPILED_HEADER += stdafx.h
 
 SOURCES += main.cpp\
