@@ -28,6 +28,7 @@ private:
       void drawAxis();
 
       void getVertexArray();
+      void getNormalArray();
       void getColorArray();
       void getIndexArray();
       void drawFigure();

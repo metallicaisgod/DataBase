@@ -3,14 +3,15 @@
 #include "glmodel.h"
 
 #define NUM_OF_FACES        50
-#define NUM_OF_TRIANGLES    4 * NUM_OF_FACES - 4
-
+#define NUM_OF_TRIANGLES    (4 * NUM_OF_FACES - 4)
+#define RADIUS              0.25
 
 const static float pi=3.141593, k=pi/180;
 
 //int ng = 12;
 
 GLfloat VertexArray[NUM_OF_FACES * 2][3];
+GLfloat NormalArray[NUM_OF_TRIANGLES][3];
 GLfloat ColorArray[NUM_OF_FACES * 2][3];
 GLubyte IndexArray[NUM_OF_TRIANGLES][3];
 
@@ -25,19 +26,40 @@ void GLModel::initializeGL()
 
    //glDisable(GL_DEPTH_TEST);
    glEnable(GL_DEPTH_TEST);
-   glShadeModel(GL_FLAT);
+   glShadeModel(GL_SMOOTH);
+
+//   glClearDepth(1.0f);
+//   GLfloat LightAmbient[]= { 0.5f, 0.5f, 0.5f, 1.0f }; // Значения фонового света ( НОВОЕ )
+//   GLfloat LightDiffuse[]= { 1.0f, 1.0f, 1.0f, 1.0f }; // Значения диффузного света ( НОВОЕ )
+//   GLfloat LightPosition[]= { 0.0f, 0.0f, 2.0f, 1.0f };     // Позиция света ( НОВОЕ )
+//   glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);    // Установка Фонового Света
+//   glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);    // Установка Диффузного Света
+//   glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);   // Позиция света
 //   GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
 //   GLfloat light_diffuse[] = {1.0, 1.0, 1.0, 1.0};
 //   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 //   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+//   float pos[4] = {3,3,3,1};
+//   float dir[3] = {-1,-1,-1};
+
+//   GLfloat mat_specular[] = {1,1,1,1 };
+
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+//    glLightfv(GL_LIGHT0, GL_POSITION, pos);
+//    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
+//    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+//    glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
+
+//   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 
 //   glEnable(GL_LIGHTING);
-//   glEnable(GL_LIGHT0);
-//   float pos[4] = {3,3,3,1};
+//   glEnable(GL_LIGHT3);
+//   float pos[4] = {3,3,3,0};
 //   float color[4] = {1,1,1,1};
 //   float sp[4] = {1,1,1,1};
 //   float mat_specular[] = {1,1,1,1};
-//   glEnable(GL_COLOR_MATERIAL);
+   glEnable(GL_COLOR_MATERIAL);
 //   float ambient[4] = {0.5, 0.5, 0.5, 1};
 //   glEnable(GL_LIGHTING);
 //   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
@@ -65,11 +87,13 @@ void GLModel::initializeGL()
   // glEnable(GL_LIGHT0);
    //glEnable(GL_CULL_FACE);
 
+   //getNormalArray();
    getVertexArray();
    getColorArray();
    getIndexArray();
 
    glEnableClientState(GL_VERTEX_ARRAY);
+   glEnableClientState(GL_NORMAL_ARRAY);
    glEnableClientState(GL_COLOR_ARRAY);
 }
 
@@ -94,10 +118,22 @@ void GLModel::paintGL()
 
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
+//   GLfloat position[] = {0.0f,0.0f,1.5f,1.0f};
+//  // GLfloat back_color[] = {0,0,1,1};
+//  // glMaterialfv(GL_FRONT, GL_DIFFUSE, front_color);
+//  // glMaterialfv(GL_BACK, GL_DIFFUSE, front_color);
 
+//   glPushMatrix; // запомнили мировую систему координат
+//   //glRotatef (spin, 1.0, О О, 0.0); // поворот системы координат
+//   glLightfv (GL_LIGHT0, GL_POSITION, position); // задаем новую позицию источника света
+//   glTranslated (0.0, 0.0, 1.5); // перемещаемся в точку, где
+//   // располагается источник света
+//   glDisable (GL_LIGHTING); // отключаем источник света
+//   //glutWireCube (0.1); // визуализируем источник света
+//   glEnable (GL_LIGHTING); // включаем источник света
+//   glPopMatrix; // возвращаемся в мировую систему координат
 
-
-   glTranslatef(0.0f, zTra, 0.0f);
+   glTranslatef(0.0f, 0.0f, zTra);
    //draw figure
    glPushMatrix();
         glScalef(nSca, nSca, nSca);
@@ -109,11 +145,12 @@ void GLModel::paintGL()
    //draw axis
    glPushMatrix();
         glTranslatef(0.8f, -0.8f, -0.8f);
-        glScalef(nSca, nSca, nSca);
         glRotatef(xRot, 1.0f, 0.0f, 0.0f);
         glRotatef(yRot, 0.0f, 1.0f, 0.0f);
         glRotatef(zRot, 0.0f, 0.0f, 1.0f);
         drawAxis();
+   glPopMatrix();
+   glPushMatrix();
    glPopMatrix();
 
 
@@ -230,7 +267,7 @@ void GLModel::rotate_right()
 
 void GLModel::translate_down()
 {
-   zTra -= 0.05;
+    zTra-= 0.05;
 }
 
 void GLModel::translate_up()
@@ -274,7 +311,7 @@ void GLModel::getVertexArray()
     int ng = NUM_OF_FACES;
    // float vert[12+1][2];
     /// при инициализации
-    float rad = 0.25;
+    float rad = RADIUS;
 
     for(int i = 0; i < ng; i++)
     {
@@ -289,66 +326,52 @@ void GLModel::getVertexArray()
         VertexArray[2 * i + 1][0] = vx;
         VertexArray[2 * i + 1][1] = vy;
         VertexArray[2 * i + 1][2] = -0.5;
-
     }
+    getNormalArray();
+}
 
-    //glColor3f(255,0,0);
-    //glBegin(GL_TRIANGLES);
+void CalcNormals(GLfloat * v1, GLfloat * v2, GLfloat * v3, GLfloat * norm)
+{
+    GLfloat Qx, Qy, Qz, Px, Py, Pz, x, y, z;
 
-    //glEnd();
+    Qx = v2[0] - v1[0];
+    Qy = v2[1] - v1[1];
+     Qz = v2[2] - v1[2];
+     Px = v3[0] - v1[0];
+     Py = v3[1] - v1[1];
+     Pz = v3[2] - v1[2];
 
-//   GLfloat R=0.75;
+     x = Py*Qz - Pz*Qy;
+     y = Pz*Qx - Px*Qz;
+     z = Px*Qy - Py*Qx;
 
-//   GLfloat a=4*R/sqrt((double)(10+2*sqrt(5.)));
-//   GLfloat alpha=acos((1-a*a/2/R/R));
+     GLfloat inv_length = 1.0f / sqrt(x*x + y*y + z*z);
+     norm[0] = x * inv_length;
+     norm[1] = y * inv_length;
+     norm[2] = z * inv_length;
+}
 
-//   VertexArray[0][0]=0;
-//   VertexArray[0][1]=0;
-//   VertexArray[0][2]=R;
 
-//   VertexArray[1][0]=R*sin(alpha)*sin(0.0);
-//   VertexArray[1][1]=R*sin(alpha)*cos(0.0);
-//   VertexArray[1][2]=R*cos(alpha);
 
-//   VertexArray[2][0]=R*sin(alpha)*sin(72*k);
-//   VertexArray[2][1]=R*sin(alpha)*cos(72*k);
-//   VertexArray[2][2]=R*cos(alpha);
-
-//   VertexArray[3][0]=R*sin(alpha)*sin(2*72*k);
-//   VertexArray[3][1]=R*sin(alpha)*cos(2*72*k);
-//   VertexArray[3][2]=R*cos(alpha);
-
-//   VertexArray[4][0]=R*sin(alpha)*sin(3*72*k);
-//   VertexArray[4][1]=R*sin(alpha)*cos(3*72*k);
-//   VertexArray[4][2]=R*cos(alpha);
-
-//   VertexArray[5][0]=R*sin(alpha)*sin(4*72*k);
-//   VertexArray[5][1]=R*sin(alpha)*cos(4*72*k);
-//   VertexArray[5][2]=R*cos(alpha);
-
-//   VertexArray[6][0]=R*sin(pi-alpha)*sin(-36*k);
-//   VertexArray[6][1]=R*sin(pi-alpha)*cos(-36*k);
-//   VertexArray[6][2]=R*cos(pi-alpha);
-
-//   VertexArray[7][0]=R*sin(pi-alpha)*sin(36*k);
-//   VertexArray[7][1]=R*sin(pi-alpha)*cos(36*k);
-//   VertexArray[7][2]=R*cos(pi-alpha);
-
-//   VertexArray[8][0]=R*sin(pi-alpha)*sin((36+72)*k);
-//   VertexArray[8][1]=R*sin(pi-alpha)*cos((36+72)*k);
-//   VertexArray[8][2]=R*cos(pi-alpha);
-
-//   VertexArray[9][0]=R*sin(pi-alpha)*sin((36+2*72)*k);
-//   VertexArray[9][1]=R*sin(pi-alpha)*cos((36+2*72)*k);
-//   VertexArray[9][2]=R*cos(pi-alpha);
-
-//   VertexArray[10][0]=R*sin(pi-alpha)*sin((36+3*72)*k);
-//   VertexArray[10][1]=R*sin(pi-alpha)*cos((36+3*72)*k);
-//   VertexArray[10][2]=R*cos(pi-alpha);
-
-//   VertexArray[11][0]=0;
-//   VertexArray[11][1]=0;
-//   VertexArray[11][2]=-R;
+void GLModel::getNormalArray()
+{
+    for(int i = 0; i < NUM_OF_FACES - 1; i++)
+    {
+        CalcNormals(VertexArray[2 * i], VertexArray[2 * i + 1], VertexArray[2 * i + 3], NormalArray[2 * i]);
+        CalcNormals(VertexArray[2 * i], VertexArray[2 * i + 3], VertexArray[2 * i + 3], NormalArray[2 * i + 1]);
+    }
+    CalcNormals(VertexArray[NUM_OF_FACES * 2 - 2], VertexArray[NUM_OF_FACES * 2 - 1], VertexArray[1], NormalArray[NUM_OF_FACES * 2 - 2]);
+    CalcNormals(VertexArray[NUM_OF_FACES * 2 - 2], VertexArray[0], VertexArray[1], NormalArray[NUM_OF_FACES * 2 - 1]);
+    int st = NUM_OF_FACES * 2;
+    for(int i = 0; i < NUM_OF_FACES - 2; i++)
+    {
+        CalcNormals(VertexArray[0], VertexArray[2 * i + 2], VertexArray[2 * i + 4], NormalArray[st + i]);
+    }
+    st = NUM_OF_FACES * 2 + NUM_OF_FACES - 2;
+    for(int i = 0; i < NUM_OF_FACES - 2; i++)
+    {
+        CalcNormals(VertexArray[1], VertexArray[2 * i + 3], VertexArray[2 * i + 5], NormalArray[st + i]);
+    }
 }
 
 void GLModel::getColorArray()
@@ -401,6 +424,7 @@ void GLModel::getIndexArray()
 
 void GLModel::drawFigure()
 {
+    glNormalPointer(GL_FLOAT, 0, NormalArray);
     glVertexPointer(3, GL_FLOAT, 0, VertexArray);
    glColorPointer(3, GL_FLOAT, 0, ColorArray);
    glDrawElements(GL_TRIANGLES, (NUM_OF_TRIANGLES) * 3, GL_UNSIGNED_BYTE, IndexArray);
