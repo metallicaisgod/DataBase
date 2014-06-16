@@ -13,6 +13,8 @@ private:
       GLfloat zTra;
       GLfloat nSca;
 
+      GLfloat lightPos[4];
+
       QPoint ptrMousePosition;
 
       void scale_plus();

@@ -4,7 +4,8 @@
 
 #define NUM_OF_FACES        50
 #define NUM_OF_TRIANGLES    (4 * NUM_OF_FACES - 4)
-#define RADIUS              0.25
+#define RADIUS              0.05
+#define HEIGHT              0.5
 
 const static float pi=3.141593, k=pi/180;
 
@@ -39,55 +40,20 @@ void GLModel::initializeGL()
 //   GLfloat light_diffuse[] = {1.0, 1.0, 1.0, 1.0};
 //   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 //   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-//   float pos[4] = {3,3,3,1};
+   lightPos[0] = 3;
+   lightPos[1] = 3;
+   lightPos[2] = 3;
+   lightPos[3] = 0;
 //   float dir[3] = {-1,-1,-1};
 
 //   GLfloat mat_specular[] = {1,1,1,1 };
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-//    glLightfv(GL_LIGHT0, GL_POSITION, pos);
-//    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
-//    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-//    glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 
-//   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-
-//   glEnable(GL_LIGHTING);
-//   glEnable(GL_LIGHT3);
-//   float pos[4] = {3,3,3,0};
-//   float color[4] = {1,1,1,1};
-//   float sp[4] = {1,1,1,1};
-//   float mat_specular[] = {1,1,1,1};
    glEnable(GL_COLOR_MATERIAL);
-//   float ambient[4] = {0.5, 0.5, 0.5, 1};
-//   glEnable(GL_LIGHTING);
-//   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
-//   glEnable(GL_LIGHT3);
-//       glEnable(GL_LIGHT5);
-//       glEnable(GL_LIGHT6);
-//   glLightfv(GL_LIGHT3, GL_SPECULAR, sp);
-//   glLightfv(GL_LIGHT5, GL_SPECULAR, sp);
-//   glLightfv(GL_LIGHT6, GL_SPECULAR, sp);
-//   color[1]=color[2]=0;
-//   glLightfv(GL_LIGHT3, GL_DIFFUSE, color);
-//   color[0]=0;
-//       color[1]=1;
-//   glLightfv(GL_LIGHT5, GL_DIFFUSE, color);
-//   color[1]=0;
-//       color[2]=1;
-//   glLightfv(GL_LIGHT6, GL_DIFFUSE, color);
-//   glLightfv(GL_LIGHT3, GL_POSITION, pos);
-//       pos[0] = -3;
-//   glLightfv(GL_LIGHT5, GL_POSITION, pos);
-//       pos[0]=0;pos[1]=-3;
-//   glLightfv(GL_LIGHT6, GL_POSITION, pos);
-//   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-//   glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
-  // glEnable(GL_LIGHT0);
-   //glEnable(GL_CULL_FACE);
 
-   //getNormalArray();
    getVertexArray();
    getColorArray();
    getIndexArray();
@@ -95,6 +61,10 @@ void GLModel::initializeGL()
    glEnableClientState(GL_VERTEX_ARRAY);
    glEnableClientState(GL_NORMAL_ARRAY);
    glEnableClientState(GL_COLOR_ARRAY);
+
+   glNormalPointer(GL_FLOAT, 0, NormalArray);
+   glVertexPointer(3, GL_FLOAT, 0, VertexArray);
+  glColorPointer(3, GL_FLOAT, 0, ColorArray);
 }
 
 void GLModel::resizeGL(int nWidth, int nHeight)
@@ -114,45 +84,40 @@ void GLModel::resizeGL(int nWidth, int nHeight)
 
 void GLModel::paintGL()
 {
-   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
-//   GLfloat position[] = {0.0f,0.0f,1.5f,1.0f};
-//  // GLfloat back_color[] = {0,0,1,1};
-//  // glMaterialfv(GL_FRONT, GL_DIFFUSE, front_color);
-//  // glMaterialfv(GL_BACK, GL_DIFFUSE, front_color);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
-//   glPushMatrix; // запомнили мировую систему координат
-//   //glRotatef (spin, 1.0, О О, 0.0); // поворот системы координат
-//   glLightfv (GL_LIGHT0, GL_POSITION, position); // задаем новую позицию источника света
-//   glTranslated (0.0, 0.0, 1.5); // перемещаемся в точку, где
-//   // располагается источник света
-//   glDisable (GL_LIGHTING); // отключаем источник света
-//   //glutWireCube (0.1); // визуализируем источник света
-//   glEnable (GL_LIGHTING); // включаем источник света
-//   glPopMatrix; // возвращаемся в мировую систему координат
+    //glTranslatef(0.0f, 0.0f, 0.0f);
 
-   glTranslatef(0.0f, 0.0f, zTra);
+    glPushMatrix();
+        glScalef(nSca, nSca, nSca);
+        if(nSca)
+        {
+            lightPos[0] /= nSca;
+            lightPos[1] /= nSca;
+            lightPos[2] /= nSca;
+        }
+        glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+    glPopMatrix();
+
    //draw figure
-   glPushMatrix();
+    glPushMatrix();
         glScalef(nSca, nSca, nSca);
         glRotatef(xRot, 1.0f, 0.0f, 0.0f);
         glRotatef(yRot, 0.0f, 1.0f, 0.0f);
         glRotatef(zRot, 0.0f, 0.0f, 1.0f);
         drawFigure();
-   glPopMatrix();
+    glPopMatrix();
    //draw axis
-   glPushMatrix();
+    glPushMatrix();
         glTranslatef(0.8f, -0.8f, -0.8f);
         glRotatef(xRot, 1.0f, 0.0f, 0.0f);
         glRotatef(yRot, 0.0f, 1.0f, 0.0f);
         glRotatef(zRot, 0.0f, 0.0f, 1.0f);
         drawAxis();
-   glPopMatrix();
-   glPushMatrix();
-   glPopMatrix();
-
+    glPopMatrix();
 
 }
 
@@ -321,11 +286,11 @@ void GLModel::getVertexArray()
 
         VertexArray[2 * i][0] = vx;
         VertexArray[2 * i][1] = vy;
-        VertexArray[2 * i][2] = 0.5;
+        VertexArray[2 * i][2] = 0.5 * HEIGHT;
 
         VertexArray[2 * i + 1][0] = vx;
         VertexArray[2 * i + 1][1] = vy;
-        VertexArray[2 * i + 1][2] = -0.5;
+        VertexArray[2 * i + 1][2] = -0.5 * HEIGHT;
     }
     getNormalArray();
 }
@@ -358,7 +323,7 @@ void GLModel::getNormalArray()
     for(int i = 0; i < NUM_OF_FACES - 1; i++)
     {
         CalcNormals(VertexArray[2 * i], VertexArray[2 * i + 1], VertexArray[2 * i + 3], NormalArray[2 * i]);
-        CalcNormals(VertexArray[2 * i], VertexArray[2 * i + 3], VertexArray[2 * i + 3], NormalArray[2 * i + 1]);
+        CalcNormals(VertexArray[2 * i], VertexArray[2 * i + 2], VertexArray[2 * i + 3], NormalArray[2 * i + 1]);
     }
     CalcNormals(VertexArray[NUM_OF_FACES * 2 - 2], VertexArray[NUM_OF_FACES * 2 - 1], VertexArray[1], NormalArray[NUM_OF_FACES * 2 - 2]);
     CalcNormals(VertexArray[NUM_OF_FACES * 2 - 2], VertexArray[0], VertexArray[1], NormalArray[NUM_OF_FACES * 2 - 1]);
@@ -424,8 +389,5 @@ void GLModel::getIndexArray()
 
 void GLModel::drawFigure()
 {
-    glNormalPointer(GL_FLOAT, 0, NormalArray);
-    glVertexPointer(3, GL_FLOAT, 0, VertexArray);
-   glColorPointer(3, GL_FLOAT, 0, ColorArray);
    glDrawElements(GL_TRIANGLES, (NUM_OF_TRIANGLES) * 3, GL_UNSIGNED_BYTE, IndexArray);
 }
