@@ -93,12 +93,6 @@ void GLModel::paintGL()
 
     glPushMatrix();
         glScalef(nSca, nSca, nSca);
-        if(nSca)
-        {
-            lightPos[0] /= nSca;
-            lightPos[1] /= nSca;
-            lightPos[2] /= nSca;
-        }
         glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
     glPopMatrix();
 
