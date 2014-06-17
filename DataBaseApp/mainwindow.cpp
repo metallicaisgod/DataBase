@@ -121,7 +121,8 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     //fileName = "..\\DataBase\\implants_db.xml";
-    iadb.LoadXml_All(fileName.toLocal8Bit().data());
+    //iadb.LoadXml_All(fileName.toLocal8Bit().data());
+    iadb.ImportFromCSV("d:\\test.csv_lst");
     fillModels(Implants);
     fillModels(Abutments);
 }
