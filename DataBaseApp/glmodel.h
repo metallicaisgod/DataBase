@@ -3,6 +3,23 @@
 
 #include <QGLWidget>
 
+#include "..\iadatabase\headers\IADataBase.h"
+
+struct GLFloatTriplet
+{
+    GLfloat x;
+    GLfloat y;
+    GLfloat z;
+};
+
+struct GLUShortTriplet
+{
+    GLushort x;
+    GLushort y;
+    GLushort z;
+};
+
+
 class GLModel : public QGLWidget
 {
     Q_OBJECT
@@ -35,6 +52,19 @@ private:
       void getIndexArray();
       void drawFigure();
 
+      db::DbImplant * m_curImpl;
+      db::DbAbutment * m_curAbut;
+
+      int m_faceCount;
+      int m_vertexCount;
+      int m_trianglesCount;
+
+      GLFloatTriplet *  m_vertexArray;
+      GLFloatTriplet *  m_normalArray;
+      GLFloatTriplet *  m_colorArray;
+      GLUShortTriplet * m_indexArray;
+
+
    protected:
       void initializeGL();
       void resizeGL(int nWidth, int nHeight);
@@ -47,6 +77,9 @@ private:
 
    public:
       GLModel(QWidget* parent = 0);
+
+      void setCurrentImplant(db::DbImplant * impl);
+      void setCurrentAbutment(db::DbAbutment * abut);
 
 };
 

@@ -533,11 +533,21 @@ void MainWindow::disableActions(ItemType itemType, ModelType modelType)
 void MainWindow::on_tabVImplants_clicked(const QModelIndex &idx)
 {
     disableActions(SeriesItem, Implants);
+    if(idx.isValid())
+    {
+        DbImplant * impl = reinterpret_cast<DbImplant *>(m_pImpTableModel->data(idx, DataRole).value<void *>());
+        ui->wOpenGL->setCurrentImplant(impl);
+    }
 }
 
 void MainWindow::on_tabVAbutments_clicked(const QModelIndex &idx)
 {
     disableActions(SeriesItem, Abutments);
+    if(idx.isValid())
+    {
+        DbAbutment * abut = reinterpret_cast<DbAbutment *>(m_pAbutTableModel->data(idx, DataRole).value<void *>());
+        ui->wOpenGL->setCurrentAbutment(abut);
+    }
 }
 
 void MainWindow::on_actionAdd_Series_triggered()

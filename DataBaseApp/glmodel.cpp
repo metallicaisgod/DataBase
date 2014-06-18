@@ -2,7 +2,7 @@
 #include <math.h>
 #include "glmodel.h"
 
-#define NUM_OF_FACES        50
+#define NUM_OF_FACES        10
 #define NUM_OF_TRIANGLES    (4 * NUM_OF_FACES - 4)
 #define RADIUS              0.05
 #define HEIGHT              0.5
@@ -11,60 +11,68 @@ const static float pi=3.141593, k=pi/180;
 
 //int ng = 12;
 
-GLfloat VertexArray[NUM_OF_FACES * 2][3];
-GLfloat NormalArray[NUM_OF_TRIANGLES][3];
-GLfloat ColorArray[NUM_OF_FACES * 2][3];
-GLubyte IndexArray[NUM_OF_TRIANGLES][3];
-
 GLModel::GLModel(QWidget* parent) : QGLWidget(parent)
 {
    xRot=-90; yRot=0; zRot=0; zTra=0; nSca=1;
+   m_curImpl = NULL;
+   m_curAbut = NULL;
+   m_vertexArray = NULL;
+   m_normalArray = NULL;
+   m_colorArray = NULL;
+   m_indexArray = NULL;
 }
 
 void GLModel::initializeGL()
 {
-   qglClearColor(Qt::blue);
+    qglClearColor(Qt::blue);
 
-   //glDisable(GL_DEPTH_TEST);
-   glEnable(GL_DEPTH_TEST);
-   glShadeModel(GL_SMOOTH);
+    glEnable(GL_DEPTH_TEST);
+    glShadeModel(GL_SMOOTH);
 
-//   glClearDepth(1.0f);
-//   GLfloat LightAmbient[]= { 0.5f, 0.5f, 0.5f, 1.0f }; // Значения фонового света ( НОВОЕ )
-//   GLfloat LightDiffuse[]= { 1.0f, 1.0f, 1.0f, 1.0f }; // Значения диффузного света ( НОВОЕ )
-//   GLfloat LightPosition[]= { 0.0f, 0.0f, 2.0f, 1.0f };     // Позиция света ( НОВОЕ )
-//   glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);    // Установка Фонового Света
-//   glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);    // Установка Диффузного Света
-//   glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);   // Позиция света
-//   GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
-//   GLfloat light_diffuse[] = {1.0, 1.0, 1.0, 1.0};
-//   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-//   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-   lightPos[0] = 3;
-   lightPos[1] = 3;
-   lightPos[2] = 3;
-   lightPos[3] = 0;
-//   float dir[3] = {-1,-1,-1};
-
-//   GLfloat mat_specular[] = {1,1,1,1 };
+    lightPos[0] = 3;
+    lightPos[1] = 3;
+    lightPos[2] = 3;
+    lightPos[3] = 0;
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 
-   glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_COLOR_MATERIAL);
 
-   getVertexArray();
-   getColorArray();
-   getIndexArray();
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+}
 
-   glEnableClientState(GL_VERTEX_ARRAY);
-   glEnableClientState(GL_NORMAL_ARRAY);
-   glEnableClientState(GL_COLOR_ARRAY);
+void GLModel::setCurrentImplant(db::DbImplant *impl)
+{
+    m_curImpl = impl;
 
-   glNormalPointer(GL_FLOAT, 0, NormalArray);
-   glVertexPointer(3, GL_FLOAT, 0, VertexArray);
-  glColorPointer(3, GL_FLOAT, 0, ColorArray);
+    if(impl != NULL)
+    {
+        getVertexArray();
+        getColorArray();
+        getIndexArray();
+    }
+
+    if(isVisible())
+        updateGL();
+}
+
+void GLModel::setCurrentAbutment(db::DbAbutment *abut)
+{
+    m_curAbut = abut;
+
+//    if(abut != NULL)
+//    {
+//        getVertexArray();
+//        getColorArray();
+//        getIndexArray();
+//    }
+
+//    if(isVisible())
+//        updateGL();
 }
 
 void GLModel::resizeGL(int nWidth, int nHeight)
@@ -90,28 +98,30 @@ void GLModel::paintGL()
     glLoadIdentity();
 
     //glTranslatef(0.0f, 0.0f, 0.0f);
+    if(m_curImpl || m_curAbut)
+    {
+        glPushMatrix();
+            glScalef(nSca, nSca, nSca);
+            glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+        glPopMatrix();
 
-    glPushMatrix();
-        glScalef(nSca, nSca, nSca);
-        glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
-    glPopMatrix();
-
-   //draw figure
-    glPushMatrix();
-        glScalef(nSca, nSca, nSca);
-        glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-        glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-        glRotatef(zRot, 0.0f, 0.0f, 1.0f);
-        drawFigure();
-    glPopMatrix();
-   //draw axis
-    glPushMatrix();
-        glTranslatef(0.8f, -0.8f, -0.8f);
-        glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-        glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-        glRotatef(zRot, 0.0f, 0.0f, 1.0f);
-        drawAxis();
-    glPopMatrix();
+       //draw figure
+        glPushMatrix();
+            glScalef(nSca, nSca, nSca);
+            glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+            glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+            glRotatef(zRot, 0.0f, 0.0f, 1.0f);
+            drawFigure();
+        glPopMatrix();
+       //draw axis
+        glPushMatrix();
+            glTranslatef(0.8f, -0.8f, -0.8f);
+            glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+            glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+            glRotatef(zRot, 0.0f, 0.0f, 1.0f);
+            drawAxis();
+        glPopMatrix();
+    }
 
 }
 
@@ -267,121 +277,234 @@ void GLModel::drawAxis()
 
 void GLModel::getVertexArray()
 {
-    int ng = NUM_OF_FACES;
-   // float vert[12+1][2];
-    /// при инициализации
-    float rad = RADIUS;
-
-    for(int i = 0; i < ng; i++)
+    if(m_vertexArray != NULL)
     {
-        float seta = i*360.0/ng;
-        float vx = sin(M_PI * seta / 180.0)*rad;
-        float vy = cos(M_PI * seta / 180.0)*rad;
+        free(m_vertexArray);
+        m_vertexArray = NULL;
+    }
+    if(m_colorArray != NULL)
+    {
+        free(m_colorArray);
+        m_colorArray = NULL;
+    }
+    if(m_normalArray != NULL)
+    {
+        free(m_normalArray);
+        m_normalArray = NULL;
+    }
+    if(m_indexArray != NULL)
+    {
+        free(m_indexArray);
+        m_indexArray = NULL;
+    }
 
-        VertexArray[2 * i][0] = vx;
-        VertexArray[2 * i][1] = vy;
-        VertexArray[2 * i][2] = 0.5 * HEIGHT;
+    m_faceCount = NUM_OF_FACES;
 
-        VertexArray[2 * i + 1][0] = vx;
-        VertexArray[2 * i + 1][1] = vy;
-        VertexArray[2 * i + 1][2] = -0.5 * HEIGHT;
+    m_vertexCount = m_faceCount * 2;
+
+    m_trianglesCount = 4 * m_faceCount - 4;
+    if(/*m_curImpl &&*/ m_curImpl->L1 > 0)
+    {
+         m_trianglesCount += 2 * m_faceCount;
+         m_vertexCount += m_faceCount;
+    }
+
+    m_vertexArray =( GLFloatTriplet*)malloc(m_vertexCount * sizeof(GLFloatTriplet));
+    m_colorArray = ( GLFloatTriplet*)malloc(m_vertexCount * sizeof(GLFloatTriplet));
+    m_normalArray = ( GLFloatTriplet*)malloc(m_trianglesCount * sizeof(GLFloatTriplet));
+    m_indexArray = (GLUShortTriplet *)malloc(m_trianglesCount * sizeof(GLUShortTriplet));
+
+    float scale = 0.05;
+
+    float R1 = m_curImpl->D1 / 2 * scale;
+    float R2 = m_curImpl->D2 / 2 * scale;
+    float L1 = m_curImpl->L1 * scale;
+    float L2 = m_curImpl->L2 * scale;
+
+    for(int  i = 0; i < m_faceCount; i++)
+    {
+        float seta = i*360.0/m_faceCount;
+        float v1x = sin(M_PI * seta / 180.0)*R1;
+        float v1y = cos(M_PI * seta / 180.0)*R1;
+
+        float v2x = sin(M_PI * seta / 180.0)*R2;
+        float v2y = cos(M_PI * seta / 180.0)*R2;
+
+        m_vertexArray[2 * i].x     = v2x;
+        m_vertexArray[2 * i].y     = v2y;
+        m_vertexArray[2 * i].z     = L2;
+
+        m_vertexArray[2 * i + 1].x = v1x;
+        m_vertexArray[2 * i + 1].y = v1y;
+        m_vertexArray[2 * i + 1].z = 0.0;
+
+        if(L1 > 0)
+        {
+            m_vertexArray[2 * m_faceCount + i].x = v1x;
+            m_vertexArray[2 * m_faceCount + i].y = v1y;
+            m_vertexArray[2 * m_faceCount + i].z = -L1;
+        }
+
     }
     getNormalArray();
 }
 
-void CalcNormals(GLfloat * v1, GLfloat * v2, GLfloat * v3, GLfloat * norm)
+void CalcNormals(GLFloatTriplet  v1, GLFloatTriplet  v2, GLFloatTriplet  v3, GLFloatTriplet * norm)
 {
     GLfloat Qx, Qy, Qz, Px, Py, Pz, x, y, z;
 
-    Qx = v2[0] - v1[0];
-    Qy = v2[1] - v1[1];
-     Qz = v2[2] - v1[2];
-     Px = v3[0] - v1[0];
-     Py = v3[1] - v1[1];
-     Pz = v3[2] - v1[2];
+    Qx = v2.x - v1.x;
+    Qy = v2.y - v1.y;
+     Qz = v2.z - v1.z;
+     Px = v3.x - v1.x;
+     Py = v3.y - v1.y;
+     Pz = v3.z - v1.z;
 
      x = Py*Qz - Pz*Qy;
      y = Pz*Qx - Px*Qz;
      z = Px*Qy - Py*Qx;
 
-     GLfloat inv_length = 1.0f / sqrt(x*x + y*y + z*z);
-     norm[0] = x * inv_length;
-     norm[1] = y * inv_length;
-     norm[2] = z * inv_length;
+     GLfloat vec_length = sqrt(x*x + y*y + z*z);
+     GLfloat inv_length = 1.0f;
+    if(vec_length != 0)
+        inv_length = 1.0f/ vec_length;
+     norm->x = x * inv_length;
+     norm->y = y * inv_length;
+     norm->z = z * inv_length;
 }
 
 
 
 void GLModel::getNormalArray()
 {
-    for(int i = 0; i < NUM_OF_FACES - 1; i++)
+    for(int i = 0; i < m_faceCount - 1; i++)
     {
-        CalcNormals(VertexArray[2 * i], VertexArray[2 * i + 1], VertexArray[2 * i + 3], NormalArray[2 * i]);
-        CalcNormals(VertexArray[2 * i], VertexArray[2 * i + 2], VertexArray[2 * i + 3], NormalArray[2 * i + 1]);
+        CalcNormals(m_vertexArray[2 * i], m_vertexArray[2 * i + 1], m_vertexArray[2 * i + 3], &m_normalArray[2 * i]);
+        CalcNormals(m_vertexArray[2 * i], m_vertexArray[2 * i + 3], m_vertexArray[2 * i + 2], &m_normalArray[2 * i + 1]);
+        if(m_curImpl->L1 > 0)
+        {
+            CalcNormals(m_vertexArray[2 * i + 1], m_vertexArray[2 * m_faceCount + i], m_vertexArray[2 * m_faceCount + i + 1], &m_normalArray[2 * m_faceCount + 2 * i]);
+            CalcNormals(m_vertexArray[2 * i + 1], m_vertexArray[2 * m_faceCount + i + 1], m_vertexArray[2 * i + 3], &m_normalArray[2 * m_faceCount + 2 * i + 1]);
+        }
     }
-    CalcNormals(VertexArray[NUM_OF_FACES * 2 - 2], VertexArray[NUM_OF_FACES * 2 - 1], VertexArray[1], NormalArray[NUM_OF_FACES * 2 - 2]);
-    CalcNormals(VertexArray[NUM_OF_FACES * 2 - 2], VertexArray[0], VertexArray[1], NormalArray[NUM_OF_FACES * 2 - 1]);
-    int st = NUM_OF_FACES * 2;
-    for(int i = 0; i < NUM_OF_FACES - 2; i++)
+    CalcNormals(m_vertexArray[2 * m_faceCount - 2], m_vertexArray[2 * m_faceCount - 1], m_vertexArray[1], &m_normalArray[2 * m_faceCount - 2]);
+    CalcNormals(m_vertexArray[2 * m_faceCount - 2], m_vertexArray[1], m_vertexArray[0], &m_normalArray[2 * m_faceCount - 1]);
+
+    if(m_curImpl->L1 > 0)
     {
-        CalcNormals(VertexArray[0], VertexArray[2 * i + 2], VertexArray[2 * i + 4], NormalArray[st + i]);
+        CalcNormals(m_vertexArray[2 * m_faceCount - 1], m_vertexArray[3 * m_faceCount - 1], m_vertexArray[1], &m_normalArray[4 * m_faceCount - 2]);
+        CalcNormals(m_vertexArray[2 * m_faceCount - 1], m_vertexArray[2 * m_faceCount], m_vertexArray[1], &m_normalArray[4 * m_faceCount - 1]);
     }
-    st = NUM_OF_FACES * 2 + NUM_OF_FACES - 2;
-    for(int i = 0; i < NUM_OF_FACES - 2; i++)
+
+    int st = 2 * m_faceCount;
+    if(m_curImpl->L1 > 0)
     {
-        CalcNormals(VertexArray[1], VertexArray[2 * i + 3], VertexArray[2 * i + 5], NormalArray[st + i]);
+        st *= 2;
+    }
+    for(int i = 0; i < m_faceCount - 2; i++)
+    {
+        CalcNormals(m_vertexArray[0], m_vertexArray[2 * i + 2], m_vertexArray[2 * i + 4], &m_normalArray[st + i]);
+    }
+    st += m_faceCount - 2;
+    for(int i = 0; i < m_faceCount - 2; i++)
+    {
+        if(m_curImpl->L1 > 0)
+            CalcNormals(m_vertexArray[2 * m_faceCount], m_vertexArray[2 * m_faceCount + i + 1], m_vertexArray[2 * m_faceCount + i + 2], &m_normalArray[st + i]);
+        else
+            CalcNormals(m_vertexArray[1], m_vertexArray[2 * i + 3], m_vertexArray[2 * i + 5],&m_normalArray[st + i]);
     }
 }
 
 void GLModel::getColorArray()
 {
-   for (int i=0; i < NUM_OF_FACES * 2; i++)
+   for (int i=0; i < m_vertexCount; i++)
    {
-      ColorArray[i][0]=1.0f;
-      ColorArray[i][1]=0.0f;
-      ColorArray[i][2]=0.0f;
+      m_colorArray[i].x=1.0f;
+      m_colorArray[i].y=0.0f;
+      m_colorArray[i].z=0.0f;
    }
 }
 
 void GLModel::getIndexArray()
 {
-    for(int i = 0; i < NUM_OF_FACES - 1; i++)
+    for(int i = 0; i < m_faceCount - 1; i++)
     {
-        IndexArray[2 * i][0] = 2 * i;
-        IndexArray[2 * i][1] = 2 * i + 1;
-        IndexArray[2 * i][2] = 2 * i + 3;
+        m_indexArray[2 * i].x = 2 * i;
+        m_indexArray[2 * i].y = 2 * i + 1;
+        m_indexArray[2 * i].z = 2 * i + 3;
 
-        IndexArray[2 * i + 1][0] = 2 * i;
-        IndexArray[2 * i + 1][1] = 2 * i + 2;
-        IndexArray[2 * i + 1][2] = 2 * i + 3;
+        m_indexArray[2 * i + 1].x = 2 * i;
+        m_indexArray[2 * i + 1].y = 2 * i + 3;
+        m_indexArray[2 * i + 1].z = 2 * i + 2;
+
+        if(m_curImpl->L1 > 0)
+        {
+            m_indexArray[2 * m_faceCount + 2 * i].x = 2 * i + 1;
+            m_indexArray[2 * m_faceCount + 2 * i].y = 2 * m_faceCount + i;
+            m_indexArray[2 * m_faceCount + 2 * i].z = 2 * m_faceCount + i + 1;
+
+            m_indexArray[2 * m_faceCount + 2 * i + 1].x = 2 * i + 1;
+            m_indexArray[2 * m_faceCount + 2 * i + 1].y = 2 * m_faceCount + i + 1;
+            m_indexArray[2 * m_faceCount + 2 * i + 1].z = 2 * i + 3;
+        }
+
     }
 
-   IndexArray[NUM_OF_FACES * 2 - 2][0] = NUM_OF_FACES * 2 - 2;
-   IndexArray[NUM_OF_FACES * 2 - 2][1] = NUM_OF_FACES * 2 - 1;
-   IndexArray[NUM_OF_FACES * 2 - 2][2] = 1;
+   m_indexArray[m_faceCount * 2 - 2].x = m_faceCount * 2 - 2;
+   m_indexArray[m_faceCount * 2 - 2].y = m_faceCount * 2 - 1;
+   m_indexArray[m_faceCount * 2 - 2].z = 1;
 
-   IndexArray[NUM_OF_FACES * 2 - 1][0] = NUM_OF_FACES * 2 - 2;
-   IndexArray[NUM_OF_FACES * 2 - 1][1] = 0;
-   IndexArray[NUM_OF_FACES * 2 - 1][2] = 1;
+   m_indexArray[m_faceCount * 2 - 1].x = m_faceCount * 2 - 2;
+   m_indexArray[m_faceCount * 2 - 1].y = 1;
+   m_indexArray[m_faceCount * 2 - 1].z = 0;
 
+   if(m_curImpl->L1 > 0)
+   {
+       m_indexArray[m_faceCount * 4 - 2].x = 2 * m_faceCount - 1;
+       m_indexArray[m_faceCount * 4 - 2].y = 3 * m_faceCount - 1;
+       m_indexArray[m_faceCount * 4 - 2].z = 2 * m_faceCount;
+
+       m_indexArray[m_faceCount * 4 - 1].x = 2 * m_faceCount - 1;
+       m_indexArray[m_faceCount * 4 - 1].y = 2 * m_faceCount;
+       m_indexArray[m_faceCount * 4 - 1].z = 1;
+   }
+
+
+   int st = 2 * m_faceCount;
+   if(m_curImpl->L1 > 0)
+   {
+       st *= 2;
+   }
    //верхняя грань
-   int st = NUM_OF_FACES * 2;
-   for(int i = 0; i < NUM_OF_FACES - 2; i++)
+   for(int i = 0; i < m_faceCount - 2; i++)
    {
-       IndexArray[st + i][0] = 0;
-       IndexArray[st + i][1] = i * 2 + 2;
-       IndexArray[st + i][2] = i * 2 + 4;
+       m_indexArray[st + i].x = 0;
+       m_indexArray[st + i].y = i * 2 + 2;
+       m_indexArray[st + i].z = i * 2 + 4;
    }
-   st = NUM_OF_FACES * 2 + NUM_OF_FACES - 2;
-   for(int i = 0; i < NUM_OF_FACES - 2; i++)
+   st += m_faceCount - 2;
+   for(int i = 0; i < m_faceCount - 2; i++)
    {
-        IndexArray[st + i][0] = 1;
-        IndexArray[st + i][1] = i * 2 + 3;
-        IndexArray[st + i][2] = i * 2 + 5;
+       if(m_curImpl->L1 > 0)
+       {
+           m_indexArray[st + i].x = 2 * m_faceCount;
+           m_indexArray[st + i].y = 2 * m_faceCount + i + 1;
+           m_indexArray[st + i].z = 2 * m_faceCount + i + 2;
+       }
+       else
+       {
+           m_indexArray[st + i].x = 1;
+           m_indexArray[st + i].y = i * 2 + 3;
+           m_indexArray[st + i].z = i * 2 + 5;
+       }
    }
+
 }
 
 void GLModel::drawFigure()
 {
-   glDrawElements(GL_TRIANGLES, (NUM_OF_TRIANGLES) * 3, GL_UNSIGNED_BYTE, IndexArray);
+    glNormalPointer(GL_FLOAT, 0, m_normalArray);
+    glVertexPointer(3, GL_FLOAT, 0, m_vertexArray);
+    glColorPointer(3, GL_FLOAT, 0, m_colorArray);
+    glDrawElements(GL_TRIANGLES, (m_trianglesCount) * 3, GL_UNSIGNED_SHORT, m_indexArray);
 }
