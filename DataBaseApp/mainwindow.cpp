@@ -329,6 +329,7 @@ void MainWindow::on_tVImplants_clicked(const QModelIndex &index)
     {
         series = reinterpret_cast<db::DbSeries *>(m_pImpTreeModel->data(index, DataRole).value<void *>());
     }
+    ui->wOpenGL->setCurrentAbutment(NULL);
     //if(series)
     //{
     m_pImpTableModel->setSeries(series);
@@ -474,7 +475,8 @@ void MainWindow::on_actionAdd_Provider_triggered()
     iadb.AddProvider("\0");
     QWidget * fWidget = focusWidget();
     if(fWidget == ui->tabVAbutments || fWidget == ui->tVAbutments)
-    {
+    {        
+        ui->wOpenGL->setCurrentAbutment(NULL);
         fillModels(Abutments);
         QModelIndex idx = m_pAbutTreeModel->index(m_pAbutTreeModel->rowCount(m_pAbutTreeModel->rootIndex()) - 1, 0, m_pAbutTreeModel->rootIndex());
         if(idx.isValid())
@@ -485,6 +487,7 @@ void MainWindow::on_actionAdd_Provider_triggered()
     }
     else
     {
+        ui->wOpenGL->setCurrentImplant(NULL);
         fillModels(Implants);
         QModelIndex idx = m_pImpTreeModel->index(m_pImpTreeModel->rowCount(m_pImpTreeModel->rootIndex()) - 1, 0, m_pImpTreeModel->rootIndex());
         if(idx.isValid())
@@ -562,6 +565,7 @@ void MainWindow::on_actionAdd_Series_triggered()
         DbProvider * provider = reinterpret_cast<DbProvider *>(m_pAbutTreeModel->data(provIdx, DataRole).value<void *>());
         if(!provider)
             return;
+        ui->wOpenGL->setCurrentAbutment(NULL);
         provider->AddSeries("\0");
         fillModels(Abutments);
         provIdx = m_pAbutTreeModel->index(row, 0, m_pAbutTreeModel->rootIndex());
@@ -582,6 +586,7 @@ void MainWindow::on_actionAdd_Series_triggered()
         DbProvider * provider = reinterpret_cast<DbProvider *>(m_pImpTreeModel->data(provIdx, DataRole).value<void *>());
          if(!provider)
             return;
+        ui->wOpenGL->setCurrentImplant(NULL);
         provider->AddSeries("\0");
         fillModels(Implants);
         provIdx = m_pImpTreeModel->index(row, 0, m_pImpTreeModel->rootIndex());
@@ -716,6 +721,8 @@ void MainWindow::on_actionRemove_Note_triggered()
                  DbProvider * provider = reinterpret_cast<DbProvider*>(m_pImpTreeModel->data(idx, DataRole).value<void*>());
                  if(provider)
                      iadb.RemoveProvider(*provider);
+                 ui->wOpenGL->setCurrentAbutment(NULL);
+                 ui->wOpenGL->setCurrentImplant(NULL);
                  fillModels(Implants);
                  fillModels(Abutments);
                  ui->tVImplants->expand(m_pImpTreeModel->rootIndex());
@@ -734,6 +741,8 @@ void MainWindow::on_actionRemove_Note_triggered()
                     return;
                 DbProvider & provider = series->GetProvider();
                 provider.RemoveSeries(*series);
+                ui->wOpenGL->setCurrentAbutment(NULL);
+                ui->wOpenGL->setCurrentImplant(NULL);
                 fillModels(Implants);
                 fillModels(Abutments);
                 parentIndex = m_pImpTreeModel->index(row, 0, m_pImpTreeModel->rootIndex());
@@ -762,6 +771,8 @@ void MainWindow::on_actionRemove_Note_triggered()
                  DbProvider * provider = reinterpret_cast<DbProvider*>(m_pAbutTreeModel->data(idx, DataRole).value<void*>());
                  if(provider)
                      iadb.RemoveProvider(*provider);
+                 ui->wOpenGL->setCurrentAbutment(NULL);
+                 ui->wOpenGL->setCurrentImplant(NULL);
                  fillModels(Implants);
                  fillModels(Abutments);
                  ui->tVAbutments->expand(m_pAbutTreeModel->rootIndex());
@@ -856,6 +867,8 @@ void MainWindow::on_actionLoad_triggered()
     if(!fileName.isEmpty() && QMessageBox::question(this, tr("Save data base"), tr("Do you want to save the current data base?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
         iadb.SaveXml_All(fileName.toLocal8Bit().data());
     fileName = name;
+    ui->wOpenGL->setCurrentAbutment(NULL);
+    ui->wOpenGL->setCurrentImplant(NULL);
     iadb.LoadXml_All(fileName.toLocal8Bit().data());
     fillModels(Implants);
     fillModels(Abutments);

@@ -46,23 +46,36 @@ private:
 
       void drawAxis();
 
-      void getVertexArray();
-      void getNormalArray();
-      void getColorArray();
-      void getIndexArray();
-      void drawFigure();
+      void getImplVertexArray();
+      void getImplNormalArray();
+      void getImplColorArray();
+      void getImplIndexArray();
+      void drawImplant();
+
+      void getAbutVertexArray();
+      void getAbutNormalArray();
+      void getAbutColorArray();
+      void getAbutIndexArray();
+      void drawAbutment();
 
       db::DbImplant * m_curImpl;
       db::DbAbutment * m_curAbut;
 
       int m_faceCount;
-      int m_vertexCount;
-      int m_trianglesCount;
+      int m_implVertexCount;
+      int m_implTrianglesCount;
+      int m_abutVertexCount;
+      int m_abutTrianglesCount;
 
-      GLFloatTriplet *  m_vertexArray;
-      GLFloatTriplet *  m_normalArray;
-      GLFloatTriplet *  m_colorArray;
-      GLUShortTriplet * m_indexArray;
+      GLFloatTriplet *  m_implVertexArray;
+      GLFloatTriplet *  m_implNormalArray;
+      GLFloatTriplet *  m_implColorArray;
+      GLUShortTriplet * m_implIndexArray;
+
+      GLFloatTriplet *  m_abutVertexArray;
+      GLFloatTriplet *  m_abutNormalArray;
+      GLFloatTriplet *  m_abutColorArray;
+      GLUShortTriplet * m_abutIndexArray;
 
 
    protected:
