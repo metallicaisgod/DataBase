@@ -251,7 +251,7 @@ namespace db
 			return m_Series;
 		}
 		template <typename predicate>
-		enumerator<t_SeriesList::iterator, typename predicate> GetSeriesEnumerator(predicate filter=db::no_filter<db::DbSeries*>())
+        enumerator<t_SeriesList::iterator, predicate> GetSeriesEnumerator(predicate filter=db::no_filter<db::DbSeries*>())
 		{
 			return enumerator<t_SeriesList::iterator, predicate>(m_Series.begin(), m_Series.end(), filter);
 		}
@@ -312,7 +312,7 @@ namespace db
 		}
 
 		template <typename predicate>
-		enumerator<t_ProvidersList::iterator, typename predicate> GetProvidersEnumerator(predicate filter = predicate())
+        enumerator<t_ProvidersList::iterator, predicate> GetProvidersEnumerator(predicate filter = predicate())
 		{
 			return enumerator<t_ProvidersList::iterator, predicate>(m_Providers.begin(), m_Providers.end(), filter);
 		}
@@ -326,7 +326,7 @@ namespace db
 	public:
 
 		template <typename predicate, typename comparer>
-		enumerator<t_ImplantList::iterator, typename predicate>* GetImplantsEnumerator(comparer compare, predicate filter=db::no_filter<db::DbImplant*>())
+        enumerator<t_ImplantList::iterator, predicate>* GetImplantsEnumerator(comparer compare, predicate filter=db::no_filter<db::DbImplant*>())
 		{
 			t_ImplantList *all_ptr = new t_ImplantList;
 			t_ProvidersList::iterator prov_iter = m_Providers.begin();
@@ -343,11 +343,11 @@ namespace db
 			}
 
 			std::sort(all_ptr->begin(), all_ptr->end(), compare);
-			return new enumerator_ref2ptr<t_ImplantList, typename predicate>(all_ptr, filter);
+            return new enumerator_ref2ptr<t_ImplantList, predicate>(all_ptr, filter);
 		}
 
 		template <typename predicate, typename comparer>
-		enumerator<t_AbutmentList::iterator, typename predicate>*  GetAbutmentsEnumerator(comparer compare, predicate filter=db::no_filter<db::DbAbutment*>())
+        enumerator<t_AbutmentList::iterator, predicate>*  GetAbutmentsEnumerator(comparer compare, predicate filter=db::no_filter<db::DbAbutment*>())
 		{
 			t_AbutmentList *all_ptr = new t_AbutmentList;
 			t_ProvidersList::iterator prov_iter = m_Providers.begin();

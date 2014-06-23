@@ -433,14 +433,14 @@ bool IADataBase::ImportFromCSV(char* file_name)
     //FILE *f_lst = NULL;
     QFile f_lst(file_name);
 	// get CSV files path
-    QString strPath(file_name), strFileName(file_name);
-    int pos = strPath.lastIndexOf('\\');
-    strPath = strPath.left(pos+1);
+    QString strPath, strFileName(file_name);
+    QFileInfo fileInfo(strFileName);
+    strPath = fileInfo.absolutePath();
 	
     // check if input file is csv
     strFileName = strFileName.toLower();
     //std::transform(strFileName.begin(), strFileName.end(), strFileName.begin(), ::tolower);
-    if(strFileName.lastIndexOf(".csv")==(strFileName.length()-4))
+    if(fileInfo.suffix() == "csv")
 		bList=false;
 
 	// open manufacturers list file
@@ -467,6 +467,9 @@ bool IADataBase::ImportFromCSV(char* file_name)
 		
 		// open manufacturer CSV file 
         QFile f(strPath1);
+        QFileInfo fi(strPath1);
+        if(fi.suffix() != "csv")
+            return false;
 
         //FILE *f = fopen(strPath1.c_str(), "rt");
         if(f.open(QFile::ReadOnly | QFile::Text))

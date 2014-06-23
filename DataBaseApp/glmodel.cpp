@@ -298,21 +298,28 @@ void GLModel::drawAxis()
       glVertex3f( 0.0f,  0.0f,  0.0f);
       glVertex3f(0.15f,  0.0f,  0.0f);
    glEnd();
+
+   glDisable(GL_DEPTH_TEST);
    renderText(0.17f,  0.0f,  0.0f, "X");
+    glEnable(GL_DEPTH_TEST);
 
     glColor4f(0.00f, 1.00f, 0.00f, 1.0f);
    glBegin(GL_LINES);
       glVertex3f( 0.0f, 0.0f,  0.0f);
       glVertex3f( 0.0f, 0.15f,  0.0f);
    glEnd();
+   glDisable(GL_DEPTH_TEST);
    renderText( 0.0f,  0.17f,  0.0f, "Y");
+    glEnable(GL_DEPTH_TEST);
 
    glColor4f(1.00f, 0.00f, 1.00f, 1.0f);
    glBegin(GL_LINES);
       glVertex3f( 0.0f, 0.0f,  0.0f);
       glVertex3f( 0.0f, 0.0f,  0.15f);
    glEnd();
+   glDisable(GL_DEPTH_TEST);
    renderText( 0.0f,  0.0f,  0.17f, "Z");
+   glEnable(GL_DEPTH_TEST);
 }
 
 void GLModel::getImplVertexArray()

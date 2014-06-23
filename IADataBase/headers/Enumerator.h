@@ -119,13 +119,13 @@ namespace db
 	//	t_CollPtr m_collection;
 	//};
 
-	template<typename collection, typename predicat=no_filter<typename collection::iterator::value_type> >
-	class enumerator_ref2ptr : public enumerator<typename collection::iterator, predicat>
-	{
-	public:
-		enumerator_ref2ptr(collection *collection, predicat pred) :
-			enumerator<collection::iterator, predicat>(collection->begin(), collection->end(), pred),
-			m_collection(collection)
+    template<typename collection, typename predicat=no_filter<typename collection::iterator::value_type> >
+    class enumerator_ref2ptr : public enumerator<typename collection::iterator, predicat>
+    {
+    public:
+        enumerator_ref2ptr(collection *collect, predicat pred) :
+            enumerator<typename collection::iterator, predicat>(collect->begin(), collect->end(), pred),
+            m_collection(collect)
 		  {
 		  }
 		virtual ~enumerator_ref2ptr()

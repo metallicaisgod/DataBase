@@ -286,7 +286,7 @@ namespace db
 			return m_Series;
 		}
 		template <typename predicate>
-		enumerator<t_GuideSeriesList::iterator, typename predicate> GetSeriesEnumerator(predicate filter=db::no_filter<db::DbGuideSeries*>())
+        enumerator<t_GuideSeriesList::iterator, predicate> GetSeriesEnumerator(predicate filter=db::no_filter<db::DbGuideSeries*>())
 		{
 			return enumerator<t_GuideSeriesList::iterator, predicate>(m_Series.begin(), m_Series.end(), filter);
 		}
@@ -326,7 +326,7 @@ namespace db
 		}
 
 		template <typename predicate>
-		enumerator<t_GuideProvidersList::iterator, typename predicate> GetProvidersEnumerator(predicate filter = predicate())
+        enumerator<t_GuideProvidersList::iterator, predicate> GetProvidersEnumerator(predicate filter = predicate())
 		{
 			return enumerator<t_GuideProvidersList::iterator, predicate>(m_Providers.begin(), m_Providers.end(), filter);
 		}
@@ -336,7 +336,7 @@ namespace db
 
 	public:
 		template <typename predicate, typename comparer>
-		enumerator<t_ScrewList::iterator, typename predicate>* GetScrewEnumerator(comparer compare, predicate filter=db::no_filter<db::DbScrew*>())
+        enumerator<t_ScrewList::iterator, predicate>* GetScrewEnumerator(comparer compare, predicate filter=db::no_filter<db::DbScrew*>())
 		{
 			t_ScrewList *all_ptr = new t_ScrewList;
 			t_GuideProvidersList::iterator prov_iter = m_Providers.begin();
@@ -353,11 +353,11 @@ namespace db
 			}
 
 			std::sort(all_ptr->begin(), all_ptr->end(), compare);
-			return new enumerator_ref2ptr<t_ScrewList, typename predicate>(all_ptr, filter);
+            return new enumerator_ref2ptr<t_ScrewList, predicate>(all_ptr, filter);
 		}
 
 		template <typename predicate, typename comparer>
-		enumerator<t_CutterList::iterator, typename predicate>* GetCutterEnumerator(comparer compare, predicate filter=db::no_filter<db::DbCutter*>())
+        enumerator<t_CutterList::iterator, predicate>* GetCutterEnumerator(comparer compare, predicate filter=db::no_filter<db::DbCutter*>())
 		{
 			t_CutterList *all_ptr = new t_CutterList;
 			t_GuideProvidersList::iterator prov_iter = m_Providers.begin();
@@ -374,11 +374,11 @@ namespace db
 			}
 
 			std::sort(all_ptr->begin(), all_ptr->end(), compare);
-			return new enumerator_ref2ptr<t_CutterList, typename predicate>(all_ptr, filter);
+            return new enumerator_ref2ptr<t_CutterList, predicate>(all_ptr, filter);
 		}
 
 		template <typename predicate, typename comparer>
-		enumerator<t_SleeveList::iterator, typename predicate>*  GetSleeveEnumerator(comparer compare, predicate filter=db::no_filter<db::DbSleeve*>())
+        enumerator<t_SleeveList::iterator, predicate>*  GetSleeveEnumerator(comparer compare, predicate filter=db::no_filter<db::DbSleeve*>())
 		{
 			t_SleeveList *all_ptr = new t_SleeveList;
 			t_GuideProvidersList::iterator prov_iter = m_Providers.begin();
@@ -395,7 +395,7 @@ namespace db
 			}
 
 			std::sort(all_ptr->begin(), all_ptr->end(), compare);
-			return new enumerator_ref2ptr<t_SleeveList, typename predicate>(all_ptr, filter);
+            return new enumerator_ref2ptr<t_SleeveList, predicate>(all_ptr, filter);
 		}
 
 

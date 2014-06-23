@@ -311,7 +311,8 @@ void TreeModel::setupModelData(QList<db::DbProvider*> providers, TreeItem *paren
 
 void TreeModel::Update()
 {
-    reset();
+    beginResetModel ();
+    endResetModel ();
     //currentIndex()
 }
 

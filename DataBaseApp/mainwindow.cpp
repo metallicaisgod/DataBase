@@ -116,15 +116,15 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     if(fileName.isEmpty())
     {
-        QMessageBox::critical(this, "Load database error!", "Load database error!");
+        QMessageBox::critical(this, "Load database error!", "No path to the database file!");
         return;
     }
 
-    //fileName = "..\\DataBase\\implants_db.xml";
-    //iadb.LoadXml_All(fileName.toLocal8Bit().data());
-    iadb.ImportFromCSV("d:\\test.csv_lst");
-    fillModels(Implants);
-    fillModels(Abutments);
+    if(loadDataBase())
+    {
+        fillModels(Implants);
+        fillModels(Abutments);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -177,6 +177,26 @@ void MainWindow::showEvent(QShowEvent * ev)
 
 void MainWindow::closeEvent(QCloseEvent * ev)
 {
+    if(!m_CancelClicked && !m_OKClicked && (m_isXMLLoaded || m_isCSVLoaded))
+    {
+        QMessageBox::StandardButton but = QMessageBox::question(this, tr("Save data base"), tr("Save the database before exiting?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
+        if(but == QMessageBox::Yes)
+        {
+            if(m_isXMLLoaded)
+            {
+                iadb.SaveXml_All(fileName.toLocal8Bit().data());
+            }
+            else if(m_isCSVLoaded)
+            {
+                iadb.ExportToCSV(fileName.toLocal8Bit().data());
+            }
+        }
+        else if(but == QMessageBox::Cancel)
+        {
+            ev->ignore();
+            return;
+        }
+    }
     if(ui->wOpenGL->isVisible())
     {
         QRect rect = geometry();
@@ -861,21 +881,64 @@ void MainWindow::on_actionLoad_triggered()
         QFileInfo fi(fileName);
         dir = fi.absolutePath();
     }
-    QString name = QFileDialog::getOpenFileName(this, tr("Load Data Base"), dir, tr("Data Base (*.xml)"));
+    QString name = QFileDialog::getOpenFileName(this, tr("Load Data Base"), dir, tr("Data Base (*.xml *.csv *.csv_lst)"));
     if(name.isEmpty() || name == fileName)
         return;
-    if(!fileName.isEmpty() && QMessageBox::question(this, tr("Save data base"), tr("Do you want to save the current data base?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
-        iadb.SaveXml_All(fileName.toLocal8Bit().data());
+    if(!fileName.isEmpty() && (m_isXMLLoaded || m_isCSVLoaded) && QMessageBox::question(this, tr("Save data base"), tr("Do you want to save the current data base?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+    {
+        if(m_isXMLLoaded)
+        {
+            iadb.SaveXml_All(fileName.toLocal8Bit().data());
+        }
+        else if(m_isCSVLoaded)
+        {
+            iadb.ExportToCSV(fileName.toLocal8Bit().data());
+        }
+    }
     fileName = name;
     ui->wOpenGL->setCurrentAbutment(NULL);
     ui->wOpenGL->setCurrentImplant(NULL);
-    iadb.LoadXml_All(fileName.toLocal8Bit().data());
-    fillModels(Implants);
-    fillModels(Abutments);
+    if(loadDataBase())
+    {
+        fillModels(Implants);
+        fillModels(Abutments);
+    }
 }
 
 void MainWindow::on_pBOK_clicked()
 {
-    iadb.SaveXml_All(fileName.toLocal8Bit().data());
+    if(m_isXMLLoaded)
+    {
+        iadb.SaveXml_All(fileName.toLocal8Bit().data());
+    }
+    else if(m_isCSVLoaded)
+    {
+        iadb.ExportToCSV(fileName.toLocal8Bit().data());
+    }
+    m_OKClicked = true;
+    close();
+}
+
+bool MainWindow::loadDataBase()
+{
+    m_isCSVLoaded = true;
+    m_isXMLLoaded = false;
+    if(!iadb.ImportFromCSV(fileName.toLocal8Bit().data()))
+    {
+        m_isCSVLoaded = false;
+        m_isXMLLoaded = true;
+        if(!iadb.LoadXml_All(fileName.toLocal8Bit().data()))
+        {
+            m_isXMLLoaded = false;
+            QMessageBox::critical(this, "Load database error!", "Wrong file!");
+            return false;
+        }
+    }
+    return true;
+}
+
+void MainWindow::on_pBCancel_clicked()
+{
+    m_CancelClicked = true;
     close();
 }

@@ -21,9 +21,10 @@ public:
     Qt::ItemFlags flags ( const QModelIndex & index ) const;
     void setSeries(db::DbSeries * series)
     {
+        beginResetModel ();
         m_pSeries = series;
         set = (bool)m_pSeries;
-        reset();
+        endResetModel ();
     }
     db::DbSeries * series()
     {
@@ -60,7 +61,8 @@ signals:
 public slots:
     void Update()
     {
-        reset();
+        beginResetModel ();
+        endResetModel ();
     }
 
 private:

@@ -28,6 +28,7 @@ protected:
     void fillModels(ModelType);
     void closeEvent(QCloseEvent * ev);
     void showEvent(QShowEvent * ev);
+    bool loadDataBase();
 
 protected slots:
 //    void moveSplitter(int pos, int index);
@@ -73,6 +74,8 @@ private slots:
 
     void on_pBOK_clicked();
 
+    void on_pBCancel_clicked();
+
 private:
     Ui::MainWindow *ui;
     db::IADataBase iadb;
@@ -87,6 +90,10 @@ private:
     AbutmentDialog * m_pAbutmentDialog;
     QString fileName;
     int m_openGLwidth;
+    bool m_isCSVLoaded;
+    bool m_isXMLLoaded;
+    bool m_OKClicked;
+    bool m_CancelClicked;
 //    bool m_bLeftSplitterCatched;
 //    bool m_bRightSplitterCatched;
 };
