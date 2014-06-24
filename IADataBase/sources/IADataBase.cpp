@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#pragma warning( disable : 4267 ) 
+//#pragma warning( disable : 4267 )
 
 #include "IADataBase.h"
 #include "ext_resources.h"
@@ -452,7 +452,7 @@ bool IADataBase::ImportFromCSV(char* file_name)
 	{
 		// read manufacturer files from list
         QString strPath1 = strPath;
-		char szFirmFile[1000]="", szDum[255]="";
+        char szFirmFile[1000]="";
 		if(bList)
 		{
             f_lst.readLine(szFirmFile, 1000);
@@ -485,7 +485,7 @@ bool IADataBase::ImportFromCSV(char* file_name)
 			do
 			{
 				// Read data line by line
-				char szStr[1000]="", szDummy[255]="";
+                char szStr[1000]="";
                 //fscanf(f, "%[^\n]s", szStr);
                 //fscanf(f, "%[\n]s", szDummy);
                 f.readLine(szStr, 1000);
@@ -504,7 +504,7 @@ bool IADataBase::ImportFromCSV(char* file_name)
 				};
 				const int items_num = 30;
                 QString str_items[items_num];
-				int curPos= 0;
+                //int curPos= 0;
 				int posLeft=0, posRight=0;
 				for(int i=0; i<items_num; i++)
 				{
@@ -845,7 +845,7 @@ DbSeries& DbSeries::operator+=(const DbSeries& other)
 
 void DbSeries::RemoveImplant(unsigned long index)
 {
-	if (index < 0 || index >= m_Implants.size())
+    if (index >= m_Implants.size())
 		return;
 	t_ImplantList::iterator it = m_Implants.begin() + index;
 	delete *it;
@@ -864,7 +864,7 @@ void DbSeries::RemoveAbutment(const DbAbutment& data)
 
 void DbSeries::RemoveAbutment(unsigned long index)
 {
-	if (index < 0 || index >= m_Abutments.size())
+    if (index >= m_Abutments.size())
 		return;
 	t_AbutmentList::iterator it = m_Abutments.begin() + index;
 	delete *it;

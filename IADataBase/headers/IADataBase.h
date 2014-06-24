@@ -241,7 +241,7 @@ namespace db
 		virtual ~DbProvider();
 		DbProvider& operator+=(const DbProvider& other);
 
-		const size_t SeriesCount() const
+        size_t SeriesCount() const
 		{
 			return m_Series.size();
 		}
@@ -306,7 +306,7 @@ namespace db
 
 		IADataBase& operator+=(const IADataBase& extraDB);
 
-		const size_t ProvidersCount() const
+        size_t ProvidersCount() const
 		{
 			return m_Providers.size();
 		}

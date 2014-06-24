@@ -310,7 +310,7 @@ void GuideHelper::ParseDataBase(db::GuideDataBase& indb, const char* fileName, c
         indb.LoadXml(attrStr.toLocal8Bit().data());
 		return;
 	}
-    for( Provider; !Provider.isNull(); Provider=Provider.nextSiblingElement("provider"))
+    for( ; !Provider.isNull(); Provider=Provider.nextSiblingElement("provider"))
 	{
         QString strName = ParseStringValue(Provider, "name");
         db::DbGuideProvider& newProvider = indb.AddProvider(strName.toLocal8Bit().data());
@@ -321,7 +321,7 @@ void GuideHelper::ParseDataBase(db::GuideDataBase& indb, const char* fileName, c
 void GuideHelper::ParseProvider(db::DbGuideProvider& provider, const QDomElement& element, unsigned long flags)
 {
     QDomElement pSeries = element.firstChildElement("series");
-    for( pSeries; !pSeries.isNull(); pSeries=pSeries.nextSiblingElement("series"))
+    for( ; !pSeries.isNull(); pSeries=pSeries.nextSiblingElement("series"))
 	{
         QString strName = ParseStringValue(pSeries, "name");
         db::DbGuideSeries& series = provider.AddSeries(strName.toLocal8Bit().data());
@@ -338,7 +338,7 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& elem
     if (!pScrews.isNull())
 	{
         QDomElement pScrew = pScrews.firstChildElement("screw");
-        for( pScrew; !pScrew.isNull(); pScrew=pScrew.nextSiblingElement("screw"))
+        for( ; !pScrew.isNull(); pScrew=pScrew.nextSiblingElement("screw"))
 		{
 			bool editable = ParseBoolValue(pScrew, "ed");
 			if (bWithoutCondition || (condition == editable))
@@ -356,7 +356,7 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& elem
 				screwData.editable = editable;
 				ParseStringValue(pScrew, "color", screwData.defcolor, ARTIKUL_SIZE);
 
-				db::DbScrew& implant = series.AddScrew(screwData);
+                /*db::DbScrew& implant = */series.AddScrew(screwData);
 			}
 		}
 	}
@@ -364,7 +364,7 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& elem
     if (!pCutters.isNull())
 	{
         QDomElement pCutter = pCutters.firstChildElement("cutter");
-        for( pCutter; !pCutter.isNull(); pCutter=pCutter.nextSiblingElement("cutter"))
+        for( ; !pCutter.isNull(); pCutter=pCutter.nextSiblingElement("cutter"))
 		{
 			bool editable = ParseBoolValue(pCutter, "ed");
 			if (bWithoutCondition || (condition == editable))
@@ -383,7 +383,7 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& elem
 				ParseStringValue(pCutter, "article", data.artikul, ARTIKUL_SIZE);
 				data.editable = editable;
 				ParseStringValue(pCutter, "color", data.defcolor, ARTIKUL_SIZE);
-				db::DbCutter& cutter = series.AddCutter(data);
+                /*db::DbCutter& cutter = */series.AddCutter(data);
 			}
 		}
 	}
@@ -391,7 +391,7 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& elem
     if (!pSleeves.isNull())
 	{
         QDomElement pSleeve = pSleeves.firstChildElement("sleeve");
-        for( pSleeve; !pSleeve.isNull(); pSleeve=pSleeve.nextSiblingElement("sleeve"))
+        for( ; !pSleeve.isNull(); pSleeve=pSleeve.nextSiblingElement("sleeve"))
 		{
 			bool editable = ParseBoolValue(pSleeve, "ed");
 			if (bWithoutCondition || (condition == editable))
@@ -410,7 +410,7 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& elem
 				ParseSegments(data, pSleeve);
 				data.editable = editable;
 				ParseStringValue(pSleeve, "color", data.defcolor, ARTIKUL_SIZE);
-				db::DbSleeve& sleeve = series.AddSleeve(data);
+                /*db::DbSleeve& sleeve = */series.AddSleeve(data);
 			}
 		}
 	}
@@ -418,7 +418,7 @@ void GuideHelper::ParseSeries(db::DbGuideSeries& series, const QDomElement& elem
     if (!pICMap.isNull())
 	{
         QDomElement pPair = pICMap.firstChildElement("pair");
-        for( pPair; !pPair.isNull(); pPair=pPair.nextSiblingElement("pair"))
+        for( ; !pPair.isNull(); pPair=pPair.nextSiblingElement("pair"))
 		{
             QString impl_article= ParseStringValue(pPair, "impl");
             QString cutr_article= ParseStringValue(pPair, "ctr");
@@ -448,7 +448,7 @@ void GuideHelper::ParseSegments(db::ProductionBase& prodbase, const QDomElement&
         if (!pSegment.isNull())
 		{
 			prodbase.Segments.clear();
-            for( pSegment; !pSegment.isNull(); pSegment=pSegment.nextSiblingElement("segment"))
+            for( ; !pSegment.isNull(); pSegment=pSegment.nextSiblingElement("segment"))
 			{
 				db::Segment data;
 				data.D1 = ParseDoubleValue(pSegment, "D1");
@@ -472,7 +472,7 @@ void GuideHelper::ParseOldDataBase(db::GuideDataBase& indb, const QDomElement& e
         if (!pProviders.isNull())
 		{
             QDomElement pProvider = pProviders.firstChildElement("item");
-            for( pProvider; !pProvider.isNull(); pProvider=pProvider.nextSiblingElement("item"))
+            for( ; !pProvider.isNull(); pProvider=pProvider.nextSiblingElement("item"))
 			{
                 QString strName = ParseStringValue(pProvider, "name");
                 db::DbGuideProvider& newProvider = indb.AddProvider(strName.toLocal8Bit().data());
@@ -486,7 +486,7 @@ void GuideHelper::ParseOldProvider(db::DbGuideProvider& provider, const QDomElem
 {
     QDomElement pSeriesRoot = element.firstChildElement("series");
     QDomElement pSeries = pSeriesRoot.firstChildElement("item");
-    for( pSeries; !pSeries.isNull(); pSeries=pSeries.nextSiblingElement("item"))
+    for( ; !pSeries.isNull(); pSeries=pSeries.nextSiblingElement("item"))
 	{
         QString strName = ParseStringValue(pSeries, "name");
         db::DbGuideSeries& series = provider.AddSeries(strName.toLocal8Bit().data());
@@ -500,7 +500,7 @@ void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const QDomElement& e
     if (!pScrews.isNull())
 	{
         QDomElement pScrew = pScrews.firstChildElement("item");
-        for( pScrew; !pScrew.isNull(); pScrew=pScrew.nextSiblingElement("item"))
+        for( ; !pScrew.isNull(); pScrew=pScrew.nextSiblingElement("item"))
 		{
 			db::ScrewData screwData;
 			ParseStringValue(pScrew, "name", screwData.name, NAME_SIZE);
@@ -514,14 +514,14 @@ void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const QDomElement& e
 			ParseStringValue(pScrew, "article", screwData.artikul, ARTIKUL_SIZE);
 			screwData.editable = ParseBoolValue(pScrew, "ed");
 
-			db::DbScrew& implant = series.AddScrew(screwData);
+            /*db::DbScrew& implant = */series.AddScrew(screwData);
 		}
 	}
     QDomElement pCutters = element.firstChildElement("cutters");
     if (!pCutters.isNull())
 	{
         QDomElement pCutter = pCutters.firstChildElement("item");
-        for( pCutter; !pCutter.isNull(); pCutter=pCutter.nextSiblingElement("item"))
+        for( ; !pCutter.isNull(); pCutter=pCutter.nextSiblingElement("item"))
 		{
 			db::CutterData data;
 			ParseStringValue(pCutter, "name", data.name, NAME_SIZE);
@@ -535,14 +535,14 @@ void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const QDomElement& e
 			ParseStringValue(pCutter, "model", data.szModelName, _MAX_PATH);
 			ParseStringValue(pCutter, "article", data.artikul, ARTIKUL_SIZE);
 			data.editable = ParseBoolValue(pCutter, "ed");
-			db::DbCutter& cutter = series.AddCutter(data);
+            /*db::DbCutter& cutter = */series.AddCutter(data);
 		}
 	}
     QDomElement pSleeves = element.firstChildElement("sleeves");
     if (!pSleeves.isNull())
 	{
         QDomElement pSleeve = pSleeves.firstChildElement("item");
-        for( pSleeve; !pSleeve.isNull(); pSleeve=pSleeve.nextSiblingElement("item"))
+        for( ; !pSleeve.isNull(); pSleeve=pSleeve.nextSiblingElement("item"))
 		{
 			db::SleeveData data;
 			ParseStringValue(pSleeve, "name", data.name, NAME_SIZE);
@@ -557,7 +557,7 @@ void GuideHelper::ParseOldSeries(db::DbGuideSeries& series, const QDomElement& e
 			ParseStringValue(pSleeve, "article", data.artikul, ARTIKUL_SIZE);
 			ParseOldSegments(data, pSleeve);
 			data.editable = ParseBoolValue(pSleeve, "ed");
-			db::DbSleeve& sleeve = series.AddSleeve(data);
+            /*db::DbSleeve& sleeve = */series.AddSleeve(data);
 		}
 	}
 }
@@ -571,7 +571,7 @@ void GuideHelper::ParseOldSegments(db::ProductionBase& prodbase, const QDomEleme
         if (!pSegment.isNull())
 		{
 			prodbase.Segments.clear();
-            for( pSegment; !pSegment.isNull(); pSegment=pSegment.nextSiblingElement("item"))
+            for( ; !pSegment.isNull(); pSegment=pSegment.nextSiblingElement("item"))
 			{
 				db::Segment data;
 				data.D1 = ParseDoubleValue(pSegment, "D1");

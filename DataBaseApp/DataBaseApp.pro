@@ -13,7 +13,9 @@ TEMPLATE = app
 DESTDIR = "../"
 DEFINES += _CRT_SECURE_NO_WARNINGS
 LIBS += -L"$${DESTDIR}" \
-    -lIADataBase \
+    -lIADataBase
+INCLUDEPATH += . \
+    $${_PRO_FILE_PWD_}
 
 PRECOMPILED_HEADER += stdafx.h
 

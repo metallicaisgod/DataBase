@@ -276,7 +276,7 @@ namespace db
 		virtual ~DbGuideProvider();
 		DbGuideProvider& operator+=(const DbGuideProvider& other);
 
-		const size_t SeriesCount() const
+        size_t SeriesCount() const
 		{
 			return m_Series.size();
 		}
@@ -320,7 +320,7 @@ namespace db
 
 		GuideDataBase& operator+=(const GuideDataBase& extraDB);
 
-		const size_t ProvidersCount() const
+        size_t ProvidersCount() const
 		{
 			return m_Providers.size();
 		}

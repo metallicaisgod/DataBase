@@ -29,6 +29,8 @@ GLModel::GLModel(QWidget* parent) : QGLWidget(parent)
 
 void GLModel::initializeGL()
 {
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     qglClearColor(Qt::blue);
 
     glEnable(GL_DEPTH_TEST);
@@ -99,9 +101,6 @@ void GLModel::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
     //glTranslatef(0.0f, 0.0f, 0.0f);
 
         glPushMatrix();
@@ -151,7 +150,6 @@ void GLModel::paintGL()
             }
 
         glPopMatrix();
-    }
        //draw axis
         glPushMatrix();
             glTranslatef(0.8f, -0.8f, -0.8f);
@@ -163,6 +161,7 @@ void GLModel::paintGL()
             glRotatef(zRot, 1.0f, 0.0f, 0.0f);
             drawAxis();
         glPopMatrix();
+    }
 }
 
 void GLModel::mousePressEvent(QMouseEvent* pe)
@@ -299,27 +298,21 @@ void GLModel::drawAxis()
       glVertex3f(0.15f,  0.0f,  0.0f);
    glEnd();
 
-   glDisable(GL_DEPTH_TEST);
    renderText(0.17f,  0.0f,  0.0f, "X");
-    glEnable(GL_DEPTH_TEST);
 
     glColor4f(0.00f, 1.00f, 0.00f, 1.0f);
    glBegin(GL_LINES);
       glVertex3f( 0.0f, 0.0f,  0.0f);
       glVertex3f( 0.0f, 0.15f,  0.0f);
    glEnd();
-   glDisable(GL_DEPTH_TEST);
    renderText( 0.0f,  0.17f,  0.0f, "Y");
-    glEnable(GL_DEPTH_TEST);
 
    glColor4f(1.00f, 0.00f, 1.00f, 1.0f);
    glBegin(GL_LINES);
       glVertex3f( 0.0f, 0.0f,  0.0f);
       glVertex3f( 0.0f, 0.0f,  0.15f);
    glEnd();
-   glDisable(GL_DEPTH_TEST);
    renderText( 0.0f,  0.0f,  0.17f, "Z");
-   glEnable(GL_DEPTH_TEST);
 }
 
 void GLModel::getImplVertexArray()

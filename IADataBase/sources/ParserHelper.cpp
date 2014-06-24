@@ -15,13 +15,10 @@ void ParserHelper::ParseDataBase(db::IADataBase& indb, const char* fileName, con
 	{
         QString attrStr = pProvider.attribute("ext_file");
         if(!attrStr.isEmpty())
-		{
-            QString extFileName = fileName;
-            int pathpos1 = extFileName.lastIndexOf("\\");
-            int pathpos2 = extFileName.lastIndexOf("\/");
-			pathpos1 = (pathpos1>pathpos2)?pathpos1:pathpos2;
-            extFileName.remove(pathpos1+1,-1);
-            extFileName.append( attrStr.toLocal8Bit().data());
+        {
+            QFileInfo fi(fileName);
+            QString extFileName = fi.absolutePath();
+            extFileName += attrStr;
             indb.LoadXml_2(extFileName.toLocal8Bit().data(), flags|PROVIDER_EXT_FILE);
 			continue;
 		}
@@ -84,7 +81,7 @@ void ParserHelper::ParseSeries(db::DbSeries& series, const QDomElement& element,
 				implData.editable = editable;
 				ParseStringValue(pImplant, "comp_val", implData.szCompatibility, _MAX_PATH);
 				ParseStringValue(pImplant, "color", implData.defcolor, ARTIKUL_SIZE);
-				db::DbImplant& implant = series.AddImplant(implData);
+                /*db::DbImplant& implant = */series.AddImplant(implData);
 			}
 		}
 	}
@@ -108,7 +105,7 @@ void ParserHelper::ParseSeries(db::DbSeries& series, const QDomElement& element,
 				data.editable = editable;
 				ParseStringValue(pAbutment, "comp_val", data.szCompatibility, _MAX_PATH);
 				ParseStringValue(pAbutment, "color", data.defcolor, ARTIKUL_SIZE);
-				db::DbAbutment& abutment = series.AddAbutment(data);
+                /*db::DbAbutment& abutment = */series.AddAbutment(data);
 			}
 		}
 	}
@@ -188,7 +185,7 @@ void ParserHelper::ParseOldSeries(db::DbSeries& series, const QDomElement& eleme
 			implData.Le = ParseDoubleValue(pImplant, "len-e");
 			implData.editable = ParseBoolValue(pImplant, "ed");
 
-			db::DbImplant& implant = series.AddImplant(implData);
+            /*db::DbImplant& implant = */series.AddImplant(implData);
 		}
 	}
     QDomElement pAbutments = element.firstChildElement("abutments");
@@ -206,7 +203,7 @@ void ParserHelper::ParseOldSeries(db::DbSeries& series, const QDomElement& eleme
 			ParseStringValue(pAbutment, "model-file", data.szModelName, _MAX_PATH);
 			ParseStringValue(pAbutment, "article", data.artikul, ARTIKUL_SIZE);
 			data.editable = ParseBoolValue(pAbutment, "ed");
-			db::DbAbutment& abutment = series.AddAbutment(data);
+            /*db::DbAbutment& abutment = */series.AddAbutment(data);
 		}
 	}
     QDomElement pCompSeries = element.firstChildElement("comp_ser");
@@ -245,11 +242,8 @@ QDomElement* ParserHelper::ToXml(const db::IADataBase& indb, const char* fileNam
 			//if(flags&PROVIDER_EXT_FILE)
 			{
                 QString extFileName = pProvider->m_szExtFile;
-                int pathpos1 = extFileName.lastIndexOf("\\");
-                int pathpos2 = extFileName.lastIndexOf("\/");
-				pathpos1 = (pathpos1>pathpos2)?pathpos1:pathpos2;
-                extFileName.remove(0,pathpos1+1);
-
+                QFileInfo fi(extFileName);
+                extFileName = fi.fileName();
                 elProvider.setAttribute("ext_file", extFileName.toLocal8Bit().data());
                 root->appendChild( elProvider );
 			

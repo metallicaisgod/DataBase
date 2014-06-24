@@ -85,7 +85,23 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pAbutTreeModel(NULL),
     m_pAbutTableModel(NULL)
 {
+    QGLFormat f = QGLFormat::defaultFormat();
+    f.setSampleBuffers(true);
+    QGLFormat::setDefaultFormat(f);
+    if (!QGLFormat::hasOpenGL()) {
+        QMessageBox::information(0, "OpenGL samplebuffers",
+                                 "This system does not support OpenGL.");
+        return;
+    }
+
+
     ui->setupUi(this);
+
+    if (!ui->wOpenGL->format().sampleBuffers()) {
+        QMessageBox::information(0, "OpenGL samplebuffers",
+                                 "This system does not have sample buffer support.");
+        return;
+    }
     QWidgetList list;
     list << ui->tVImplants << ui->tabVImplants << ui->tVAbutments << ui->tabVAbutments;
     ui->frame_2->setWidgets(list, 2, 2);

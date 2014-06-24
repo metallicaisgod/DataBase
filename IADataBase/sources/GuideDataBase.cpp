@@ -218,7 +218,7 @@ namespace db
 	}
 	void DbGuideSeries::RemoveScrew(unsigned long index)
 	{
-		if (index < 0 || index >= m_Screws.size())
+        if (index >= m_Screws.size())
 			return;
 		t_ScrewList::iterator it = m_Screws.begin() + index;
 		delete *it;
@@ -237,7 +237,7 @@ namespace db
 
 	void DbGuideSeries::RemoveCutter(unsigned long index)
 	{
-		if (index < 0 || index >= m_Cutters.size())
+        if (index >= m_Cutters.size())
 			return;
 		t_CutterList::iterator it = m_Cutters.begin() + index;
 		delete *it;
@@ -256,7 +256,7 @@ namespace db
 
 	void DbGuideSeries::RemoveSleeve(unsigned long index)
 	{
-		if (index < 0 || index >= m_Sleeves.size())
+        if (index >= m_Sleeves.size())
 			return;
 		t_SleeveList::iterator it = m_Sleeves.begin() + index;
 		delete *it;
