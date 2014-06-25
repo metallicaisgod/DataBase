@@ -83,7 +83,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pImpTreeModel(NULL),
     m_pImpTableModel(NULL),
     m_pAbutTreeModel(NULL),
-    m_pAbutTableModel(NULL)
+    m_pAbutTableModel(NULL),
+    iadb(NULL)
 {
     QGLFormat f = QGLFormat::defaultFormat();
     f.setSampleBuffers(true);
@@ -145,6 +146,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    if(iadb)
+    {
+        delete iadb;
+    }
     QSettings settings("IA", "Database");
     settings.setValue("fileName", fileName);
     delete ui;
@@ -200,11 +205,11 @@ void MainWindow::closeEvent(QCloseEvent * ev)
         {
             if(m_isXMLLoaded)
             {
-                iadb.SaveXml_All(fileName.toLocal8Bit().data());
+                iadb->SaveXml_All(fileName.toLocal8Bit().data());
             }
             else if(m_isCSVLoaded)
             {
-                iadb.ExportToCSV(fileName.toLocal8Bit().data());
+                iadb->ExportToCSV(fileName.toLocal8Bit().data());
             }
         }
         else if(but == QMessageBox::Cancel)
@@ -263,7 +268,7 @@ void MainWindow::fillModels(ModelType modelType)
     if(modelType == Implants)
     {
 
-        t_ProviderEnumNF prov_enum = iadb.GetProvidersEnumerator(db::no_filter<db::DbProvider*>());
+        t_ProviderEnumNF prov_enum = iadb->GetProvidersEnumerator(db::no_filter<db::DbProvider*>());
 
         while(prov_enum.MoveNext())
         {
@@ -274,7 +279,7 @@ void MainWindow::fillModels(ModelType modelType)
             }
         }
 
-    //    t_implantsEnumNFsp impl_enum = iadb.GetImplantsEnumerator(impl_length_comp<db::DbImplant>(), db::no_filter<db::DbImplant*>());
+    //    t_implantsEnumNFsp impl_enum = iadb->GetImplantsEnumerator(impl_length_comp<db::DbImplant>(), db::no_filter<db::DbImplant*>());
     //    DbImplant* pImplant = NULL;
     //    while (impl_enum->MoveNext())
     //    {
@@ -308,7 +313,7 @@ void MainWindow::fillModels(ModelType modelType)
         if(!index.isValid())
             return;
         DbImplant * implant = reinterpret_cast<DbImplant *>(m_pImpTableModel->data(index, DataRole).value<void*>());
-//        t_ProviderEnumFA prov_abut_enum = iadb.GetProvidersEnumerator(provider_filter_abutments<db::DbProvider*>());
+//        t_ProviderEnumFA prov_abut_enum = iadb->GetProvidersEnumerator(provider_filter_abutments<db::DbProvider*>());
 //        //providerList.clear();
 //        while(prov_abut_enum.MoveNext())
 //        {
@@ -318,7 +323,7 @@ void MainWindow::fillModels(ModelType modelType)
 //                providerList << provider;
 //            }
 //        }
-        t_abutmentEnumCompPtr abut_enum = iadb.GetAbutmentsEnumerator(abut_length_comp<db::DbAbutment>(), compatible_abutment<db::DbAbutment*>(implant));
+        t_abutmentEnumCompPtr abut_enum = iadb->GetAbutmentsEnumerator(abut_length_comp<db::DbAbutment>(), compatible_abutment<db::DbAbutment*>(implant));
         db::DbAbutment* pAbut = NULL;
         DbSeries * series = NULL;
         DbProvider * provider;
@@ -508,7 +513,7 @@ void MainWindow::treeAbutmentsStateChanged(QModelIndex index)
 
 void MainWindow::on_actionAdd_Provider_triggered()
 {
-    iadb.AddProvider("\0");
+    iadb->AddProvider("\0");
     QWidget * fWidget = focusWidget();
     if(fWidget == ui->tabVAbutments || fWidget == ui->tVAbutments)
     {        
@@ -756,7 +761,7 @@ void MainWindow::on_actionRemove_Note_triggered()
             {
                  DbProvider * provider = reinterpret_cast<DbProvider*>(m_pImpTreeModel->data(idx, DataRole).value<void*>());
                  if(provider)
-                     iadb.RemoveProvider(*provider);
+                     iadb->RemoveProvider(*provider);
                  ui->wOpenGL->setCurrentAbutment(NULL);
                  ui->wOpenGL->setCurrentImplant(NULL);
                  fillModels(Implants);
@@ -806,7 +811,7 @@ void MainWindow::on_actionRemove_Note_triggered()
             {
                  DbProvider * provider = reinterpret_cast<DbProvider*>(m_pAbutTreeModel->data(idx, DataRole).value<void*>());
                  if(provider)
-                     iadb.RemoveProvider(*provider);
+                     iadb->RemoveProvider(*provider);
                  ui->wOpenGL->setCurrentAbutment(NULL);
                  ui->wOpenGL->setCurrentImplant(NULL);
                  fillModels(Implants);
@@ -904,11 +909,11 @@ void MainWindow::on_actionLoad_triggered()
     {
         if(m_isXMLLoaded)
         {
-            iadb.SaveXml_All(fileName.toLocal8Bit().data());
+            iadb->SaveXml_All(fileName.toLocal8Bit().data());
         }
         else if(m_isCSVLoaded)
         {
-            iadb.ExportToCSV(fileName.toLocal8Bit().data());
+            iadb->ExportToCSV(fileName.toLocal8Bit().data());
         }
     }
     fileName = name;
@@ -925,11 +930,11 @@ void MainWindow::on_pBOK_clicked()
 {
     if(m_isXMLLoaded)
     {
-        iadb.SaveXml_All(fileName.toLocal8Bit().data());
+        iadb->SaveXml_All(fileName.toLocal8Bit().data());
     }
     else if(m_isCSVLoaded)
     {
-        iadb.ExportToCSV(fileName.toLocal8Bit().data());
+        iadb->ExportToCSV(fileName.toLocal8Bit().data());
     }
     m_OKClicked = true;
     close();
@@ -939,11 +944,37 @@ bool MainWindow::loadDataBase()
 {
     m_isCSVLoaded = true;
     m_isXMLLoaded = false;
-    if(!iadb.ImportFromCSV(fileName.toLocal8Bit().data()))
+    if(iadb)
+    {
+        delete iadb;
+    }
+
+    if(m_pImpTreeModel)
+    {
+        delete m_pImpTreeModel;
+        m_pImpTreeModel = NULL;
+    }
+    if(m_pImpTableModel)
+    {
+        delete m_pImpTableModel;
+        m_pImpTableModel = NULL;
+    }
+    if(m_pAbutTreeModel)
+    {
+        delete m_pAbutTreeModel;
+        m_pAbutTreeModel = NULL;
+    }
+    if(m_pAbutTableModel)
+    {
+        delete m_pAbutTableModel;
+        m_pAbutTableModel = NULL;
+    }
+    iadb = new IADataBase();
+    if(!iadb->ImportFromCSV(fileName.toLocal8Bit().data()))
     {
         m_isCSVLoaded = false;
         m_isXMLLoaded = true;
-        if(!iadb.LoadXml_All(fileName.toLocal8Bit().data()))
+        if(!iadb->LoadXml_All(fileName.toLocal8Bit().data()))
         {
             m_isXMLLoaded = false;
             QMessageBox::critical(this, "Load database error!", "Wrong file!");

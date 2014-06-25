@@ -90,7 +90,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 3.4</Series>
                 <Series Producer="3i">Gingihue ® Post - 3.4</Series>
@@ -185,7 +185,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 4.1</Series>
                 <Series Producer="3i">Gingihue ® Post - 4.1</Series>
@@ -267,7 +267,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 5.0</Series>
                 <Series Producer="3i">Gingihue ® Post - 5.0</Series>
@@ -349,7 +349,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 6.0</Series>
                 <Series Producer="3i">Gingihue ® Post - 6.0</Series>
@@ -431,7 +431,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 3.4</Series>
                 <Series Producer="3i">Gingihue ® Post - 3.4</Series>
@@ -512,7 +512,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 4.1</Series>
                 <Series Producer="3i">Gingihue ® Post - 4.1</Series>
@@ -594,7 +594,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 5.0</Series>
                 <Series Producer="3i">Gingihue ® Post - 5.0</Series>
@@ -676,7 +676,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="3i">Conical Abutments - 6.0</Series>
                 <Series Producer="3i">Gingihue ® Post - 6.0</Series>
@@ -686,7 +686,7 @@
         </series>
         <series>
             <name>Gingihue ® Post - 3.4</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>3.8x2.0</name>
@@ -745,7 +745,7 @@
         </series>
         <series>
             <name>Gingihue ® Post - 4.1</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>5.0x2.0</name>
@@ -901,7 +901,7 @@
         </series>
         <series>
             <name>Gingihue ® Post - 5.0</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>5.0x2.0</name>
@@ -1057,7 +1057,7 @@
         </series>
         <series>
             <name>Gingihue ® Post - 6.0</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>6.0x2.0</name>
@@ -1165,7 +1165,7 @@
         </series>
         <series>
             <name>Provide ® - 4.1</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>4.8x1.0x4.0</name>
@@ -1273,7 +1273,7 @@
         </series>
         <series>
             <name>Provide ® - 5.0</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>6.5x1.0x4.0</name>
@@ -1381,7 +1381,7 @@
         </series>
         <series>
             <name>Provide ® - 6.0</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>6.5x1.0x4.0</name>
@@ -1489,7 +1489,7 @@
         </series>
         <series>
             <name>Conical Abutments - 3.4</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>3.4x1.0</name>
@@ -1548,7 +1548,7 @@
         </series>
         <series>
             <name>Conical Abutments - 4.1</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>5.0x1.0</name>
@@ -1668,7 +1668,7 @@
         </series>
         <series>
             <name>Conical Abutments - 5.0</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>5.0x1.0</name>
@@ -1788,7 +1788,7 @@
         </series>
         <series>
             <name>Conical Abutments - 6.0</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>6.0x1.0</name>
@@ -2201,7 +2201,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="AlphaBio">Internal Hex</Series>
             </comp_ser>
@@ -2490,7 +2490,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="AlphaBio">Internal Hex</Series>
             </comp_ser>
@@ -2849,7 +2849,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="AlphaBio">Internal Hex</Series>
             </comp_ser>
@@ -3138,12 +3138,12 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Internal Hex</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>Straight 2.5x7.5</name>
@@ -4146,14 +4146,14 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="AlphaBio">External Hex</Series>
             </comp_ser>
         </series>
         <series>
             <name>External Hex</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>Straight 2.7x8.5</name>
@@ -4317,8 +4317,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Anthofit ® OI 4,0</name>
@@ -4450,8 +4450,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Anthofit ® OI 5,0</name>
@@ -4555,8 +4555,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Anthofit ® HE R</name>
@@ -4772,8 +4772,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Anthofit ® HE L</name>
@@ -4835,8 +4835,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Ossfit ® 3,5/4,2</name>
@@ -5122,8 +5122,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Ossfit ® 5,0</name>
@@ -5241,8 +5241,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>axiom</name>
@@ -5528,7 +5528,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -5911,7 +5911,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Astra Tech">OsseoSpeed 3.5 S</Series>
             </comp_ser>
@@ -6267,7 +6267,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Astra Tech">OsseoSpeed 5.0 S</Series>
                 <Series Producer="Astra Tech">OsseoSpeed 4.5</Series>
@@ -6361,7 +6361,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Astra Tech">OsseoSpeed 5.0</Series>
                 <Series Producer="Astra Tech">OsseoSpeed 4.5</Series>
@@ -6598,7 +6598,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="BEGO">SEMADOS ® S 3,25</Series>
             </comp_ser>
@@ -6767,7 +6767,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>SEMADOS ® S 5,5</name>
@@ -6867,7 +6867,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -7194,7 +7194,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>3.0mm well</name>
@@ -7660,7 +7660,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -7895,7 +7895,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>O4.0mm RBT/HA</name>
@@ -8183,7 +8183,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>O5.0mm RBT/HA</name>
@@ -8471,7 +8471,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>O6.0mm RBT/HA</name>
@@ -8651,7 +8651,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Tapered Internal</name>
@@ -8853,8 +8853,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Internal</name>
@@ -9084,8 +9084,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -9388,7 +9388,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>B.I.S.</name>
@@ -9674,8 +9674,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Smilea</name>
@@ -9891,8 +9891,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Smilea Conic</name>
@@ -10108,8 +10108,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>I-Ball</name>
@@ -10199,8 +10199,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -10741,7 +10741,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Single-Step</name>
@@ -10859,7 +10859,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Conmet">Standard</Series>
                 <Series Producer="Conmet">Estetic</Series>
@@ -11264,8 +11264,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -11498,8 +11498,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>HC(ATI)</name>
@@ -11645,8 +11645,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>KOS</name>
@@ -11876,8 +11876,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>KOS A</name>
@@ -11995,8 +11995,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>KOS E</name>
@@ -12072,8 +12072,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>KOS EB</name>
@@ -12135,8 +12135,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>XING</name>
@@ -12324,8 +12324,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -12684,7 +12684,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="FRIADENT">EstheticBase</Series>
             </comp_ser>
@@ -12957,11 +12957,11 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>EstheticBase</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>Straight D 3.0/GH 1</name>
@@ -13732,7 +13732,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -14021,7 +14021,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Seven</name>
@@ -14251,7 +14251,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -14470,8 +14470,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>TITAMAX Cortical CM</name>
@@ -14841,7 +14841,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Neodent">CM Mini Conical Abutment</Series>
             </comp_ser>
@@ -15060,8 +15060,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>AlvimCM</name>
@@ -15277,8 +15277,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>TITAMAX WS</name>
@@ -15424,8 +15424,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>TITAMAX Cortical Ti</name>
@@ -15669,8 +15669,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>TITAMAX Internal Torque EX</name>
@@ -15816,8 +15816,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>AlvimTM</name>
@@ -15907,8 +15907,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>TITAMAX CM MEDULAR</name>
@@ -16082,14 +16082,14 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Neodent">CM Mini Conical Abutment</Series>
             </comp_ser>
         </series>
         <series>
             <name>CM Mini Conical Abutment</name>
-            <implants />
+            <implants/>
             <abutments>
                 <abutment>
                     <name>4.4x0.8</name>
@@ -16807,7 +16807,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Niko">Lux_3.6/4.0</Series>
                 <Series Producer="Niko">Standart_3.5/4.0</Series>
@@ -16957,7 +16957,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Niko">Standart_3.5/4.0</Series>
                 <Series Producer="Niko">Standart_Plus_3.5/4.0</Series>
@@ -17093,7 +17093,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Solo_sfera</name>
@@ -17225,7 +17225,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Standart_4.5/5.0</name>
@@ -17822,7 +17822,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Niko">Standart_4.5/5.0</Series>
                 <Series Producer="Niko">Lux_4.6/5.0</Series>
@@ -17958,7 +17958,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Niko">Standart_4.5/5.0</Series>
                 <Series Producer="Niko">Standart_Plus_4.5/5.0</Series>
@@ -18570,7 +18570,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="NobelBiocare">NobelReplace Tapered</Series>
                 <Series Producer="NobelBiocare">NobelSpeedy Replace</Series>
@@ -18846,7 +18846,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="NobelBiocare">NobelReplace Tapered</Series>
                 <Series Producer="NobelBiocare">NobelReplace Straight Groovy</Series>
@@ -19321,7 +19321,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Pitt-Easy</name>
@@ -20223,7 +20223,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -20748,7 +20748,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Gimlet-DM</name>
@@ -20838,8 +20838,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Gimlet-I</name>
@@ -20887,8 +20887,3476 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
+        </series>
+    </provider>
+    <provider>
+        <name>Southern Implants</name>
+        <series>
+            <name>External Hex - Co-axis</name>
+            <implants>
+                <implant>
+                    <name>4x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IBT12d-8.5.cdm</model-file>
+                    <article>IBT12d-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x10</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>5.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IBT12d-10.cdm</model-file>
+                    <article>IBT12d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>7</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IBT12d-11.5.cdm</model-file>
+                    <article>IBT12d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x13</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>8.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IBT12d-13.cdm</model-file>
+                    <article>IBT12d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x15</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>10.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IBT12d-15.cdm</model-file>
+                    <article>IBT12d-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x18</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>13.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IBT12d-18.cdm</model-file>
+                    <article>IBT12d-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x10</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT12d-10.cdm</model-file>
+                    <article>BAT12d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT12d-11.5.cdm</model-file>
+                    <article>BAT12d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x13</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>9.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT12d-13.cdm</model-file>
+                    <article>BAT12d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x15</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>11.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT12d-15.cdm</model-file>
+                    <article>BAT12d-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x18</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>14.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT12d-18.cdm</model-file>
+                    <article>BAT12d-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT24d-10.cdm</model-file>
+                    <article>BAT24d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT24d-11.5.cdm</model-file>
+                    <article>BAT24d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>9.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT24d-13.cdm</model-file>
+                    <article>BAT24d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>11.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT24d-15.cdm</model-file>
+                    <article>BAT24d-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x10</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT36d-10.cdm</model-file>
+                    <article>BAT36d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT36d-11.5.cdm</model-file>
+                    <article>BAT36d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x13</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>9.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT36d-13.cdm</model-file>
+                    <article>BAT36d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x15</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>11.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT36d-15.cdm</model-file>
+                    <article>BAT36d-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,11x18</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.11</cyl-diam2>
+                    <length2>14.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BAT36d-18.cdm</model-file>
+                    <article>BAT36d-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x10</name>
+                    <state>1</state>
+                    <cyl-diam>4.1</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT12d-10.cdm</model-file>
+                    <article>BBBT12d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>4.1</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT12d-11.5.cdm</model-file>
+                    <article>BBBT12d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x13</name>
+                    <state>1</state>
+                    <cyl-diam>4.1</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>9.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT12d-13.cdm</model-file>
+                    <article>BBBT12d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x15</name>
+                    <state>1</state>
+                    <cyl-diam>4.1</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>11.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT12d-15.cdm</model-file>
+                    <article>BBBT12d-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x18</name>
+                    <state>1</state>
+                    <cyl-diam>4.1</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>14.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT12d-18.cdm</model-file>
+                    <article>BBBT12d-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x10</name>
+                    <state>1</state>
+                    <cyl-diam>0.3</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT24d-10.cdm</model-file>
+                    <article>BBBT24d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>0.3</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT24d-11.5.cdm</model-file>
+                    <article>BBBT24d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x13</name>
+                    <state>1</state>
+                    <cyl-diam>0.3</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>9.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT24d-13.cdm</model-file>
+                    <article>BBBT24d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x15</name>
+                    <state>1</state>
+                    <cyl-diam>0.3</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>11.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT24d-15.cdm</model-file>
+                    <article>BBBT24d-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x18</name>
+                    <state>1</state>
+                    <cyl-diam>0.3</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>14.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\BBBT24d-18.cdm</model-file>
+                    <article>BBBT24d-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>Tri-nex - Co-axis</name>
+            <implants>
+                <implant>
+                    <name>4,3x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>4.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA43-12d-10.cdm</model-file>
+                    <article>IA43-12d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA43-12d-11.5.cdm</model-file>
+                    <article>IA43-12d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>7.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA43-12d-13.cdm</model-file>
+                    <article>IA43-12d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x16</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>10.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA43-12d-16.cdm</model-file>
+                    <article>IA43-12d-16</article>
+                    <len-e>16</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x10</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>4.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA50-12d-10.cdm</model-file>
+                    <article>IA50-12d-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA50-12d-11.5.cdm</model-file>
+                    <article>IA50-12d-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x13</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>7.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA50-12d-13.cdm</model-file>
+                    <article>IA50-12d-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x16</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>5.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>10.5</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\IA50-12d-16.cdm</model-file>
+                    <article>IA50-12d-16</article>
+                    <len-e>16</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>IT - Co-axis</name>
+            <implants>
+                <implant>
+                    <name>4x8</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.33</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>3.7</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-408.cdm</model-file>
+                    <article>ITST12d-408</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x10</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.73</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>5.3</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-410.cdm</model-file>
+                    <article>ITST12d-410</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x12</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.73</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>7.3</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-412.cdm</model-file>
+                    <article>ITST12d-412</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4x14</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.73</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>9.3</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-414.cdm</model-file>
+                    <article>ITST12d-414</article>
+                    <len-e>14</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x8</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.2</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-508.cdm</model-file>
+                    <article>ITST12d-508</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.2</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>5.8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-510.cdm</model-file>
+                    <article>ITST12d-510</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x12</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.2</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>7.8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-512.cdm</model-file>
+                    <article>ITST12d-512</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x14</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.2</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>9.8</length2>
+                    <model-file>\Southern Implants\External Hex - Co-axis\ITST12d-514.cdm</model-file>
+                    <article>ITST12d-514</article>
+                    <len-e>14</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>Oncology and Zygomatic</name>
+            <implants>
+                <implant>
+                    <name>4,3x35</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>20</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-35.cdm</model-file>
+                    <article>ZYG-55-35</article>
+                    <len-e>35</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x37,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>22.5</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-37.5.cdm</model-file>
+                    <article>ZYG-55-37.5</article>
+                    <len-e>37.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x40</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>25</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-40.cdm</model-file>
+                    <article>ZYG-55-40</article>
+                    <len-e>40</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x42,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>27.5</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-42.5.cdm</model-file>
+                    <article>ZYG-55-42.5</article>
+                    <len-e>42.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x45</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>30</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-45.cdm</model-file>
+                    <article>ZYG-55-45</article>
+                    <len-e>45</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x47,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>32.5</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-47.5.cdm</model-file>
+                    <article>ZYG-55-47.5</article>
+                    <len-e>47.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x50</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>35</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-50.cdm</model-file>
+                    <article>ZYG-55-50</article>
+                    <len-e>50</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x52,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>37.5</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ZYG-55-52.5.cdm</model-file>
+                    <article>ZYG-55-52.5</article>
+                    <len-e>52.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x27</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>15</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>12</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ONC-55-27.cdm</model-file>
+                    <article>ONC-55-27</article>
+                    <len-e>27</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x32</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>20</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>12</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ONC-55-32.cdm</model-file>
+                    <article>ONC-55-32</article>
+                    <len-e>32</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x37</name>
+                    <state>1</state>
+                    <cyl-diam>3.03</cyl-diam>
+                    <length>25</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>12</length2>
+                    <model-file>\Southern Implants\Oncology and Zygomatic\ONC-55-37.cdm</model-file>
+                    <article>ONC-55-37</article>
+                    <len-e>37</len-e>
+                    <ed>0</ed>
+                    <comp_val>ZYG</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>External Hex - Cylindrical</name>
+            <implants>
+                <implant>
+                    <name>3,25x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>5.9</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBN-8.5.cdm</model-file>
+                    <article>IBN-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>7.4</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBN-10.cdm</model-file>
+                    <article>IBN-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>8.9</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBN-11.5.cdm</model-file>
+                    <article>IBN-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>10.4</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBN-13.cdm</model-file>
+                    <article>IBN-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>12.4</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBN-15.cdm</model-file>
+                    <article>IBN-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x18</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>14.4</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBN-18.cdm</model-file>
+                    <article>IBN-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,3x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>6</length>
+                    <cyl-diam2>3.3</cyl-diam2>
+                    <length2>2.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\INPi-8.5.cdm</model-file>
+                    <article>INPi-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,3x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>7.5</length>
+                    <cyl-diam2>3.3</cyl-diam2>
+                    <length2>2.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\INPi-10.cdm</model-file>
+                    <article>INPi-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,3x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>9</length>
+                    <cyl-diam2>3.3</cyl-diam2>
+                    <length2>2.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\INPi-11.5.cdm</model-file>
+                    <article>INPi-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,3x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>10.5</length>
+                    <cyl-diam2>3.3</cyl-diam2>
+                    <length2>2.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\INPi-13.cdm</model-file>
+                    <article>INPi-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,3x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>12.5</length>
+                    <cyl-diam2>3.3</cyl-diam2>
+                    <length2>2.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\INPi-15.cdm</model-file>
+                    <article>INPi-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x7</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-7.cdm</model-file>
+                    <article>IBS-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>5.9</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-8.5.cdm</model-file>
+                    <article>IBS-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>7.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-10.cdm</model-file>
+                    <article>IBS-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>8.9</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-11.5.cdm</model-file>
+                    <article>IBS-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>10.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-13.cdm</model-file>
+                    <article>IBS-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>12.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-15.cdm</model-file>
+                    <article>IBS-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x18</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>15.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-18.cdm</model-file>
+                    <article>IBS-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x20</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>17.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBS-20.cdm</model-file>
+                    <article>IBS-20</article>
+                    <len-e>20</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x7</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-7.cdm</model-file>
+                    <article>IBi-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>5.9</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-8.5.cdm</model-file>
+                    <article>IBi-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>7.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-10.cdm</model-file>
+                    <article>IBi-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>8.9</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-11.5.cdm</model-file>
+                    <article>IBi-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>10.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-13.cdm</model-file>
+                    <article>IBi-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>12.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-15.cdm</model-file>
+                    <article>IBi-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x18</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>15.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-18.cdm</model-file>
+                    <article>IBi-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,75x20</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>17.4</length>
+                    <cyl-diam2>3.75</cyl-diam2>
+                    <length2>2.6</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\IBi-20.cdm</model-file>
+                    <article>IBi-20</article>
+                    <len-e>20</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x6</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>2.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-6.cdm</model-file>
+                    <article>BA-6</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x7</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-7.cdm</model-file>
+                    <article>BA-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-8.5.cdm</model-file>
+                    <article>BA-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-10.cdm</model-file>
+                    <article>BA-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-11.5.cdm</model-file>
+                    <article>BA-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>9.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-13.cdm</model-file>
+                    <article>BA-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>11.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-15.cdm</model-file>
+                    <article>BA-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x</name>
+                    <state>1</state>
+                    <cyl-diam>2.3</cyl-diam>
+                    <length>14.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BA-18.cdm</model-file>
+                    <article>BA-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x7</name>
+                    <state>1</state>
+                    <cyl-diam>3.7</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BAi-7.cdm</model-file>
+                    <article>BAi-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.7</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BAi-8.5.cdm</model-file>
+                    <article>BAi-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x10</name>
+                    <state>1</state>
+                    <cyl-diam>3.7</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BAi-10.cdm</model-file>
+                    <article>BAi-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.7</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BAi-11.5.cdm</model-file>
+                    <article>BAi-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x13</name>
+                    <state>1</state>
+                    <cyl-diam>3.7</cyl-diam>
+                    <length>9.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BAi-13.cdm</model-file>
+                    <article>BAi-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x15</name>
+                    <state>1</state>
+                    <cyl-diam>3.7</cyl-diam>
+                    <length>11.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BAi-15.cdm</model-file>
+                    <article>BAi-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x18</name>
+                    <state>1</state>
+                    <cyl-diam>3.7</cyl-diam>
+                    <length>14.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BAi-18.cdm</model-file>
+                    <article>BAi-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBS-7.cdm</model-file>
+                    <article>BBBS-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBS-8.5.cdm</model-file>
+                    <article>BBBS-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x10</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBS-10.cdm</model-file>
+                    <article>BBBS-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBS-11.5.cdm</model-file>
+                    <article>BBBS-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x13</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>9.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBS-13.cdm</model-file>
+                    <article>BBBS-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x15</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>11.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBS-15.cdm</model-file>
+                    <article>BBBS-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBi-7.cdm</model-file>
+                    <article>BBBi-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBi-8.5.cdm</model-file>
+                    <article>BBBi-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x10</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBi-10.cdm</model-file>
+                    <article>BBBi-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBi-11.5.cdm</model-file>
+                    <article>BBBi-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x13</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>9.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBi-13.cdm</model-file>
+                    <article>BBBi-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x15</name>
+                    <state>1</state>
+                    <cyl-diam>4.6</cyl-diam>
+                    <length>11.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Cylindrical\BBBi-15.cdm</model-file>
+                    <article>BBBi-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>External Hex - Tapered</name>
+            <implants>
+                <implant>
+                    <name>3,25x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>3.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBNT-8.5.cdm</model-file>
+                    <article>IBNT-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBNT-10.cdm</model-file>
+                    <article>IBNT-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBNT-11.5.cdm</model-file>
+                    <article>IBNT-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBNT-13.cdm</model-file>
+                    <article>IBNT-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>10</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBNT-15.cdm</model-file>
+                    <article>IBNT-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,25x18</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>5</length>
+                    <cyl-diam2>3.25</cyl-diam2>
+                    <length2>13</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBNT-18.cdm</model-file>
+                    <article>IBNT-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x6</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>3.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>2.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBT-6.cdm</model-file>
+                    <article>IBT-6</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>4.2</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBT-8.5.cdm</model-file>
+                    <article>IBT-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>5.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBT-10.cdm</model-file>
+                    <article>IBT-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>7.2</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBT-11.5.cdm</model-file>
+                    <article>IBT-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>8.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBT-13.cdm</model-file>
+                    <article>IBT-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>10.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBT-15.cdm</model-file>
+                    <article>IBT-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x18</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>13.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBT-18.cdm</model-file>
+                    <article>IBT-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>5.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBTi-10.cdm</model-file>
+                    <article>IBTi-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>7.2</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBTi-11.5.cdm</model-file>
+                    <article>IBTi-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x13</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>8.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBTi-13.cdm</model-file>
+                    <article>IBTi-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,05x15</name>
+                    <state>1</state>
+                    <cyl-diam>2.6</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.05</cyl-diam2>
+                    <length2>10.7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\IBTi-15.cdm</model-file>
+                    <article>IBTi-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x6</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>2.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BAT-6.cdm</model-file>
+                    <article>BAT-6</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BAT-8.5.cdm</model-file>
+                    <article>BAT-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x10</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BAT-10.cdm</model-file>
+                    <article>BAT-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BAT-11.5.cdm</model-file>
+                    <article>BAT-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x13</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>9.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BAT-13.cdm</model-file>
+                    <article>BAT-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x15</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>11.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BAT-15.cdm</model-file>
+                    <article>BAT-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x18</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>14.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BAT-18.cdm</model-file>
+                    <article>BAT-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x10</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>6.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BATi-10.cdm</model-file>
+                    <article>BATi-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BATi-11.5.cdm</model-file>
+                    <article>BATi-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x13</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>9.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BATi-13.cdm</model-file>
+                    <article>BATi-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x15</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>11.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BATi-15.cdm</model-file>
+                    <article>BATi-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,7x18</name>
+                    <state>1</state>
+                    <cyl-diam>3.13</cyl-diam>
+                    <length>3.5</length>
+                    <cyl-diam2>4.7</cyl-diam2>
+                    <length2>14.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BATi-18.cdm</model-file>
+                    <article>BATi-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x6</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>3</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBT-6.cdm</model-file>
+                    <article>BBBT-6</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBT-8.5.cdm</model-file>
+                    <article>BBBT-8.5</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x10</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>5.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBT-10.cdm</model-file>
+                    <article>BBBT-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBT-11.5.cdm</model-file>
+                    <article>BBBT-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x13</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>8.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBT-13.cdm</model-file>
+                    <article>BBBT-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x15</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>10.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBT-15.cdm</model-file>
+                    <article>BBBT-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x18</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>13.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBT-18.cdm</model-file>
+                    <article>BBBT-18</article>
+                    <len-e>18</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x10</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>5.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBTi-10.cdm</model-file>
+                    <article>BBBTi-10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x11,5</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>7</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBTi-11.5.cdm</model-file>
+                    <article>BBBTi-11.5</article>
+                    <len-e>11.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x13</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>8.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBTi-13.cdm</model-file>
+                    <article>BBBTi-13</article>
+                    <len-e>13</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5,7x15</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5.7</cyl-diam2>
+                    <length2>10.5</length2>
+                    <model-file>\Southern Implants\External Hex - Tapered\BBBTi-15.cdm</model-file>
+                    <article>BBBTi-15</article>
+                    <len-e>15</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>Tri-nex - Cylindrical</name>
+            <implants>
+                <implant>
+                    <name>3,5x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>6.3</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-35-8.cdm</model-file>
+                    <article>IA-LHS-35-8</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x10,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>8.3</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-35-10.cdm</model-file>
+                    <article>IA-LHS-35-10</article>
+                    <len-e>10.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x12</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>9.8</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-35-11.5.cdm</model-file>
+                    <article>IA-LHS-35-11.5</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x13,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>11.3</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-35-13.cdm</model-file>
+                    <article>IA-LHS-35-13</article>
+                    <len-e>13.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x15,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>13.3</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-35-15.cdm</model-file>
+                    <article>IA-LHS-35-15</article>
+                    <len-e>15.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x8,6</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>6.4</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-43-8.cdm</model-file>
+                    <article>IA-LHS-43-8</article>
+                    <len-e>8.6</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x10,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>8.3</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-43-10.cdm</model-file>
+                    <article>IA-LHS-43-10</article>
+                    <len-e>10.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x12</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>9.8</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-43-11.5.cdm</model-file>
+                    <article>IA-LHS-43-11.5</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x13,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>11.3</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-43-13.cdm</model-file>
+                    <article>IA-LHS-43-13</article>
+                    <len-e>13.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x15,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>13.3</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>2.2</length2>
+                    <model-file>\Southern Implants\Tri-nex - Cylindrical\IA-LHS-43-15.cdm</model-file>
+                    <article>IA-LHS-43-15</article>
+                    <len-e>15.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>Tri-nex - Tapered</name>
+            <implants>
+                <implant>
+                    <name>3,5x8,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-35-8.cdm</model-file>
+                    <article>IA-LH-35-8</article>
+                    <len-e>8.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x10,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-35-10.cdm</model-file>
+                    <article>IA-LH-35-10</article>
+                    <len-e>10.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x12</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>5.5</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-35-11.5.cdm</model-file>
+                    <article>IA-LH-35-11.5</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x13,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>7</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-35-13.cdm</model-file>
+                    <article>IA-LH-35-13</article>
+                    <len-e>13.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>3,5x16,5</name>
+                    <state>1</state>
+                    <cyl-diam>2</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>3.5</cyl-diam2>
+                    <length2>10</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-35-16.cdm</model-file>
+                    <article>IA-LH-35-16</article>
+                    <len-e>16.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x8,6</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>4.1</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-43-8.cdm</model-file>
+                    <article>IA-LH-43-8</article>
+                    <len-e>8.6</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x10,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-43-10.cdm</model-file>
+                    <article>IA-LH-43-10</article>
+                    <len-e>10.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x12</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>5.5</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-43-11.5.cdm</model-file>
+                    <article>IA-LH-43-11.5</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x13,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>7</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-43-13.cdm</model-file>
+                    <article>IA-LH-43-13</article>
+                    <len-e>13.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,3x16,5</name>
+                    <state>1</state>
+                    <cyl-diam>2.4</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>4.3</cyl-diam2>
+                    <length2>10</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-43-16.cdm</model-file>
+                    <article>IA-LH-43-16</article>
+                    <len-e>16.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x8,6</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>4.1</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-50-8.cdm</model-file>
+                    <article>IA-LH-50-8</article>
+                    <len-e>8.6</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x10,5</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-50-10.cdm</model-file>
+                    <article>IA-LH-50-10</article>
+                    <len-e>10.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x12</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>5.5</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-50-11.5.cdm</model-file>
+                    <article>IA-LH-50-11.5</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x13,5</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>7</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-50-13.cdm</model-file>
+                    <article>IA-LH-50-13</article>
+                    <len-e>13.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x16,5</name>
+                    <state>1</state>
+                    <cyl-diam>3</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>10</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-50-16.cdm</model-file>
+                    <article>IA-LH-50-16</article>
+                    <len-e>16.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x8,6</name>
+                    <state>1</state>
+                    <cyl-diam>3.9</cyl-diam>
+                    <length>4.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>4.1</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-60-8.cdm</model-file>
+                    <article>IA-LH-60-8</article>
+                    <len-e>8.6</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x10,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.9</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-60-10.cdm</model-file>
+                    <article>IA-LH-60-10</article>
+                    <len-e>10.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x12</name>
+                    <state>1</state>
+                    <cyl-diam>3.9</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>5.5</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-60-11.5.cdm</model-file>
+                    <article>IA-LH-60-11.5</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x13,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.9</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>7</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-60-13.cdm</model-file>
+                    <article>IA-LH-60-13</article>
+                    <len-e>13.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6x16,5</name>
+                    <state>1</state>
+                    <cyl-diam>3.9</cyl-diam>
+                    <length>6.5</length>
+                    <cyl-diam2>6</cyl-diam2>
+                    <length2>10</length2>
+                    <model-file>\Southern Implants\Tri-nex - Tapered\IA-LH-60-16.cdm</model-file>
+                    <article>IA-LH-60-16</article>
+                    <len-e>16.5</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>IT - Cylindrical</name>
+            <implants>
+                <implant>
+                    <name>4,8x6</name>
+                    <state>1</state>
+                    <cyl-diam>2.75</cyl-diam>
+                    <length>6</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC306.cdm</model-file>
+                    <article>ITC306</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x8</name>
+                    <state>1</state>
+                    <cyl-diam>2.75</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC308.cdm</model-file>
+                    <article>ITC308</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.75</cyl-diam>
+                    <length>10</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC310.cdm</model-file>
+                    <article>ITC310</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x12</name>
+                    <state>1</state>
+                    <cyl-diam>2.75</cyl-diam>
+                    <length>12</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC312.cdm</model-file>
+                    <article>ITC312</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x14</name>
+                    <state>1</state>
+                    <cyl-diam>2.75</cyl-diam>
+                    <length>14</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC314.cdm</model-file>
+                    <article>ITC314</article>
+                    <len-e>14</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x6</name>
+                    <state>1</state>
+                    <cyl-diam>3.5</cyl-diam>
+                    <length>6</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC406.cdm</model-file>
+                    <article>ITC406</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x8</name>
+                    <state>1</state>
+                    <cyl-diam>3.5</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC408.cdm</model-file>
+                    <article>ITC408</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x10</name>
+                    <state>1</state>
+                    <cyl-diam>3.5</cyl-diam>
+                    <length>10</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC410.cdm</model-file>
+                    <article>ITC410</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x12</name>
+                    <state>1</state>
+                    <cyl-diam>3.5</cyl-diam>
+                    <length>12</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC412.cdm</model-file>
+                    <article>ITC412</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x14</name>
+                    <state>1</state>
+                    <cyl-diam>3.5</cyl-diam>
+                    <length>14</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC414.cdm</model-file>
+                    <article>ITC414</article>
+                    <len-e>14</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,9x6</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>6</length>
+                    <cyl-diam2>4.9</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC506.cdm</model-file>
+                    <article>ITC506</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,9x8</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>4.9</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC508.cdm</model-file>
+                    <article>ITC508</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,9x10</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>10</length>
+                    <cyl-diam2>4.9</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC510.cdm</model-file>
+                    <article>ITC510</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,9x12</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>12</length>
+                    <cyl-diam2>4.9</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC512.cdm</model-file>
+                    <article>ITC512</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,9x14</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>14</length>
+                    <cyl-diam2>4.9</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC514.cdm</model-file>
+                    <article>ITC514</article>
+                    <len-e>14</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x6</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>6</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC6-506.cdm</model-file>
+                    <article>ITC6-506</article>
+                    <len-e>6</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x8</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC6-508.cdm</model-file>
+                    <article>ITC6-508</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x10</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>10</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC6-510.cdm</model-file>
+                    <article>ITC6-510</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x12</name>
+                    <state>1</state>
+                    <cyl-diam>4.3</cyl-diam>
+                    <length>12</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Southern Implants\IT - Cylindrical\ITC6-512.cdm</model-file>
+                    <article>ITC6-512</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>IT - Tapered</name>
+            <implants>
+                <implant>
+                    <name>4,8x8</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>3.7</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT408.cdm</model-file>
+                    <article>ITT408</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x10</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.7</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>5.3</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT410.cdm</model-file>
+                    <article>ITT410</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x12</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.7</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>7.3</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT412.cdm</model-file>
+                    <article>ITT412</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>4,8x14</name>
+                    <state>1</state>
+                    <cyl-diam>1.85</cyl-diam>
+                    <length>4.74</length>
+                    <cyl-diam2>4.8</cyl-diam2>
+                    <length2>9.3</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT414.cdm</model-file>
+                    <article>ITT414</article>
+                    <len-e>14</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x8</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.3</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>3.7</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT508.cdm</model-file>
+                    <article>ITT508</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>5.8</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>4.2</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT510.cdm</model-file>
+                    <article>ITT510</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x12</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>7.8</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>4.2</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT512.cdm</model-file>
+                    <article>ITT512</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>5x14</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>9.8</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>4.2</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT514.cdm</model-file>
+                    <article>ITT514</article>
+                    <len-e>14</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6.5x8</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>3.9</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>4.2</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT608.cdm</model-file>
+                    <article>ITT608</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x10</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>3.9</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>6.2</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT610.cdm</model-file>
+                    <article>ITT610</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x12</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>3.9</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>8.2</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT612.cdm</model-file>
+                    <article>ITT612</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x8</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>3.7</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>4.3</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT6-508.cdm</model-file>
+                    <article>ITT6-508</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.2</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>5.8</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT6-510.cdm</model-file>
+                    <article>ITT6-510</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>6,5x10</name>
+                    <state>1</state>
+                    <cyl-diam>2.8</cyl-diam>
+                    <length>4.2</length>
+                    <cyl-diam2>6.5</cyl-diam2>
+                    <length2>7.8</length2>
+                    <model-file>\Southern Implants\IT - Tapered\ITT6-512.cdm</model-file>
+                    <article>ITT6-512</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>External Hex - MAX</name>
+            <implants>
+                <implant>
+                    <name>7x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.44</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-7-7.cdm</model-file>
+                    <article>MAX-7-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>7x9</name>
+                    <state>1</state>
+                    <cyl-diam>4.44</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-7-9.cdm</model-file>
+                    <article>MAX-7-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>7x11</name>
+                    <state>1</state>
+                    <cyl-diam>4.44</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-7-11.cdm</model-file>
+                    <article>MAX-7-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x7</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-8-7.cdm</model-file>
+                    <article>MAX-8-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x9</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-8-9.cdm</model-file>
+                    <article>MAX-8-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x11</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-8-11.cdm</model-file>
+                    <article>MAX-8-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>9x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-9-7.cdm</model-file>
+                    <article>MAX-9-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>9x9</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-9-9.cdm</model-file>
+                    <article>MAX-9-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>9x11</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\External Hex - MAX\MAX-9-11.cdm</model-file>
+                    <article>MAX-9-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>External Hex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>Tri-nex - MAX</name>
+            <implants>
+                <implant>
+                    <name>7x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.4</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX7-7.cdm</model-file>
+                    <article>TRI-MAX7-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>7x9</name>
+                    <state>1</state>
+                    <cyl-diam>4.4</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX7-9.cdm</model-file>
+                    <article>TRI-MAX7-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>7x11</name>
+                    <state>1</state>
+                    <cyl-diam>4.4</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX7-11.cdm</model-file>
+                    <article>TRI-MAX7-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x7</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX8-7.cdm</model-file>
+                    <article>TRI-MAX8-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x9</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX8-9.cdm</model-file>
+                    <article>TRI-MAX8-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x11</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX8-11.cdm</model-file>
+                    <article>TRI-MAX8-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX9-7.cdm</model-file>
+                    <article>TRI-MAX9-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x9</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX9-9.cdm</model-file>
+                    <article>TRI-MAX9-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x11</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\Tri-nex - MAX\TRI-MAX9-11.cdm</model-file>
+                    <article>TRI-MAX9-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>Tri-nex</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
+        </series>
+        <series>
+            <name>IT-MAX</name>
+            <implants>
+                <implant>
+                    <name>7x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.44</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT7-7.cdm</model-file>
+                    <article>MAXIT7-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>7x9</name>
+                    <state>1</state>
+                    <cyl-diam>4.44</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT7-9.cdm</model-file>
+                    <article>MAXIT7-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>7x11</name>
+                    <state>1</state>
+                    <cyl-diam>4.44</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>7</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT7-11.cdm</model-file>
+                    <article>MAXIT7-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x7</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT8-7.cdm</model-file>
+                    <article>MAXIT8-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x9</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT8-9.cdm</model-file>
+                    <article>MAXIT8-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>8x11</name>
+                    <state>1</state>
+                    <cyl-diam>3.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>8</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT8-11.cdm</model-file>
+                    <article>MAXIT8-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>9x7</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>4</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT9-7.cdm</model-file>
+                    <article>MAXIT9-7</article>
+                    <len-e>7</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>9x9</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>6</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT9-9.cdm</model-file>
+                    <article>MAXIT9-9</article>
+                    <len-e>9</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>9x11</name>
+                    <state>1</state>
+                    <cyl-diam>4.94</cyl-diam>
+                    <length>3</length>
+                    <cyl-diam2>9</cyl-diam2>
+                    <length2>8</length2>
+                    <model-file>\Southern Implants\IT-MAX\MAXIT9-11.cdm</model-file>
+                    <article>MAXIT9-11</article>
+                    <len-e>11</len-e>
+                    <ed>0</ed>
+                    <comp_val>IT</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments/>
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -22075,7 +25543,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Straumann">Tapered Effect - Regular Neck</Series>
                 <Series Producer="Straumann">Standard - Regular Neck</Series>
@@ -22235,7 +25703,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>Standard Plus - Wide Neck</name>
@@ -22353,7 +25821,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Straumann">Tapered Effect - Wide Neck</Series>
                 <Series Producer="Straumann">Standard - Wide Neck</Series>
@@ -22587,7 +26055,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Straumann">Standard - Regular Neck</Series>
                 <Series Producer="Straumann">Standard Plus - Regular Neck</Series>
@@ -22681,7 +26149,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="Straumann">Standard - Wide Neck</Series>
                 <Series Producer="Straumann">Standard Plus - Wide Neck</Series>
@@ -22862,7 +26330,7 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
+            <abutments/>
             <comp_ser>
                 <Series Producer="TBR">CS</Series>
             </comp_ser>
@@ -23356,7 +26824,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -23495,7 +26963,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>tioLogic Implantat M</name>
@@ -23715,7 +27183,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
         <series>
             <name>tioLogic Implantat L</name>
@@ -23921,7 +27389,7 @@
                     <color></color>
                 </abutment>
             </abutments>
-            <comp_ser />
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -24392,8 +27860,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>IMPLUS_cylinder_TTS</name>
@@ -24861,8 +28329,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>IMPLUS_Konus</name>
@@ -25344,8 +28812,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
     </provider>
     <provider>
@@ -25886,8 +29354,8 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
         </series>
         <series>
             <name>Advent</name>
@@ -26215,8 +29683,113 @@
                     <color></color>
                 </implant>
             </implants>
-            <abutments />
-            <comp_ser />
+            <abutments/>
+            <comp_ser/>
+        </series>
+    </provider>
+    <provider>
+        <name>Milde</name>
+        <series>
+            <name>Milde</name>
+            <implants>
+                <implant>
+                    <name>d4x10</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>10</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Milde\Milde\impl\d4x10.cdm</model-file>
+                    <article>d4x10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>milde</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>d4x12</name>
+                    <state>1</state>
+                    <cyl-diam>4</cyl-diam>
+                    <length>12</length>
+                    <cyl-diam2>4</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Milde\Milde\impl\d4x12.cdm</model-file>
+                    <article>d4x12</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>milde</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>d5x8</name>
+                    <state>1</state>
+                    <cyl-diam>5</cyl-diam>
+                    <length>8</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Milde\Milde\impl\d5x8.cdm</model-file>
+                    <article>d5x8</article>
+                    <len-e>8</len-e>
+                    <ed>0</ed>
+                    <comp_val>milde</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>d5x10</name>
+                    <state>1</state>
+                    <cyl-diam>5</cyl-diam>
+                    <length>10</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Milde\Milde\impl\d5x10.cdm</model-file>
+                    <article>d5x10</article>
+                    <len-e>10</len-e>
+                    <ed>0</ed>
+                    <comp_val>milde</comp_val>
+                    <color></color>
+                </implant>
+                <implant>
+                    <name>d5x12</name>
+                    <state>1</state>
+                    <cyl-diam>5</cyl-diam>
+                    <length>12</length>
+                    <cyl-diam2>5</cyl-diam2>
+                    <length2>0</length2>
+                    <model-file>\Milde\Milde\impl\d5x12.cdm</model-file>
+                    <article>d5x12</article>
+                    <len-e>12</len-e>
+                    <ed>0</ed>
+                    <comp_val>milde</comp_val>
+                    <color></color>
+                </implant>
+            </implants>
+            <abutments>
+                <abutment>
+                    <name>moncone135</name>
+                    <state>1</state>
+                    <cyl-diam>5</cyl-diam>
+                    <length>10</length>
+                    <alpha>0</alpha>
+                    <model-file>\Milde\Milde\abut\moncone_135.cdm</model-file>
+                    <article>moncone_135</article>
+                    <ed>0</ed>
+                    <comp_val>milde</comp_val>
+                    <color></color>
+                </abutment>
+                <abutment>
+                    <name>moncone135</name>
+                    <state>1</state>
+                    <cyl-diam>6</cyl-diam>
+                    <length>10</length>
+                    <alpha>0</alpha>
+                    <model-file>\Milde\Milde\abut\moncone_235.cdm</model-file>
+                    <article>moncone_235</article>
+                    <ed>0</ed>
+                    <comp_val>milde</comp_val>
+                    <color></color>
+                </abutment>
+            </abutments>
+            <comp_ser/>
         </series>
     </provider>
 </database>

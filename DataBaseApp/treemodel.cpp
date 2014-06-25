@@ -115,7 +115,7 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
                 db::DbSeries * series = reinterpret_cast<db::DbSeries *>(item->data());
                // QByteArray encodedString(series->name);
                // QTextCodec *codec = QTextCodec::codecForName("UTF-8");
-                QString svalue(series->name);
+                QString svalue = QString::fromLocal8Bit(series->name);
                 return svalue;
             }
         }

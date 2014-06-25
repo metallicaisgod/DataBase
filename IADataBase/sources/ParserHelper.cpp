@@ -241,10 +241,10 @@ QDomElement* ParserHelper::ToXml(const db::IADataBase& indb, const char* fileNam
             QDomElement elProvider = document.createElement( "provider" );
 			//if(flags&PROVIDER_EXT_FILE)
 			{
-                QString extFileName = pProvider->m_szExtFile;
+                QString extFileName = QString::fromLocal8Bit(pProvider->m_szExtFile);
                 QFileInfo fi(extFileName);
                 extFileName = fi.fileName();
-                elProvider.setAttribute("ext_file", extFileName.toLocal8Bit().data());
+                elProvider.setAttribute("ext_file", extFileName);
                 root->appendChild( elProvider );
 			
 			}
@@ -294,7 +294,7 @@ QDomElement* ParserHelper::ToXml(const db::DbProvider* provider, QDomDocument do
 	//}
 
     QDomElement elName = document.createElement( "name" );
-    elName.appendChild( document.createTextNode(pProvider->name));
+    elName.appendChild( document.createTextNode(QString::fromLocal8Bit(pProvider->name)));
     elProvider->appendChild(elName);
 	
 	while (seriesEnum.MoveNext())
@@ -325,7 +325,7 @@ QDomElement* ParserHelper::ToXml(const db::DbSeries* series, QDomDocument docume
 
     *elSeries = document.createElement( "series" );
     QDomElement elName = document.createElement( "name" );
-    elName.appendChild( document.createTextNode( pSeries->name ));
+    elName.appendChild( document.createTextNode( QString::fromLocal8Bit(pSeries->name)));
     elSeries->appendChild(elName);
 
 	bool bNotEmpty = false;
@@ -341,18 +341,18 @@ QDomElement* ParserHelper::ToXml(const db::DbSeries* series, QDomDocument docume
 		if (bWithoutCondition || (condition == pImplant->editable))
 		{
             QDomElement elImplant = document.createElement( "implant" );
-            AddElement("name", pImplant->name, document, elImplant);
-            AddElement("state", (unsigned int)pImplant->state, document, elImplant);
-            AddElement("cyl-diam", pImplant->D1, document, elImplant);
-            AddElement("length", pImplant->L1, document, elImplant);
-            AddElement("cyl-diam2", pImplant->D2, document, elImplant);
-            AddElement("length2", pImplant->L2, document, elImplant);
-            AddElement("model-file", pImplant->szModelName, document, elImplant);
-            AddElement("article", pImplant->artikul, document, elImplant);
-            AddElement("len-e", pImplant->Le, document, elImplant);
-            AddElement("ed", pImplant->editable, document, elImplant);
-            AddElement("comp_val", pImplant->szCompatibility, document, elImplant);
-            AddElement("color", pImplant->defcolor, document, elImplant);
+            AddStringElement("name", pImplant->name, document, elImplant);
+            AddNumberElement("state", (unsigned int)pImplant->state, document, elImplant);
+            AddNumberElement("cyl-diam", pImplant->D1, document, elImplant);
+            AddNumberElement("length", pImplant->L1, document, elImplant);
+            AddNumberElement("cyl-diam2", pImplant->D2, document, elImplant);
+            AddNumberElement("length2", pImplant->L2, document, elImplant);
+            AddStringElement("model-file", pImplant->szModelName, document, elImplant);
+            AddStringElement("article", pImplant->artikul, document, elImplant);
+            AddNumberElement("len-e", pImplant->Le, document, elImplant);
+            AddNumberElement("ed", pImplant->editable, document, elImplant);
+            AddStringElement("comp_val", pImplant->szCompatibility, document, elImplant);
+            AddStringElement("color", pImplant->defcolor, document, elImplant);
 //            elImplant.appendChild( *(MakeStringElement("name", pImplant->name, document)));
 //            elImplant.appendChild( *(MakeIntElement("state", (unsigned int)pImplant->state, document)) );
 //            elImplant.appendChild( *(MakeDoubleElement("cyl-diam", pImplant->D1, document)) );
@@ -381,16 +381,16 @@ QDomElement* ParserHelper::ToXml(const db::DbSeries* series, QDomDocument docume
 		if (bWithoutCondition || (condition == pAbutment->editable))
 		{
             QDomElement elAbutment = document.createElement( "abutment" );
-            AddElement("name", pAbutment->name, document, elAbutment);
-            AddElement("state", (unsigned int)pAbutment->state, document, elAbutment);
-            AddElement("cyl-diam", pAbutment->D1, document, elAbutment);
-            AddElement("length", pAbutment->L1, document, elAbutment);
-            AddElement("alpha", pAbutment->Alpha, document, elAbutment);
-            AddElement("model-file", pAbutment->szModelName, document, elAbutment);
-            AddElement("article", pAbutment->artikul, document, elAbutment);
-            AddElement("ed", pAbutment->editable, document, elAbutment);
-            AddElement("comp_val", pAbutment->szCompatibility, document, elAbutment);
-            AddElement("color", pAbutment->defcolor, document, elAbutment);
+            AddStringElement("name", pAbutment->name, document, elAbutment);
+            AddNumberElement("state", (unsigned int)pAbutment->state, document, elAbutment);
+            AddNumberElement("cyl-diam", pAbutment->D1, document, elAbutment);
+            AddNumberElement("length", pAbutment->L1, document, elAbutment);
+            AddNumberElement("alpha", pAbutment->Alpha, document, elAbutment);
+            AddStringElement("model-file", pAbutment->szModelName, document, elAbutment);
+            AddStringElement("article", pAbutment->artikul, document, elAbutment);
+            AddNumberElement("ed", pAbutment->editable, document, elAbutment);
+            AddStringElement("comp_val", pAbutment->szCompatibility, document, elAbutment);
+            AddStringElement("color", pAbutment->defcolor, document, elAbutment);
 //            elAbutment.appendChild( *(MakeStringElement("name", pAbutment->name, document)));
 //            elAbutment.appendChild( *(MakeIntElement("state", (unsigned int)pAbutment->state, document)) );
 //            elAbutment.appendChild( *(MakeDoubleElement("cyl-diam", pAbutment->D1, document)) );
@@ -414,8 +414,8 @@ QDomElement* ParserHelper::ToXml(const db::DbSeries* series, QDomDocument docume
 	{
 		db::CompatibleSeries pSer = *it3;
         QDomElement elSer = document.createElement( "Series" );
-        elSer.setAttribute("Producer", pSer.prov);
-        elSer.appendChild( document.createTextNode(QString(pSer.ser)));
+        elSer.setAttribute("Producer", QString::fromLocal8Bit(pSer.prov));
+        elSer.appendChild( document.createTextNode(QString::fromLocal8Bit(pSer.ser)));
         elCompSer.appendChild(elSer);
 	}
     elSeries->appendChild(elCompSer);
@@ -544,11 +544,22 @@ bool ParserHelper::ParseBoolValue( QDomElement& element, const char *name )
 }
 
 template <typename T>
-void ParserHelper::AddElement(const char *name, T _value, QDomDocument document, QDomElement parent)
+void ParserHelper::AddNumberElement(const char *name, T _value, QDomDocument document, QDomElement parent)
 {
     //QDomElement * element = new QDomElement();
     QDomElement element = document.createElement(QString(name));
     element.appendChild( document.createTextNode(QString("%1").arg( _value )));
+    parent.appendChild(element);
+    //return element;
+}
+
+void ParserHelper::AddStringElement(const char *name, char * _value, QDomDocument document, QDomElement parent)
+{
+    if(! _value)
+        return;
+    //QDomElement * element = new QDomElement();
+    QDomElement element = document.createElement(QString(name));
+    element.appendChild( document.createTextNode(QString::fromLocal8Bit(_value )));
     parent.appendChild(element);
     //return element;
 }

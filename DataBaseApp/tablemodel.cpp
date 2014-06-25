@@ -124,9 +124,9 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
                 switch(c)
                 {
                 case 0:
-                    return implants[r]->name;
+                    return QString::fromLocal8Bit(implants[r]->name);
                 case 1:
-                    return implants[r]->artikul;
+                    return QString::fromLocal8Bit(implants[r]->artikul);
                 case 2:
                     return implants[r]->D1;
                 case 3:

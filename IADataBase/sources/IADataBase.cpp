@@ -314,12 +314,16 @@ void IADataBase::BuildCompatibility()
 bool IADataBase::ExportToCSV(char* file_name)
 {
 	// open manufacturers list file
-    QFile f_list(file_name);
-    //FILE *f_list = fopen(file_name, "wt");
-    //if(!f_list)
-    bool bRet = f_list.open(QFile::WriteOnly | QFile::Text);
+    QString fileName = QString::fromLocal8Bit(file_name);
+    QFileInfo fInfo(fileName);
+    bool bList = true;
+    if(fInfo.suffix() == "csv")
+        bList = false;
+    QFile f(fileName);
+    bool bRet = f.open(QFile::WriteOnly | QFile::Text);
     if(!bRet)
         return false;
+    f.close();
 
 	for(t_ProvidersList::iterator ip = m_Providers.begin();ip != m_Providers.end();ip++)
 	{
@@ -327,103 +331,106 @@ bool IADataBase::ExportToCSV(char* file_name)
 		DbProvider *prov = *ip;
 
 		// write provider to the list file
-        QString strProv(prov->name);
-        //std::string strProv = prov->name;
-        strProv += ".csv\n";
-        f_list.write(strProv.toLocal8Bit().data());
-        //fprintf(f_list, "%s\n", strProv.c_str());
-		
-
-		// open provider CSV file
-        QString str(file_name);
-        //std::string str=file_name;
-        int slpos =	str.lastIndexOf('\\');
-        str = str.left(slpos+1);
-        str += prov->name;
-        str += ".csv";
-        QFile f(str);
-        //FILE *f = fopen(str.c_str(), "wt");
-        if(!f.open(QFile::WriteOnly | QFile::Text))
-            return false;
-	
-		for(t_SeriesList::iterator is = prov->GetSeriesList().begin();is != prov->GetSeriesList().end();is++)
-		{
-			// Save implant to CSV
-			DbSeries *ser = *is;
-			if(ser->GetImplants().size())
-			{
-				// write header
+        QString strProv = QString::fromLocal8Bit(prov->name);
+        if(bList)
+        {
+            f.setFileName(fileName);
+            f.open(QFile::WriteOnly | QFile::Text);
+            strProv += ".csv\n";
+            f.write(prov->name);
+            f.close();
+            // open provider CSV file
+            QString str = fInfo.absolutePath() + strProv;
+            str += ".csv";
+            f.setFileName(str);
+            //FILE *f = fopen(str.c_str(), "wt");
+            if(!f.open(QFile::WriteOnly | QFile::Text))
+                return false;
+        }
+        else
+        {
+            if(fInfo.baseName().toLower() != strProv.toLower())
+            {
+                continue;
+            }
+            f.open(QFile::WriteOnly | QFile::Text);
+        }
+        for(t_SeriesList::iterator is = prov->GetSeriesList().begin();is != prov->GetSeriesList().end();is++)
+        {
+            // Save implant to CSV
+            DbSeries *ser = *is;
+            if(ser->GetImplants().size())
+            {
+                // write header
                 f.write(";;;;;;;;;;\n");
                 f.write("ObjectType;Manufacturer;Series;Name;Articul;AbComp;D1;D2;L1;L2;Le;ModelFileName\n");
                 //fprintf(f, ";;;;;;;;;;\n");
                 //fprintf(f, "ObjectType;Manufacturer;Series;Name;Articul;AbComp;D1;D2;L1;L2;Le;ModelFileName\n");
-			}
-			for(t_ImplantList::const_iterator ii = ser->GetImplants().begin();ii != ser->GetImplants().end();ii++)
-			{
-				db::DbImplant* pImplant = *ii;
-				//FillCompatibility(pImplant->szCompatibility, ser);
+            }
+            for(t_ImplantList::const_iterator ii = ser->GetImplants().begin();ii != ser->GetImplants().end();ii++)
+            {
+                db::DbImplant* pImplant = *ii;
+                //FillCompatibility(pImplant->szCompatibility, ser);
                 QString impl = QString("Impl;%1;%2;%3;%4;%5;%6;%7;%8;%9;%10;%11\n").
-                        arg(prov->name).arg(ser->name).arg(pImplant->name).arg(pImplant->artikul).arg(pImplant->szCompatibility).
-                        arg(pImplant->D1,0, 'g', 3).arg(pImplant->D2,0, 'g', 3).arg(pImplant->L1,0, 'g', 3).arg(pImplant->L2,0, 'g', 3).
-                        arg(pImplant->Le,0, 'g', 3).arg(pImplant->szModelName);
+                        arg(QString::fromLocal8Bit(prov->name)).arg(QString::fromLocal8Bit(ser->name)).arg(QString::fromLocal8Bit(pImplant->name)).
+                        arg(QString::fromLocal8Bit(pImplant->artikul)).arg(QString::fromLocal8Bit(pImplant->szCompatibility)).arg(pImplant->D1,0, 'g', 3).
+                        arg(pImplant->D2,0, 'g', 3).arg(pImplant->L1,0, 'g', 3).arg(pImplant->L2,0, 'g', 3).
+                        arg(pImplant->Le,0, 'g', 3).arg(QString::fromLocal8Bit(pImplant->szModelName));
                 f.write(impl.toLocal8Bit().data());
 //				fprintf(f, "Impl;%s;%s;%s;%s;%s;%.3f;%.3f;%.3f;%.3f;%.3f;%s\n",
 //					prov->name, ser->name, pImplant->name, pImplant->artikul, pImplant->szCompatibility,
 //					pImplant->D1,pImplant->D2, pImplant->L1,pImplant->L2,
 //					pImplant->Le, pImplant->szModelName);
-			}
-			
+            }
 
-			// Save abutment to CSV
-			if(ser->GetAbutment().size()>0)
-			{
-				// write header
+
+            // Save abutment to CSV
+            if(ser->GetAbutment().size()>0)
+            {
+                // write header
                 f.write(";;;;;;;;;;\n");
                 f.write("ObjectType;Manufacturer;Series;Name;Articul;AbComp;D1;L1;Alpha; ; ;ModelFileName\n");
 //				fprintf(f, ";;;;;;;;;;\n");
 //				fprintf(f, "ObjectType;Manufacturer;Series;Name;Articul;AbComp;D1;L1;Alpha; ; ;ModelFileName\n");
-			}
-			for(t_AbutmentList::const_iterator ia = ser->GetAbutment().begin(); ia != ser->GetAbutment().end();ia++)
-			{
-				db::DbAbutment* pAbutment = *ia;
-				//FillCompatibility(pImplant->szCompatibility, ser);
+            }
+            for(t_AbutmentList::const_iterator ia = ser->GetAbutment().begin(); ia != ser->GetAbutment().end();ia++)
+            {
+                db::DbAbutment* pAbutment = *ia;
+                //FillCompatibility(pImplant->szCompatibility, ser);
                 QString abut = QString("Abut;%1;%2;%3;%4;%5;%6;%7;%8; ; ;%9\n").
-                        arg(prov->name).arg(ser->name).arg(pAbutment->name).arg(pAbutment->artikul).arg(pAbutment->szCompatibility).
-                        arg(pAbutment->D1,0, 'g', 3).arg(pAbutment->L1,0, 'g', 3).arg(pAbutment->Alpha,0, 'g', 3).arg(pAbutment->szModelName);
+                        arg(QString::fromLocal8Bit(prov->name)).arg(QString::fromLocal8Bit(ser->name)).arg(QString::fromLocal8Bit(pAbutment->name)).
+                        arg(QString::fromLocal8Bit(pAbutment->artikul)).arg(QString::fromLocal8Bit(pAbutment->szCompatibility)).
+                        arg(pAbutment->D1,0, 'g', 3).arg(pAbutment->L1,0, 'g', 3).arg(pAbutment->Alpha,0, 'g', 3).
+                        arg(QString::fromLocal8Bit(pAbutment->szModelName));
                 f.write(abut.toLocal8Bit().data());
 //				fprintf(f, "Abut;%s;%s;%s;%s;%s;%.3f;%.3f;%.3f; ; ;%s\n",
 //					prov->name, ser->name, pAbutment->name, pAbutment->artikul, pAbutment->szCompatibility,
 //					pAbutment->D1, pAbutment->L1, pAbutment->Alpha,pAbutment->szModelName);
-			}
-			
-			// Save COmpatible series to CSV
-			if(ser->m_CompSer.size()>0)
-			{
-				// write header
+            }
+
+            // Save COmpatible series to CSV
+            if(ser->m_CompSer.size()>0)
+            {
+                // write header
                 f.write(";;;;;;;;;;\n");
                 f.write("ObjectType;Manufacturer1;Series1;Manufacturer2;Series2\n");
 //				fprintf(f, ";;;;;;;;;;\n");
 //				fprintf(f, "ObjectType;Manufacturer1;Series1;Manufacturer2;Series2\n");
-			}
-			for(std::vector<CompatibleSeries>::iterator ics = ser->m_CompSer.begin(); ics != ser->m_CompSer.end();ics++)
-			{
-				CompatibleSeries ser_com = *ics;
-				//FillCompatibility(pImplant->szCompatibility, ser);
+            }
+            for(std::vector<CompatibleSeries>::iterator ics = ser->m_CompSer.begin(); ics != ser->m_CompSer.end();ics++)
+            {
+                CompatibleSeries ser_com = *ics;
+                //FillCompatibility(pImplant->szCompatibility, ser);
                 QString compSer = QString("CompSer;%1;%2;%3;%4\n").
-                        arg(prov->name).arg(ser->name).arg(ser_com.prov).arg(ser_com.ser);
+                        arg(QString::fromLocal8Bit(prov->name)).arg(QString::fromLocal8Bit(ser->name)).arg(QString::fromLocal8Bit(ser_com.prov)).arg(QString::fromLocal8Bit(ser_com.ser));
                 f.write(compSer.toLocal8Bit().data());
 //				fprintf(f, "CompSer;%s;%s;%s;%s\n",
 //					prov->name, ser->name, ser_com.prov, ser_com.ser);
-			}
-		}
+            }
+
+        }
         f.close();
-        //fclose(f);
-	}
-	// close manufacturers list file
-    f_list.close();
-
-    //fclose (f_list);
-
+    }
 	return true;
 }
 
@@ -490,7 +497,7 @@ bool IADataBase::ImportFromCSV(char* file_name)
                 //fscanf(f, "%[\n]s", szDummy);
                 f.readLine(szStr, 1000);
 
-                QString strF(szStr);
+                QString strF = QString::fromLocal8Bit(szStr);
                 strF.truncate(strF.indexOf('\n'));
 				while (true)
 				{

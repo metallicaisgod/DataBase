@@ -78,7 +78,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    db::IADataBase iadb;
+    db::IADataBase * iadb;
     //QStandardItemModel * m_pImplantsTreeModel;
     //QStandardItemModel * m_pAbutmentsTreeModel;
     TreeModel * m_pImpTreeModel;
