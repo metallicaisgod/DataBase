@@ -14,7 +14,7 @@ const float scale = 0.05;
 
 GLModel::GLModel(QWidget* parent) : QGLWidget(parent)
 {
-   xRot=-90; yRot=0; zRot=0; zTra=0; nSca=1;
+   xRot=0; yRot=0; zRot=0; zTra=0; nSca=1;
    m_curImpl = NULL;
    m_curAbut = NULL;
    m_implVertexArray = NULL;
@@ -112,13 +112,12 @@ void GLModel::paintGL()
        //draw figure
         glPushMatrix();
             glScalef(nSca, nSca, nSca);
-            //glRotatef(xRot, 1.0f, 0.0f, 0.0f);
             glRotatef(xRot, 0.0f, 0.0f, 1.0f);
             glRotatef(xRot, 0.0f, 1.0f, 0.0f);
-            glRotatef(yRot, 1.0f, 0.0f, 0.0f);
-            glRotatef(yRot, 0.0f, 0.0f, 1.0f);
-            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
+//            glRotatef(yRot, 1.0f, 0.0f, 0.0f);
+//            glRotatef(yRot, 0.0f, 0.0f, 1.0f);
             glRotatef(zRot, 1.0f, 0.0f, 0.0f);
+            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
             float length_impl = 0.0;
             float length_abut = 0.0;
 
@@ -155,10 +154,10 @@ void GLModel::paintGL()
             glTranslatef(0.8f, -0.8f, -0.8f);
             glRotatef(xRot, 0.0f, 0.0f, 1.0f);
             glRotatef(xRot, 0.0f, 1.0f, 0.0f);
-            glRotatef(yRot, 1.0f, 0.0f, 0.0f);
-            glRotatef(yRot, 0.0f, 0.0f, 1.0f);
-            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
+//            glRotatef(yRot, 1.0f, 0.0f, 0.0f);
+//            glRotatef(yRot, 0.0f, 0.0f, 1.0f);
             glRotatef(zRot, 1.0f, 0.0f, 0.0f);
+            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
             drawAxis();
         glPopMatrix();
     }
@@ -285,7 +284,7 @@ void GLModel::translate_up()
 
 void GLModel::defaultScene()
 {
-   xRot=-90; yRot=0; zRot=0; zTra=0; nSca=1;
+   xRot=0; yRot=0; zRot=0; zTra=0; nSca=1;
 }
 
 void GLModel::drawAxis()
