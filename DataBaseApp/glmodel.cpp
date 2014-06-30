@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <math.h>
 #include "glmodel.h"
+#include "GL/glu.h"
 
 #define NUM_OF_FACES        10
 #define NUM_OF_TRIANGLES    (4 * NUM_OF_FACES - 4)
@@ -36,16 +37,24 @@ void GLModel::initializeGL()
     glEnable(GL_DEPTH_TEST);
     glShadeModel(GL_SMOOTH);
 
+    glEnable(GL_COLOR_MATERIAL);
+
+    float dir[3] = {-1,-1,-1};
+    GLfloat mat_specular[] = {1,1,1,1};
+
     lightPos[0] = 3;
     lightPos[1] = 3;
     lightPos[2] = 3;
-    lightPos[3] = 0;
+    lightPos[3] = 1;
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 
-    glEnable(GL_COLOR_MATERIAL);
+    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
+
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+    glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
@@ -84,40 +93,35 @@ void GLModel::setCurrentAbutment(db::DbAbutment *abut)
 
 void GLModel::resizeGL(int nWidth, int nHeight)
 {
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
 
-   GLfloat ratio=(GLfloat)nHeight/(GLfloat)nWidth;
+    glViewport(0, 0, (GLint)nWidth, (GLint)nHeight);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    GLfloat ratio=(GLfloat)nHeight/(GLfloat)nWidth;
 
    if (nWidth>=nHeight)
-      glOrtho(-1.0/ratio, 1.0/ratio, -1.0, 1.0, -10.0, 1.0);
+      glOrtho(-1.0/ratio, 1.0/ratio, -1.0, 1.0, -10.0, 10.0);
    else
-      glOrtho(-1.0, 1.0, -1.0*ratio, 1.0*ratio, -10.0, 1.0);
+      glOrtho(-1.0, 1.0, -1.0*ratio, 1.0*ratio, -10.0, 10.0);
+   //gluLookAt(0, 0, 5, 0,0,0, 0,0,1 );
+   glMatrixMode( GL_MODELVIEW );
 
-   glViewport(0, 0, (GLint)nWidth, (GLint)nHeight);
 }
 
 void GLModel::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    //glTranslatef(0.0f, 0.0f, 0.0f);
-
-        glPushMatrix();
-            glScalef(nSca, nSca, nSca);
-            glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
-        glPopMatrix();
+    glMatrixMode( GL_MODELVIEW );
     if(m_curImpl || m_curAbut)
     {
        //draw figure
         glPushMatrix();
             glScalef(nSca, nSca, nSca);
-            glRotatef(xRot, 0.0f, 0.0f, 1.0f);
-            glRotatef(xRot, 0.0f, 1.0f, 0.0f);
-//            glRotatef(yRot, 1.0f, 0.0f, 0.0f);
-//            glRotatef(yRot, 0.0f, 0.0f, 1.0f);
-            glRotatef(zRot, 1.0f, 0.0f, 0.0f);
-            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
+            glRotated(yRot, 0, 1, 0);
+            glRotated(xRot, 1, 0, 0);
+//            glRotatef(zRot, 1.0f, 0.0f, 0.0f);
+//            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
             float length_impl = 0.0;
             float length_abut = 0.0;
 
@@ -152,12 +156,14 @@ void GLModel::paintGL()
        //draw axis
         glPushMatrix();
             glTranslatef(0.8f, -0.8f, -0.8f);
-            glRotatef(xRot, 0.0f, 0.0f, 1.0f);
-            glRotatef(xRot, 0.0f, 1.0f, 0.0f);
-//            glRotatef(yRot, 1.0f, 0.0f, 0.0f);
-//            glRotatef(yRot, 0.0f, 0.0f, 1.0f);
-            glRotatef(zRot, 1.0f, 0.0f, 0.0f);
-            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
+            glRotated(yRot, 0, 1, 0);
+            glRotated(xRot, 1, 0, 0);
+//            glRotatef(xRot, 0.0f, 0.0f, 1.0f);
+//            glRotatef(xRot, 0.0f, 1.0f, 0.0f);
+////            glRotatef(yRot, 1.0f, 0.0f, 0.0f);
+////            glRotatef(yRot, 0.0f, 0.0f, 1.0f);
+//            glRotatef(zRot, 1.0f, 0.0f, 0.0f);
+//            glRotatef(zRot, 0.0f, 1.0f, 0.0f);
             drawAxis();
         glPopMatrix();
     }
@@ -165,7 +171,7 @@ void GLModel::paintGL()
 
 void GLModel::mousePressEvent(QMouseEvent* pe)
 {
-   ptrMousePosition = pe->pos();
+    ptrMousePosition = pe->pos();
 }
 
 void GLModel::mouseReleaseEvent(QMouseEvent* pe)
@@ -175,12 +181,11 @@ void GLModel::mouseReleaseEvent(QMouseEvent* pe)
 
 void GLModel::mouseMoveEvent(QMouseEvent* pe)
 {
-   xRot += 180/nSca*(GLfloat)(pe->y()-ptrMousePosition.y())/height();
-   zRot += 180/nSca*(GLfloat)(pe->x()-ptrMousePosition.x())/width();
+    yRot += pe->x()- ptrMousePosition.x();
+    xRot += pe->y()- ptrMousePosition.y();
+    ptrMousePosition = pe->pos();
 
-   ptrMousePosition = pe->pos();
-
-   updateGL();
+    updateGL();
 }
 
 void GLModel::wheelEvent(QWheelEvent* pe)

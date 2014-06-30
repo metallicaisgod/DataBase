@@ -24,8 +24,8 @@ class GLModel : public QGLWidget
 {
     Q_OBJECT
 private:
-      GLfloat xRot;
-      GLfloat yRot;
+      int xRot;
+      int yRot;
       GLfloat zRot;
       GLfloat zTra;
       GLfloat nSca;
