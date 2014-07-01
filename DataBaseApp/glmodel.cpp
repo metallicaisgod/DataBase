@@ -15,7 +15,7 @@ const float scale = 0.05;
 
 GLModel::GLModel(QWidget* parent) : QGLWidget(parent)
 {
-   xRot=0; yRot=0; zRot=0; zTra=0; nSca=1;
+   xRot=-90; yRot=0; zRot=0; zTra=0; nSca=1;
    m_curImpl = NULL;
    m_curAbut = NULL;
    m_implVertexArray = NULL;
@@ -30,7 +30,7 @@ GLModel::GLModel(QWidget* parent) : QGLWidget(parent)
 
 void GLModel::initializeGL()
 {
-    glMatrixMode(GL_MODELVIEW);
+   glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     qglClearColor(Qt::blue);
 
@@ -39,22 +39,61 @@ void GLModel::initializeGL()
 
     glEnable(GL_COLOR_MATERIAL);
 
-    float dir[3] = {-1,-1,-1};
+    float dir[3] = {0,0,-1};
     GLfloat mat_specular[] = {1,1,1,1};
 
-    lightPos[0] = 3;
-    lightPos[1] = 3;
-    lightPos[2] = 3;
-    lightPos[3] = 1;
+//    lightPos[0] = 3;
+//    lightPos[1] = 3;
+//    lightPos[2] = 3;
+//    lightPos[3] = 0;
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+//    glEnable(GL_LIGHT1);
+//    glEnable(GL_LIGHT2);
+//    glEnable(GL_LIGHT3);
+//    glEnable(GL_LIGHT4);
+//    glEnable(GL_LIGHT5);
+    lightPos[0] = 0.0f;
+    lightPos[1] = 0.0f;
+    lightPos[2] = 0.5f;
+    lightPos[3] = 1.0f;
     glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 
     glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
+//    lightPos[0] = -3;
+//    lightPos[1] = -3;
+//    glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
+//    lightPos[0] = 3;
+//    lightPos[1] = -3;
+//    lightPos[2] = -3;
+//    glLightfv(GL_LIGHT2, GL_POSITION, lightPos);
+//    lightPos[0] = -3;
+//    lightPos[1] = 3;
+//    lightPos[2] = -3;
+//    glLightfv(GL_LIGHT3, GL_POSITION, lightPos);
+//    lightPos[0] = 0;
+//    lightPos[1] = 0;
+//    lightPos[2] = 3;
+//    glLightfv(GL_LIGHT4, GL_POSITION, lightPos);
+//    lightPos[0] = 0;
+//    lightPos[1] = 0;
+//    lightPos[2] = -3;
+//    glLightfv(GL_LIGHT5, GL_POSITION, lightPos);
 
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-    glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
+//    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
+//    dir[0] = 1;
+//    dir[1] = -1;
+//    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, dir);
+//    dir[0] = -1;
+//    dir[1] = 1;
+//    glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
+//    dir[0] = 1;
+//    dir[1] = 1;
+//    glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, dir);
+
+//    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+//    glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
@@ -113,6 +152,7 @@ void GLModel::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
     if(m_curImpl || m_curAbut)
     {
        //draw figure
