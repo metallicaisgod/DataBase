@@ -379,6 +379,13 @@ void MainWindow::on_tVImplants_clicked(const QModelIndex &index)
         ui->tabVImplants->horizontalHeader()->setVisible(false);
     ui->tabVImplants->resizeColumnsToContents();
     ui->tabVImplants->setCurrentIndex(m_pImpTableModel->index(0,0));
+    if(m_pImpTableModel->index(0,0).isValid())
+    {
+        QItemSelectionModel * selModel =  ui->tabVImplants->selectionModel();
+        selModel->select(m_pImpTableModel->index(0,0), QItemSelectionModel::Rows);
+        DbImplant * impl = reinterpret_cast<DbImplant *>(m_pImpTableModel->data(m_pImpTableModel->index(0,0), DataRole).value<void *>());
+        ui->wOpenGL->setCurrentImplant(impl);
+    }
     fillModels(Abutments);
     disableActions(itemType, Implants);
     //}
@@ -453,6 +460,14 @@ void MainWindow::on_tVAbutments_clicked(const QModelIndex &index)
     ui->tabVAbutments->horizontalHeader()->setVisible((bool)series);
     if(series && series->GetAbutment().empty())
         ui->tabVAbutments->horizontalHeader()->setVisible(false);
+    if(m_pAbutTableModel->index(0,0).isValid())
+    {
+        ui->tabVAbutments->setCurrentIndex(m_pAbutTableModel->index(0,0));
+        QItemSelectionModel * selModel =  ui->tabVAbutments->selectionModel();
+        selModel->select(m_pAbutTableModel->index(0,0), QItemSelectionModel::Rows);
+        DbAbutment * abut = reinterpret_cast<DbAbutment *>(m_pAbutTableModel->data(m_pAbutTableModel->index(0,0), DataRole).value<void *>());
+        ui->wOpenGL->setCurrentAbutment(abut);
+    }
     ui->tabVAbutments->resizeColumnsToContents();
     disableActions(itemType, Abutments);
 }
