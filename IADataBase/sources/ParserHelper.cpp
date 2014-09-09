@@ -38,6 +38,9 @@ void ParserHelper::ParseDataBase(db::IADataBase& indb, const char* fileName, con
 		else if(!(flags&USERS_INTEMS))
 			strcpy_s(newProvider.m_szExtFile, NAME_SIZE, "");
 
+        QString strLogo = ParseStringValue(pProvider, "logo");
+        newProvider.setLogo(strLogo.toLocal8Bit().data());
+
         ParseProvider(newProvider, pProvider, flags);
 	}
 }
@@ -147,6 +150,8 @@ void ParserHelper::ParseOldDataBase(db::IADataBase& indb, const QDomElement& ele
 			{
                 QString strName = ParseStringValue(pProvider, "name");
                 db::DbProvider& newProvider = indb.AddProvider(strName.toLocal8Bit().data());
+                QString strLogo = ParseStringValue(pProvider, "logo");
+                newProvider.setLogo(strLogo.toLocal8Bit().data());
                 ParseOldProvider(newProvider, pProvider);
 			}
 		}
@@ -296,6 +301,9 @@ QDomElement* ParserHelper::ToXml(const db::DbProvider* provider, QDomDocument do
     QDomElement elName = document.createElement( "name" );
     elName.appendChild( document.createTextNode(QString::fromLocal8Bit(pProvider->name)));
     elProvider->appendChild(elName);
+    QDomElement elLogo = document.createElement( "logo" );
+    elLogo.appendChild( document.createTextNode(QString::fromLocal8Bit(pProvider->logo)));
+    elProvider->appendChild(elLogo);
 	
 	while (seriesEnum.MoveNext())
 	{

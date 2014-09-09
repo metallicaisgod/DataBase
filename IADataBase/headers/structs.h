@@ -34,6 +34,7 @@ namespace db
     struct Provider
     {
         char name[NAME_SIZE];
+        char logo[_MAX_PATH];
     };
 
     struct Series

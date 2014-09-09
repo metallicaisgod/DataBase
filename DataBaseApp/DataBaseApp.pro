@@ -50,3 +50,8 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     resources.qrc
+
+OTHER_FILES += \
+    icon_rec.rc
+
+win32:RC_FILE = icon_rec.rc

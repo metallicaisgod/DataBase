@@ -19,5 +19,7 @@
         <file>Resources/minus-end.png</file>
         <file>Resources/plus-end.png</file>
         <file>Resources/scheme.png</file>
+        <file>Resources/main_window.png</file>
+        <file>Resources/main_window.ico</file>
     </qresource>
 </RCC>

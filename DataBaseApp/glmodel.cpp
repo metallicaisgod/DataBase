@@ -394,7 +394,7 @@ void GLModel::getImplVertexArray()
     }
 
     m_implVertexArray =( GLFloatTriplet*)malloc(m_implVertexCount * sizeof(GLFloatTriplet));
-    m_implColorArray = ( GLFloatTriplet*)malloc(m_implVertexCount * sizeof(GLFloatTriplet));
+    m_implColorArray = ( GLUByteTriplet*)malloc(m_implVertexCount * sizeof(GLUByteTriplet));
     m_implNormalArray = ( GLFloatTriplet*)malloc(m_implTrianglesCount * sizeof(GLFloatTriplet));
     m_implIndexArray = (GLUShortTriplet *)malloc(m_implTrianglesCount * sizeof(GLUShortTriplet));
 
@@ -499,11 +499,22 @@ void GLModel::getImplNormalArray()
 
 void GLModel::getImplColorArray()
 {
+    GLubyte r = 0xFF, g = 0, b = 0;
+    if(m_curImpl)
+    {
+        QString str(m_curImpl->defcolor);
+        if(!str.isEmpty())
+        {
+            r = str.mid(1, 2).toUInt(0, 16);
+            g = str.mid(3, 2).toUInt(0, 16);
+            b = str.mid(5, 2).toUInt(0, 16);
+        }
+    }
    for (int i=0; i < m_implVertexCount; i++)
    {
-      m_implColorArray[i].x=1.0f;
-      m_implColorArray[i].y=0.0f;
-      m_implColorArray[i].z=0.0f;
+      m_implColorArray[i].x=r;
+      m_implColorArray[i].y=g;
+      m_implColorArray[i].z=b;
    }
 }
 
@@ -587,7 +598,7 @@ void GLModel::drawImplant()
 {
     glNormalPointer(GL_FLOAT, 0, m_implNormalArray);
     glVertexPointer(3, GL_FLOAT, 0, m_implVertexArray);
-    glColorPointer(3, GL_FLOAT, 0, m_implColorArray);
+    glColorPointer(3, GL_UNSIGNED_BYTE, 0, m_implColorArray);
     glDrawElements(GL_TRIANGLES, (m_implTrianglesCount) * 3, GL_UNSIGNED_SHORT, m_implIndexArray);
 }
 
@@ -621,7 +632,7 @@ void GLModel::getAbutVertexArray()
     m_abutTrianglesCount = 4 * m_faceCount - 4;
 
     m_abutVertexArray =( GLFloatTriplet*)malloc(m_abutVertexCount * sizeof(GLFloatTriplet));
-    m_abutColorArray = ( GLFloatTriplet*)malloc(m_abutVertexCount * sizeof(GLFloatTriplet));
+    m_abutColorArray = ( GLUByteTriplet*)malloc(m_abutVertexCount * sizeof(GLUByteTriplet));
     m_abutNormalArray = ( GLFloatTriplet*)malloc(m_abutTrianglesCount * sizeof(GLFloatTriplet));
     m_abutIndexArray = (GLUShortTriplet *)malloc(m_abutTrianglesCount * sizeof(GLUShortTriplet));
 
@@ -669,11 +680,22 @@ void GLModel::getAbutNormalArray()
 
 void GLModel::getAbutColorArray()
 {
+    GLubyte r = 0, g = 0xFF, b = 0;
+    if(m_curAbut)
+    {
+        QString str(m_curAbut->defcolor);
+        if(!str.isEmpty())
+        {
+            r = str.mid(1, 2).toUInt(0, 16);
+            g = str.mid(3, 2).toUInt(0, 16);
+            b = str.mid(5, 2).toUInt(0, 16);
+        }
+    }
    for (int i=0; i < m_abutVertexCount; i++)
    {
-      m_abutColorArray[i].x=0.0f;
-      m_abutColorArray[i].y=1.0f;
-      m_abutColorArray[i].z=0.0f;
+      m_abutColorArray[i].x=r;
+      m_abutColorArray[i].y=g;
+      m_abutColorArray[i].z=b;
    }
 }
 
@@ -719,6 +741,6 @@ void GLModel::drawAbutment()
 {
     glNormalPointer(GL_FLOAT, 0, m_abutNormalArray);
     glVertexPointer(3, GL_FLOAT, 0, m_abutVertexArray);
-    glColorPointer(3, GL_FLOAT, 0, m_abutColorArray);
+    glColorPointer(3, GL_UNSIGNED_BYTE, 0, m_abutColorArray);
     glDrawElements(GL_TRIANGLES, (m_abutTrianglesCount) * 3, GL_UNSIGNED_SHORT, m_abutIndexArray);
 }

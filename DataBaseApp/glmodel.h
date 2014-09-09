@@ -12,6 +12,13 @@ struct GLFloatTriplet
     GLfloat z;
 };
 
+struct GLUByteTriplet
+{
+    GLubyte x;
+    GLubyte y;
+    GLubyte z;
+};
+
 struct GLUShortTriplet
 {
     GLushort x;
@@ -69,12 +76,12 @@ private:
 
       GLFloatTriplet *  m_implVertexArray;
       GLFloatTriplet *  m_implNormalArray;
-      GLFloatTriplet *  m_implColorArray;
+      GLUByteTriplet *  m_implColorArray;
       GLUShortTriplet * m_implIndexArray;
 
       GLFloatTriplet *  m_abutVertexArray;
       GLFloatTriplet *  m_abutNormalArray;
-      GLFloatTriplet *  m_abutColorArray;
+      GLUByteTriplet *  m_abutColorArray;
       GLUShortTriplet * m_abutIndexArray;
 
 

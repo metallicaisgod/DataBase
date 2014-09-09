@@ -23,6 +23,17 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void setAdminAccess(bool ac)
+    {
+        m_admin_access = ac;
+        if(m_pImpTableModel)
+            m_pImpTableModel->setAdminAccess(ac);
+        if(m_pAbutTableModel)
+            m_pAbutTableModel->setAdminAccess(ac);
+        m_pImplantDialog->setAdminAccess(ac);
+        m_pAbutmentDialog->setAdminAccess(ac);
+    }
+
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
     void fillModels(ModelType);
@@ -89,11 +100,14 @@ private:
     ImplantDialog * m_pImplantDialog;
     AbutmentDialog * m_pAbutmentDialog;
     QString fileName;
+    QString modelsPath;
     int m_openGLwidth;
     bool m_isCSVLoaded;
     bool m_isXMLLoaded;
     bool m_OKClicked;
     bool m_CancelClicked;
+
+    bool m_admin_access;
 //    bool m_bLeftSplitterCatched;
 //    bool m_bRightSplitterCatched;
 };

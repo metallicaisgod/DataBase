@@ -236,9 +236,15 @@ namespace db
             strncpy(name, provName, NAME_SIZE);
             name[NAME_SIZE-1] = '\0';
 			strcpy_s(m_szExtFile, NAME_SIZE, "");
+            strcpy_s(logo, _MAX_PATH, "");
 		}
-		
-		virtual ~DbProvider();
+
+        void setLogo(const char* provLogo)
+        {
+            strncpy(logo, provLogo, _MAX_PATH);
+        }
+
+        virtual ~DbProvider();
 		DbProvider& operator+=(const DbProvider& other);
 
         size_t SeriesCount() const

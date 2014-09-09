@@ -84,7 +84,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_pImpTableModel(NULL),
     m_pAbutTreeModel(NULL),
     m_pAbutTableModel(NULL),
-    iadb(NULL)
+    iadb(NULL),
+    m_admin_access(false)
 {
     QGLFormat f = QGLFormat::defaultFormat();
     f.setSampleBuffers(true);
@@ -104,7 +105,10 @@ MainWindow::MainWindow(QWidget *parent) :
         return;
     }
     QWidgetList list;
-    list << ui->tVImplants << ui->tabVImplants << ui->tVAbutments << ui->tabVAbutments;
+    ui->lProvLogo->setVisible(false);
+    ui->lProvLogo->setScaledContents(true);
+
+    list << ui->tVImplants << ui->tabVImplants << ui->widget_2 << ui->tabVAbutments;
     ui->frame_2->setWidgets(list, 2, 2);
 
     m_pImplantDialog = new ImplantDialog(this);
@@ -125,11 +129,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QSettings settings("IA", "Database");
     fileName = settings.value("fileName", fileName).toString();
+    modelsPath = settings.value("modelsParh", modelsPath).toString();
 
     if(fileName.isEmpty())
     {
         QSettings set(QSettings::NativeFormat, QSettings::SystemScope, "CDI Soft", "IA_DEMO");
         fileName = set.value("ImplantDB", "").toString();
+    }
+    if(modelsPath.isEmpty())
+    {
+        QSettings set(QSettings::NativeFormat, QSettings::SystemScope, "CDI Soft", "IA_DEMO");
+        modelsPath = set.value("DBModelsDir", "").toString();
     }
     if(fileName.isEmpty())
     {
@@ -194,6 +204,11 @@ void MainWindow::showEvent(QShowEvent * ev)
     ui->tVImplants->setFocus();
     if(m_pImpTreeModel)
         ui->tVImplants->setCurrentIndex(m_pImpTreeModel->rootIndex());
+
+    if(m_admin_access)
+    {
+        setWindowTitle("IA DataBase (Administrator)");
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent * ev)
@@ -343,12 +358,13 @@ void MainWindow::fillModels(ModelType modelType)
         delete abut_enum;
         if(m_pAbutTreeModel) delete m_pAbutTreeModel;
         m_pAbutTreeModel = new TreeModel(providerList, modelType, implant,this);
-//        m_pAbutTreeModel->setImplantForFilter(implant);
+        //        m_pAbutTreeModel->setImplantForFilter(implant);
         ui->tVAbutments->setModel(m_pAbutTreeModel);
         ui->tVAbutments->expand(m_pAbutTreeModel->rootIndex());
 
         if(m_pAbutTableModel) delete m_pAbutTableModel;
         m_pAbutTableModel = new TableModel(modelType, this);
+        m_pAbutTableModel->setAdminAccess(m_admin_access);
         ui->tabVAbutments->setModel(m_pAbutTableModel);
         ui->tabVAbutments->horizontalHeader()->setVisible(false);
         ui->tabVAbutments->resizeColumnsToContents();
@@ -366,13 +382,27 @@ void MainWindow::on_tVImplants_clicked(const QModelIndex &index)
         return;
     ItemType itemType = (ItemType)m_pImpTreeModel->data(index, ItemTypeRole).toInt();
     db::DbSeries * series = NULL;
+    QString logoFile;
     if(itemType == SeriesItem)
     {
         series = reinterpret_cast<db::DbSeries *>(m_pImpTreeModel->data(index, DataRole).value<void *>());
+        if(series)
+            logoFile = QString::fromLocal8Bit(series->GetProvider().logo);
+    }
+    else if(itemType == ProviderItem)
+    {
+        db::DbProvider * prov =  reinterpret_cast<db::DbProvider *>(m_pImpTreeModel->data(index, DataRole).value<void *>());
+        if(prov)
+            logoFile = QString::fromLocal8Bit(prov->logo);
+    }
+    ui->lProvLogo->setVisible(false);
+    if(!logoFile.isEmpty())
+    {
+        logoFile = modelsPath + logoFile;
+        ui->lProvLogo->setVisible(true);
+        ui->lProvLogo->setPixmap(QPixmap(logoFile));
     }
     ui->wOpenGL->setCurrentAbutment(NULL);
-    //if(series)
-    //{
     m_pImpTableModel->setSeries(series);
     ui->tabVImplants->horizontalHeader()->setVisible((bool)series);
     if(series && series->GetImplants().empty())
@@ -735,7 +765,8 @@ void MainWindow::on_actionEdit_Note_triggered()
         int ret = m_pImplantDialog->exec();
         if(ret == QDialog::Accepted)
         {
-            *implant = tempImplant;
+            *implant = tempImplant;            
+            ui->wOpenGL->setCurrentImplant(implant);
         }
         m_pImpTableModel->Update();
         ui->tabVImplants->setCurrentIndex(idx);
@@ -753,7 +784,8 @@ void MainWindow::on_actionEdit_Note_triggered()
         int ret = m_pAbutmentDialog->exec();
         if(ret == QDialog::Accepted)
         {
-            *abutment = tempAbutment;
+            *abutment = tempAbutment;            
+            ui->wOpenGL->setCurrentAbutment(abutment);
         }
         m_pAbutTableModel->Update();
         ui->tabVAbutments->setCurrentIndex(idx);

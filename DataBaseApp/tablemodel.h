@@ -31,6 +31,11 @@ public:
         return m_pSeries;
     }
 
+    void setAdminAccess(bool ac)
+    {
+        m_admin_access  = ac;
+    }
+
 signals:
     void stateChanged();
 
@@ -71,6 +76,7 @@ private:
     //QDir m_Dir;
     bool set;
     bool m_b;
+    bool m_admin_access;
     //QStringList m_filter;
     //QFileInfoList fiList;
     //int cur_sort_col;

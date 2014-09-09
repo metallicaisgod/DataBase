@@ -880,30 +880,34 @@ void DbSeries::RemoveAbutment(unsigned long index)
 
 QColor __stdcall GetDefColor(char* inColor)
 {
-	typedef struct t_CrlMap
-	{
-		char szColor[ARTIKUL_SIZE];
-        QColor Color;
-	} CrlMap;
+//	typedef struct t_CrlMap
+//	{
+//		char szColor[ARTIKUL_SIZE];
+//        QColor Color;
+//	} CrlMap;
 
-	CrlMap ColorMap[]=
-	{
-        {"red",    Qt::red},
-        {"green",  Qt::green},
-        {"blue",   Qt::blue},
-        {"grey",   Qt::gray},
-        {"white",  Qt::white},
-        {"yellow", Qt::yellow},
-        {"violet", QColor(255,0,255)},
-        {"black",  Qt::black},
-	};
+//	CrlMap ColorMap[]=
+//	{
+//        {"red",    Qt::red},
+//        {"green",  Qt::green},
+//        {"blue",   Qt::blue},
+//        {"grey",   Qt::gray},
+//        {"white",  Qt::white},
+//        {"yellow", Qt::yellow},
+//        {"violet", QColor(255,0,255)},
+//        {"black",  Qt::black},
+//	};
 
-	for(int i=0; i<sizeof(ColorMap)/sizeof(ColorMap[0]); i++)
-	{
-		if(0==strcmp(ColorMap[i].szColor, inColor))
-			return ColorMap[i].Color;
-	}
-
-    return Qt::green;
-};
+//	for(int i=0; i<sizeof(ColorMap)/sizeof(ColorMap[0]); i++)
+//	{
+//		if(0==strcmp(ColorMap[i].szColor, inColor))
+//			return ColorMap[i].Color;
+//	}
+    QString str(inColor);
+    if(str[0] == '#' && str.length() == 7)
+    {
+         return QColor(inColor);
+    }
+    return Qt::red;
+}
 } // end namespace db

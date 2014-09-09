@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>IA DataBase</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/files/Resources/main_window.png</normaloff>:/files/Resources/main_window.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QTreeView::branch:has-siblings:!adjoins-item  {
@@ -71,7 +75,16 @@ QTreeView::branch:open:has-children:!has-siblings {
         <property name="spacing">
          <number>0</number>
         </property>
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
         <item>
@@ -157,24 +170,55 @@ QTreeView::branch:open:has-children:!has-siblings {
             <bool>false</bool>
            </attribute>
           </widget>
-          <widget class="QTreeView" name="tVAbutments">
+          <widget class="QWidget" name="widget_2" native="true">
            <property name="geometry">
             <rect>
-             <x>90</x>
+             <x>60</x>
              <y>240</y>
-             <width>256</width>
-             <height>189</height>
+             <width>274</width>
+             <height>229</height>
             </rect>
            </property>
-           <property name="selectionBehavior">
-            <enum>QAbstractItemView::SelectItems</enum>
-           </property>
-           <property name="rootIsDecorated">
-            <bool>false</bool>
-           </property>
-           <property name="headerHidden">
-            <bool>true</bool>
-           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QTreeView" name="tVAbutments">
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
+              <property name="rootIsDecorated">
+               <bool>false</bool>
+              </property>
+              <property name="headerHidden">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lProvLogo">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>

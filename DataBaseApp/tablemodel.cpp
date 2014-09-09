@@ -9,6 +9,7 @@ TableModel::TableModel(ModelType type, QObject *parent) :
     m_type = type;
     setSeries(NULL);
     m_b = true;
+    m_admin_access = false;
 }
 
 
@@ -23,9 +24,12 @@ Qt::ItemFlags TableModel::flags ( const QModelIndex & index ) const
 }
 int	TableModel::columnCount ( const QModelIndex & parent) const
 {
+    int count = MAX_IMP_COLUMN;
     if(m_type == Abutments)
-        return MAX_ABUT_COLUMN;
-    return MAX_IMP_COLUMN;
+       count =  MAX_ABUT_COLUMN;
+    if(m_admin_access)
+        count ++;
+    return count;
 }
 
 int	TableModel::rowCount ( const QModelIndex & parent) const
@@ -49,7 +53,7 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation,
 
     if (orientation == Qt::Horizontal)
     {
-        if(section >= MAX_IMP_COLUMN)
+        if(section >= MAX_IMP_COLUMN + 1)
             return QVariant();
         QString string;
         switch(section)
@@ -77,13 +81,18 @@ QVariant TableModel::headerData(int section, Qt::Orientation orientation,
             break;
         case 5:
             string = "L2";
-            if(m_type == Abutments)
-                string = "?";
+            if(m_type == Abutments && m_admin_access)
+                string = "Model File";
             break;
         case 6:
             string = "Le";
             if(m_type == Abutments)
                 string = "?";
+            break;
+        case 7:
+            string = "?";
+            if(m_admin_access)
+                string = "Model File";
             break;
         default:
             string = "?";
@@ -112,7 +121,7 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
     {
         QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(m_pSeries->GetImplants());
 
-        if (index.row() >= implants.count() || index.column() >= MAX_IMP_COLUMN)
+        if (index.row() >= implants.count() || index.column() >= MAX_IMP_COLUMN + 1)
             return QVariant();
         int r = index.row();
         int c = index.column();
@@ -137,6 +146,8 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
                     return implants[r]->L2;
                 case 6:
                     return implants[r]->Le;
+                case 7:
+                    return QString::fromLocal8Bit(implants[r]->szModelName);
                 default:
                     return "?";
                 }
@@ -166,7 +177,7 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
     {
         QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(m_pSeries->GetAbutment());
 
-        if (index.row() >= abutments.count() || index.column() >= MAX_ABUT_COLUMN)
+        if (index.row() >= abutments.count() || index.column() >= MAX_ABUT_COLUMN + 1)
             return QVariant();
         int r = index.row();
         int c = index.column();
@@ -178,15 +189,17 @@ QVariant TableModel::data ( const QModelIndex & index, int role) const
                 switch(c)
                 {
                 case 0:
-                    return abutments[r]->name;
+                    return QString::fromLocal8Bit(abutments[r]->name);
                 case 1:
-                    return abutments[r]->artikul;
+                    return QString::fromLocal8Bit(abutments[r]->artikul);
                 case 2:
                     return abutments[r]->D1;
                 case 3:
                     return abutments[r]->L1;
                 case 4:
                     return abutments[r]->Alpha;
+                case 5:
+                    return QString::fromLocal8Bit(abutments[r]->szModelName);
                 default:
                     return "?";
                 }
@@ -225,7 +238,7 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
     if(m_type == Implants)
     {
         QVector<db::DbImplant *> implants = QVector<db::DbImplant *>::fromStdVector(m_pSeries->GetImplants());
-        if (index.row() >= implants.count() || index.column() >= MAX_IMP_COLUMN)
+        if (index.row() >= implants.count() || index.column() >= MAX_IMP_COLUMN + 1)
             return false;
         if(role == Qt::CheckStateRole)
         {
@@ -240,7 +253,7 @@ bool TableModel::setData(const QModelIndex & index, const QVariant & value, int 
     else if(m_type == Abutments)
     {
         QVector<db::DbAbutment *> abutments = QVector<db::DbAbutment *>::fromStdVector(m_pSeries->GetAbutment());
-        if (index.row() >= abutments.count() || index.column() >= MAX_ABUT_COLUMN)
+        if (index.row() >= abutments.count() || index.column() >= MAX_ABUT_COLUMN + 1)
             return false;
         if(role == Qt::CheckStateRole)
         {

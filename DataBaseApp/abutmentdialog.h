@@ -20,6 +20,11 @@ public:
         m_Abutment = imp;
         //set = (bool)m_Implant;
     }
+    void setAdminAccess(bool ac)
+    {
+        m_admin_access = ac;
+    }
+
 private slots:
     void enableButton();
     void on_lEName_textEdited(const QString &arg1);
@@ -32,12 +37,19 @@ private slots:
 
     void on_lEAlfa_textEdited(const QString &arg1);
 
+    void on_pBShowPallete_clicked();
+
+    void on_lEModelPath_textEdited(const QString &arg1);
+
+    void on_lEComp_val_textEdited(const QString &arg1);
+
 protected:
     void showEvent(QShowEvent * ev);
     void hideEvent(QHideEvent * ev);
 private:
     Ui::AbutmentDialog *ui;
     db::DbAbutment * m_Abutment;
+    bool m_admin_access;
 };
 
 #endif // ABUTMENTDIALOG_H

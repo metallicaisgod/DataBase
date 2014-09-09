@@ -21,6 +21,11 @@ public:
         //set = (bool)m_Implant;
     }
 
+    void setAdminAccess(bool ac)
+    {
+        m_admin_access = ac;
+    }
+
 private slots:
     void enableButton();
 
@@ -38,12 +43,19 @@ private slots:
 
     void on_lELe_textEdited(const QString &arg1);
 
+    void on_pBShowPallete_clicked();
+
+    void on_lEModelPath_textEdited(const QString &arg1);
+
+    void on_lEComp_val_textEdited(const QString &arg1);
+
 protected:
     void showEvent(QShowEvent * ev);
     void hideEvent(QHideEvent * ev);
 private:
     Ui::ImplantDialog *ui;
     db::DbImplant * m_Implant;
+    bool m_admin_access;
    // bool set;
 };
 
