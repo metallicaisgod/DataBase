@@ -84,6 +84,11 @@ private:
       GLUByteTriplet *  m_abutColorArray;
       GLUShortTriplet * m_abutIndexArray;
 
+      QString m_modelsPath;
+      bool m_impModelIsSTL;
+      bool m_impModelIsSimple;
+      bool m_abutModelIsSTL;
+      bool m_abutModelIsSimple;
 
    protected:
       void initializeGL();
@@ -100,6 +105,10 @@ private:
 
       void setCurrentImplant(db::DbImplant * impl);
       void setCurrentAbutment(db::DbAbutment * abut);
+      void setModelsPath(QString modelsPath)
+      {
+          m_modelsPath = modelsPath;
+      }
 
 };
 

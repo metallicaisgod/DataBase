@@ -3,6 +3,10 @@
 #include "glmodel.h"
 #include "GL/glu.h"
 
+#include "..\iadatabase\headers\stl_file.h"
+
+using namespace CDICommon;
+
 #define NUM_OF_FACES        10
 #define NUM_OF_TRIANGLES    (4 * NUM_OF_FACES - 4)
 #define RADIUS              0.05
@@ -26,6 +30,10 @@ GLModel::GLModel(QWidget* parent) : QGLWidget(parent)
    m_abutNormalArray = NULL;
    m_abutColorArray = NULL;
    m_abutIndexArray = NULL;
+   m_impModelIsSTL = false;
+   m_impModelIsSimple = false;
+   m_abutModelIsSTL = false;
+   m_abutModelIsSimple = false;
 }
 
 void GLModel::initializeGL()
@@ -61,39 +69,7 @@ void GLModel::initializeGL()
     glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 
     glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
-//    lightPos[0] = -3;
-//    lightPos[1] = -3;
-//    glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
-//    lightPos[0] = 3;
-//    lightPos[1] = -3;
-//    lightPos[2] = -3;
-//    glLightfv(GL_LIGHT2, GL_POSITION, lightPos);
-//    lightPos[0] = -3;
-//    lightPos[1] = 3;
-//    lightPos[2] = -3;
-//    glLightfv(GL_LIGHT3, GL_POSITION, lightPos);
-//    lightPos[0] = 0;
-//    lightPos[1] = 0;
-//    lightPos[2] = 3;
-//    glLightfv(GL_LIGHT4, GL_POSITION, lightPos);
-//    lightPos[0] = 0;
-//    lightPos[1] = 0;
-//    lightPos[2] = -3;
-//    glLightfv(GL_LIGHT5, GL_POSITION, lightPos);
 
-//    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
-//    dir[0] = 1;
-//    dir[1] = -1;
-//    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, dir);
-//    dir[0] = -1;
-//    dir[1] = 1;
-//    glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
-//    dir[0] = 1;
-//    dir[1] = 1;
-//    glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, dir);
-
-//    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-//    glMaterialf(GL_FRONT, GL_SHININESS, 128.0);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
@@ -103,12 +79,64 @@ void GLModel::initializeGL()
 void GLModel::setCurrentImplant(db::DbImplant *impl)
 {
     m_curImpl = impl;
+    if(impl == NULL)
+        return;
+    QString modelPath = m_modelsPath + QString::fromLocal8Bit(m_curImpl->szModelName);
 
-    if(impl != NULL)
+    QFileInfo modelFileInfo(modelPath);
+    m_impModelIsSTL = false;
+    m_impModelIsSimple = false;
+
+    if(modelPath.isEmpty() || modelFileInfo.isDir())
     {
         getImplVertexArray();
         getImplColorArray();
         getImplIndexArray();
+        m_impModelIsSimple = true;
+    }
+    else if(!modelFileInfo.suffix().compare("cdm", Qt::CaseInsensitive))
+    {
+        //TODO
+    }
+    else if(!modelFileInfo.suffix().compare("stl", Qt::CaseInsensitive))
+    {
+        int num = 0;
+        if(LoadSTLFile(modelPath.toLocal8Bit().data(), NULL, true, &num, NULL, NULL) )
+            return;
+        if(num > 0)
+        {
+            if(m_implVertexArray != NULL)
+            {
+                free(m_implVertexArray);
+                m_implVertexArray = NULL;
+            }
+            m_implVertexCount = num * 3;
+            m_implVertexArray = ( GLFloatTriplet*)malloc(m_implVertexCount * sizeof(GLFloatTriplet));
+
+
+            if(m_implNormalArray != NULL)
+            {
+                free(m_implNormalArray);
+                m_implNormalArray = NULL;
+            }
+            m_implTrianglesCount = num;
+            m_implNormalArray = ( GLFloatTriplet*)malloc(m_implTrianglesCount * sizeof(GLFloatTriplet));
+            if(LoadSTLFile(modelPath.toLocal8Bit().data(), NULL, true, &num, (float*)m_implVertexArray, (float *)m_implNormalArray))
+                return;
+            GLfloat max = 0;
+            for(int i = 0; i < m_implVertexCount; i++)
+            {
+                if(qAbs(m_implVertexArray[i].x) > max)
+                    max = qAbs(m_implVertexArray[i].x);
+                if(qAbs(m_implVertexArray[i].y) > max)
+                    max = qAbs(m_implVertexArray[i].y);
+                if(qAbs(m_implVertexArray[i].z) > max)
+                    max = qAbs(m_implVertexArray[i].z);
+            }
+            if(max != 0 && max > 1.0 && nSca > 1.0 / max)
+                nSca = 1.0 / max;
+            m_impModelIsSTL = true;
+        }
     }
 
     if(isVisible())
@@ -119,11 +147,64 @@ void GLModel::setCurrentAbutment(db::DbAbutment *abut)
 {
     m_curAbut = abut;
 
-    if(abut != NULL)
+    if(abut == NULL)
+        return;
+    QString modelPath = m_modelsPath + QString::fromLocal8Bit(m_curAbut->szModelName);
+
+    QFileInfo modelFileInfo(modelPath);
+    m_abutModelIsSTL = false;
+    m_abutModelIsSimple = false;
+
+    if(modelPath.isEmpty() || modelFileInfo.isDir())
     {
         getAbutVertexArray();
         getAbutColorArray();
         getAbutIndexArray();
+        m_abutModelIsSimple = true;
+    }
+    else if(!modelFileInfo.suffix().compare("cdm", Qt::CaseInsensitive))
+    {
+        //TODO
+    }
+    else if(!modelFileInfo.suffix().compare("stl", Qt::CaseInsensitive))
+    {
+        int num = 0;
+        if(LoadSTLFile(modelPath.toLocal8Bit().data(), NULL, true, &num, NULL, NULL) )
+            return;
+        if(num > 0)
+        {
+            if(m_abutVertexArray != NULL)
+            {
+                free(m_abutVertexArray);
+                m_abutVertexArray = NULL;
+            }
+            m_abutVertexCount = num * 3;
+            m_abutVertexArray = ( GLFloatTriplet*)malloc(m_abutVertexCount * sizeof(GLFloatTriplet));
+
+
+            if(m_abutNormalArray != NULL)
+            {
+                free(m_abutNormalArray);
+                m_abutNormalArray = NULL;
+            }
+            m_abutTrianglesCount = num;
+            m_abutNormalArray = ( GLFloatTriplet*)malloc(m_abutTrianglesCount * sizeof(GLFloatTriplet));
+            if(LoadSTLFile(modelPath.toLocal8Bit().data(), NULL, true, &num, (float*)m_implVertexArray, (float *)m_implNormalArray))
+                return;
+            GLfloat max = 0;
+            for(int i = 0; i < m_abutVertexCount; i++)
+            {
+                if(qAbs(m_abutVertexArray[i].x) > max)
+                    max = qAbs(m_abutVertexArray[i].x);
+                if(qAbs(m_abutVertexArray[i].y) > max)
+                    max = qAbs(m_abutVertexArray[i].y);
+                if(qAbs(m_abutVertexArray[i].z) > max)
+                    max = qAbs(m_abutVertexArray[i].z);
+            }
+            if(max != 0 && max > 1.0 && nSca > 1.0 / max)
+                nSca = 1.0 / max;
+            m_abutModelIsSTL = true;
+        }
     }
 
     if(isVisible())
@@ -455,8 +536,6 @@ void CalcNormals(GLFloatTriplet  v1, GLFloatTriplet  v2, GLFloatTriplet  v3, GLF
      norm->z = z * inv_length;
 }
 
-
-
 void GLModel::getImplNormalArray()
 {
     for(int i = 0; i < m_faceCount - 1; i++)
@@ -596,10 +675,40 @@ void GLModel::getImplIndexArray()
 
 void GLModel::drawImplant()
 {
-    glNormalPointer(GL_FLOAT, 0, m_implNormalArray);
-    glVertexPointer(3, GL_FLOAT, 0, m_implVertexArray);
-    glColorPointer(3, GL_UNSIGNED_BYTE, 0, m_implColorArray);
-    glDrawElements(GL_TRIANGLES, (m_implTrianglesCount) * 3, GL_UNSIGNED_SHORT, m_implIndexArray);
+    if(m_impModelIsSTL)
+    {
+        GLubyte r = 0xFF, g = 0, b = 0;
+        if(m_curImpl)
+        {
+            QString str(m_curImpl->defcolor);
+            if(!str.isEmpty())
+            {
+                r = str.mid(1, 2).toUInt(0, 16);
+                g = str.mid(3, 2).toUInt(0, 16);
+                b = str.mid(5, 2).toUInt(0, 16);
+            }
+        }
+        glColor3ub(r, g, b);
+        glBegin(GL_TRIANGLES);
+        {
+            for(int i = 0; i < m_implTrianglesCount; i ++)
+            {
+                glNormal3fv((GLfloat*)(&m_implNormalArray[i]));
+                glVertex3fv((GLfloat*)(&m_implVertexArray[3 * i]));
+                glVertex3fv((GLfloat*)(&m_implVertexArray[3 * i + 1]));
+                glVertex3fv((GLfloat*)(&m_implVertexArray[3 * i + 2]));
+            }
+        }
+        glEnd();
+
+    }
+    else if(m_impModelIsSimple)
+    {
+        glNormalPointer(GL_FLOAT, 0, m_implNormalArray);
+        glVertexPointer(3, GL_FLOAT, 0, m_implVertexArray);
+        glColorPointer(3, GL_UNSIGNED_BYTE, 0, m_implColorArray);
+        glDrawElements(GL_TRIANGLES, (m_implTrianglesCount) * 3, GL_UNSIGNED_SHORT, m_implIndexArray);
+    }
 }
 
 void GLModel::getAbutVertexArray()
@@ -739,8 +848,38 @@ void GLModel::getAbutIndexArray()
 
 void GLModel::drawAbutment()
 {
-    glNormalPointer(GL_FLOAT, 0, m_abutNormalArray);
-    glVertexPointer(3, GL_FLOAT, 0, m_abutVertexArray);
-    glColorPointer(3, GL_UNSIGNED_BYTE, 0, m_abutColorArray);
-    glDrawElements(GL_TRIANGLES, (m_abutTrianglesCount) * 3, GL_UNSIGNED_SHORT, m_abutIndexArray);
+    if(m_abutModelIsSTL)
+    {
+        GLubyte r = 0, g = 0xFF, b = 0;
+        if(m_curAbut)
+        {
+            QString str(m_curAbut->defcolor);
+            if(!str.isEmpty())
+            {
+                r = str.mid(1, 2).toUInt(0, 16);
+                g = str.mid(3, 2).toUInt(0, 16);
+                b = str.mid(5, 2).toUInt(0, 16);
+            }
+        }
+        glColor3ub(r, g, b);
+        glBegin(GL_TRIANGLES);
+        {
+            for(int i = 0; i < m_abutTrianglesCount; i ++)
+            {
+                glNormal3fv((GLfloat*)(&m_abutNormalArray[i]));
+                glVertex3fv((GLfloat*)(&m_abutVertexArray[3 * i]));
+                glVertex3fv((GLfloat*)(&m_abutVertexArray[3 * i + 1]));
+                glVertex3fv((GLfloat*)(&m_abutVertexArray[3 * i + 2]));
+            }
+        }
+        glEnd();
+
+    }
+    else if(m_abutModelIsSimple)
+    {
+        glNormalPointer(GL_FLOAT, 0, m_abutNormalArray);
+        glVertexPointer(3, GL_FLOAT, 0, m_abutVertexArray);
+        glColorPointer(3, GL_UNSIGNED_BYTE, 0, m_abutColorArray);
+        glDrawElements(GL_TRIANGLES, (m_abutTrianglesCount) * 3, GL_UNSIGNED_SHORT, m_abutIndexArray);
+    }
 }

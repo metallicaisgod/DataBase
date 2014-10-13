@@ -18,7 +18,8 @@ SOURCES += \
     sources/GuideHelper.cpp \
     sources/IADataBase.cpp \
     sources/ParserHelper.cpp \
-    sources/stdafx.cpp
+    sources/stdafx.cpp \
+    sources/stl_file.cpp
 
 HEADERS += \
     headers/common.h \
@@ -30,7 +31,8 @@ HEADERS += \
     headers/IADataBase.h \
     headers/ParserHelper.h \
     headers/stdafx.h \
-    headers/structs.h
+    headers/structs.h \
+    headers/stl_file.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

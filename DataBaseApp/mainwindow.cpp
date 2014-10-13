@@ -104,6 +104,7 @@ MainWindow::MainWindow(QWidget *parent) :
                                  "This system does not have sample buffer support.");
         return;
     }
+
     QWidgetList list;
     ui->lProvLogo->setVisible(false);
     ui->lProvLogo->setScaledContents(true);
@@ -141,6 +142,9 @@ MainWindow::MainWindow(QWidget *parent) :
         QSettings set(QSettings::NativeFormat, QSettings::SystemScope, "CDI Soft", "IA_DEMO");
         modelsPath = set.value("DBModelsDir", "").toString();
     }
+
+    ui->wOpenGL->setModelsPath(modelsPath);
+
     if(fileName.isEmpty())
     {
         QMessageBox::critical(this, "Load database error!", "No path to the database file!");
